@@ -224,7 +224,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/Registration_Page_Background_1" />
+        android:background="@drawable/registration_page_background_1" />
 
     <ImageView
         android:id="@+id/imageView13"
@@ -243,6 +243,7 @@
         android:layout_width="394dp"
         android:layout_height="100dp"
         android:background="@drawable/yellowgradienteffect"
+        android:translationZ="15dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2_IndivReg_createAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
