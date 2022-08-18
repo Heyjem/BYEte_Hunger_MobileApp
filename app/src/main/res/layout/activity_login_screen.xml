@@ -8,11 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="781dp"
+        android:layout_width="400dp"
         android:layout_height="495dp"
         android:alpha=".60"
-        android:backgroundTint="#FFFFFF"
-        android:src="@drawable/login_background"
+        android:background="@drawable/Login_Background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

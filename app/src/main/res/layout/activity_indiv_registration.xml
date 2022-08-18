@@ -224,7 +224,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/registration_page_background_1" />
+        android:background="@drawable/Registration_Page_Background_1" />
 
     <ImageView
         android:id="@+id/imageView13"
