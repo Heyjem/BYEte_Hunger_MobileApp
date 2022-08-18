@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".donate">
+
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="1139dp"
+        android:layout_height="898dp"
+        android:tintMode="src_atop"
+        app:tint="#6F000000"
+        android:src="@drawable/donations_screen_background_2"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.989"
+        tools:layout_editor_absoluteX="-443dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="360dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:alpha=".50"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="20dp"
+        android:text="\nLorem ipsum dolor sit amet,  "
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        android:fontFamily="@font/montserrat_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView24"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:alpha=".50"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName5"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName5"
+        app:layout_constraintVertical_bias="0.475"
+        app:srcCompat="@drawable/client_logo_png" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How to Donate?"
+        android:textColor="@color/white"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName5"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName5"
+        app:layout_constraintVertical_bias="0.160" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="INPUT\nDONATION\nINFORMATION"
+        android:textColor="#ffc91e"
+        android:textSize="20sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+
+
+    <EditText
+        android:id="@+id/editTextTextPersonName6"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="Weight"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_donate" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName7"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="Date of Purchase (Optional)"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName8"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="Expiration Date (Optional)"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName9"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="Contact Number"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName10"
+        android:layout_width="340dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="Note/s"
+        android:maxLines="5"
+        android:paddingHorizontal="15dp"
+        android:textSize="12sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
+
+    <Button
+        android:id="@+id/button_donate_uploadImage"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:backgroundTint="#ffc91e"
+        android:background="@drawable/yellowbutton_rounded_corners"
+        android:text="UPLOAD IMAGE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
+
+    <Button
+        android:id="@+id/button4_donate_submit"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:backgroundTint="#2eb674"
+        android:background="@drawable/greenbutton_rounded_corners"
+        android:text="SUBMIT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_donate_uploadImage" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/greenbutton_rounded_corners"
+        android:backgroundTint="#B0B8B4"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="GENERATE UNIQUE CODE"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4_donate_submit"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <Spinner
+        android:id="@+id/spinner_donate"
+        android:layout_width="340dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

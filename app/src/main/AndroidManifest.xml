@@ -14,6 +14,9 @@
         android:theme="@style/Theme.BYEte_Hunger_MobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".donate"
+            android:exported="false" />
+        <activity
             android:name=".uid_donations"
             android:exported="false" />
         <activity
