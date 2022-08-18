@@ -26,7 +26,7 @@
         android:layout_height="400dp"
         android:layout_marginBottom="302dp"
         android:alpha=".60"
-        android:background="@drawable/Registration_Page_Background_1"
+        android:background="@drawable/registration_page_background_1"
         android:translationZ="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView11"
         app:layout_constraintEnd_toEndOf="parent"
