@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrgRegistration">
+
+    <TextView
+        android:id="@+id/textView1_OrgRegistrationScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text=" HELLO! \nRegister to get Started"
+        android:textColor="#2EB674"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:translationZ="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2_OrgRegistrationScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:text="Create your account"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:translationZ="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1_OrgRegistrationScreen" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_Organization"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Organization"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2_OrgRegistrationScreen" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_ContactPerson"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Contact Person / Representative"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Organization" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_Contact"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Contact Number"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_ContactPerson" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_Location"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Contact" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_EmailAdd"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Location" />
+
+    <EditText
+        android:id="@+id/editText_OrgRegistration_Password"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/edittext_rounded_corners"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:textColorHint="#646464"
+        android:textSize="14sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_EmailAdd" />
+
+    <CheckBox
+        android:id="@+id/checkBox_OrgReg"
+        android:layout_width="284dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:button="?android:attr/listChoiceIndicatorMultiple"
+        android:buttonTint="#FDFDFD"
+        android:text="By ticking, you are confirming that you have read, understood and agree to our "
+        android:textSize="12sp"
+        android:translationZ="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Password" />
+
+    <TextView
+        android:id="@+id/textView_OrgRegistration_PrivacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="5dp"
+        android:clickable="true"
+        android:text="Privacy Policy"
+        android:translationZ="10dp"
+        android:textAllCaps="false"
+        android:textColor="#2EB674"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Password" />
+
+    <Button
+        android:id="@+id/button3_OrgRegistration_Register"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:text="Register"
+        android:translationZ="10dp"
+        android:background="@drawable/greenbutton_rounded_corners"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_OrgReg" />
+
+    <TextView
+        android:id="@+id/textView2_OrgReg_HaveAnAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="4dp"
+        android:translationZ="5dp"
+        android:text="Already have an account?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3_OrgRegistration_Register" />
+
+    <TextView
+        android:id="@+id/textView6_OrgRegistration_LoginHere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:translationZ="10dp"
+        android:text="Login Here"
+        android:clickable="true"
+        android:textColor="#2EB674"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintStart_toEndOf="@+id/textView2_OrgReg_HaveAnAccount"
+        app:layout_constraintTop_toBottomOf="@+id/button3_OrgRegistration_Register" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="436dp"
+        android:translationZ="0dp"
+        android:alpha=".60"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/registration_page_background_1" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="392dp"
+        android:layout_height="550dp"
+        android:background="#FFC91E"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1_OrgRegistrationScreen"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="394dp"
+        android:layout_height="100dp"
+        android:background="@drawable/yellowgradienteffect"
+        app:layout_constraintBottom_toTopOf="@+id/textView2_OrgRegistrationScreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1_OrgRegistrationScreen"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
