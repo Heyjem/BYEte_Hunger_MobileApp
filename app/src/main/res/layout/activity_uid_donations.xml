@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="415dp"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="?attr/colorPrimary"
         android:backgroundTint="#332806"

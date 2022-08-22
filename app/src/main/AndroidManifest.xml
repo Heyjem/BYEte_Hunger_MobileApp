@@ -14,8 +14,23 @@
         android:theme="@style/Theme.BYEte_Hunger_MobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".donations_tracker"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".donate"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".uid_donations"
             android:exported="false" />
