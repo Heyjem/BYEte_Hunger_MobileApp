@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegistrationMain extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Spinner spinner;
+    Spinner spinner;
     Button Continue;
 
     @Override

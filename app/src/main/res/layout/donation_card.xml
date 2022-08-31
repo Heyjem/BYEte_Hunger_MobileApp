@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:onClick="expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="#2eb674"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:contentPadding="20dp"
+        android:animateLayoutChanges="true">
+
+        <LinearLayout
+            android:id="@+id/layout_donationcard_front"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_donationcard_uidCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="1234567"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Date Added: "
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="180dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textAlignment="center"
+                android:text="July 31, 2022"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+            </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/rl_donationcard_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/ll_donationcard_left"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_donationcard_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ITEM:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="TYPE: "
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="WEIGHT:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_dateofpurchase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="DATE OF PURCHASE:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_expirationdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="EXPIRATION DATE:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_donationcard_right"
+                android:layout_width="165dp"
+                android:layout_height="135dp"
+                android:layout_marginLeft="145dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_donationcard_itemdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Lorem ipsum"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_typedesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Lorem ipsum"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_weightdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="00 KG"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_dateofpurchasedesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="MM / DD / YY (OPTIONAL)"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_expirationdatedesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="MM / DD / YY (OPTIONAL)"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_donationcard_center"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:layout_marginTop="150dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_donationcard_notes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="NOTES:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_notesdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Lorem Ipsum rambu rat gr abean glakin yan lodsah naolma lakiang ari. Lorem Ipsum rambu rat gr abean glakin yan lodsah naolma lakiang ari. "
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_donationcard_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ATTACHED IMAGE:"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/imageView_donationcard"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/profile_user"
+                    android:elevation="15dp" />
+
+                <Button
+                    android:id="@+id/btn_donationcard_track"
+                    android:layout_width="130dp"
+                    android:layout_height="35dp"
+                    android:layout_marginHorizontal="93dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/yellowbutton_rounded_corners"
+                    android:elevation="15dp"
+                    android:text="TRACK"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
