@@ -25,7 +25,6 @@ public class RegistrationMain extends AppCompatActivity implements AdapterView.O
         Continue = (Button)findViewById(R.id.button3_Registration_Continue);
 
 
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Options, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
