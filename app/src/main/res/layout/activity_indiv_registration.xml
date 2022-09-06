@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text=" HELLO! \nRegister to get Started"
+        android:text="HELLO! \nRegister to get Started"
         android:textColor="#2EB674"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -219,12 +219,14 @@
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_marginBottom="436dp"
-        android:alpha=".60"
+        android:background="@drawable/registration_page_background_1"
+        android:alpha="0.90"
+        android:backgroundTint="#99000000"
+        android:backgroundTintMode="src_over"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/registration_page_background_1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView13"
