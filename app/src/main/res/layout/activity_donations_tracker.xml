@@ -25,35 +25,33 @@
         android:id="@+id/generateuid_sample"
         android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginTop="80dp"
         android:background="#ffc91e"
         android:fontFamily="@font/montserrat_semibold"
         android:text="UID"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/ll_donationstracker_donationcardplacement"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toEndOf="@+id/tv1_donationstracker"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8">
+        app:layout_constraintTop_toTopOf="parent">
 
     </Button>
+
 
     <LinearLayout
         android:id="@+id/ll_donationstracker_donationcardplacement"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:scrollbarSize="10dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028">
+        app:layout_constraintTop_toBottomOf="@+id/tv1_donationstracker">
 
+        <include
+            android:id="@+id/includedLayoutFirst"
+            layout="@layout/donation_card"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="208dp" />
 
     </LinearLayout>
 

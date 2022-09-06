@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:gravity="center">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:onClick="expand"
@@ -16,7 +15,7 @@
         app:cardBackgroundColor="#2eb674"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
-        app:contentPadding="20dp"
+        app:contentPadding="10dp"
         android:animateLayoutChanges="true">
 
         <LinearLayout
@@ -245,7 +244,5 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
-
 
 </LinearLayout>
