@@ -39,8 +39,8 @@ public class IndivRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indiv_registration);
 
-        TextView PrivacyPolicy = (TextView) this.findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
-        TextView LoginHere = (TextView) this.findViewById(R.id.textView8_IndivReg_LoginHere);
+        TextView PrivacyPolicy = (TextView) findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
+        TextView LoginHere = (TextView) findViewById(R.id.textView8_IndivReg_LoginHere);
         EditText LastName = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
         EditText FirstName = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
         EditText ContactNo = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
@@ -76,7 +76,6 @@ public class IndivRegistration extends AppCompatActivity {
                                 dbref.child("users").child(EmailAddresstxt).child("FirstName").setValue(FirstNametxt);
                                 dbref.child("users").child(EmailAddresstxt).child("ContactNo").setValue(ContactNotxt);
                                 dbref.child("users").child(EmailAddresstxt).child("Location").setValue(Locationtxt);
-                                dbref.child("users").child(EmailAddresstxt).child("EmailAddress").setValue(EmailAddresstxt);
                                 dbref.child("users").child(EmailAddresstxt).child("Password").setValue(Passwordtxt);
 
                                 Toast.makeText(IndivRegistration.this, "Registration Successful, Client Verification is underway." , Toast.LENGTH_LONG).show();
