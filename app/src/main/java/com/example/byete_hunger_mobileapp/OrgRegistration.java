@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class OrgRegistration extends AppCompatActivity {
         EditText Location = (EditText) findViewById(R.id.editText_OrgRegistration_Location);
         EditText EmailAddress = (EditText) findViewById(R.id.editText_OrgRegistration_EmailAdd);
         EditText Password = (EditText) findViewById(R.id.editText_OrgRegistration_Password);
+        CheckBox Checkbox = (CheckBox) findViewById(R.id.checkBox_OrgReg);
         Button Register = (Button) findViewById(R.id.button3_OrgRegistration_Register);
 
         Register.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,7 @@ public class OrgRegistration extends AppCompatActivity {
 
                             if(snapshot.hasChild(EmailAddresstxt)){
                                 Toast.makeText(OrgRegistration.this, "Email address is already registered, please use a different one." , Toast.LENGTH_LONG).show();
-                            }else{
+                            }else if(Checkbox.isChecked()){
                                 dbref.child("users").child(EmailAddresstxt).child("Organization").setValue(Organizationtxt);
                                 dbref.child("users").child(EmailAddresstxt).child("ContactPerson").setValue(ContactPersontxt);
                                 dbref.child("users").child(EmailAddresstxt).child("ContactNo").setValue(ContactNotxt);
@@ -82,6 +84,8 @@ public class OrgRegistration extends AppCompatActivity {
 
                                 Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
                                 startActivity(intent);
+                            } else{
+                                Toast.makeText(OrgRegistration.this, "Kindly agree to our Privacy Policy by clicking the checkbox." , Toast.LENGTH_LONG).show();
                             }
                         }
 
