@@ -35,7 +35,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button12"
+                android:id="@+id/button_homescreen_chat"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="0dp"
@@ -50,7 +50,7 @@
                 app:cornerRadius="11px" />
 
             <Button
-                android:id="@+id/button13"
+                android:id="@+id/button_homescreen_track"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -64,7 +64,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/button_homescreen_donate"
             android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -337,6 +337,7 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_homescreen_faqsclickhere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

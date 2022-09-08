@@ -340,6 +340,7 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_guesthomescreen_clickhere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -353,6 +354,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/button_guesthomescreen_register"
                 android:layout_width="233dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
