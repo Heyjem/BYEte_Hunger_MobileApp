@@ -47,7 +47,6 @@ public class LoginScreen extends AppCompatActivity {
         EditText EmailAddress = (EditText) findViewById(R.id.editText_LoginEmailAddress);
         EditText Password = (EditText) findViewById(R.id.editText_LoginPassword);
 
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +57,7 @@ public class LoginScreen extends AppCompatActivity {
                 if (EmailAddresstxt.isEmpty() || Passwordtxt.isEmpty()){
                     Toast.makeText(LoginScreen.this, "Please enter your Email and Password.", Toast.LENGTH_LONG).show();
                 }else{
-                    dbref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    dbref.child("RegisteredUser").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -90,7 +89,6 @@ public class LoginScreen extends AppCompatActivity {
                 }
         });
 
-
         // Redirect to Forgot Password Page
         ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +106,6 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
     }
 }

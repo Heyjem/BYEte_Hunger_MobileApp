@@ -28,7 +28,7 @@ public class IndivRegistration extends AppCompatActivity {
     public static boolean isValidPassword(final String Password) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "(/^(?=.*\\d)(?=.*[A-Z])([@$%&#])[0-9a-zA-Z]{4,}$/)";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(Password);
         return matcher.matches();
@@ -42,11 +42,11 @@ public class IndivRegistration extends AppCompatActivity {
         TextView PrivacyPolicy = (TextView) findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
         TextView LoginHere = (TextView) findViewById(R.id.textView8_IndivReg_LoginHere);
         EditText LastName = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        EditText FirstName = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        EditText ContactNo = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        EditText Location = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        EditText EmailAddress = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        EditText Password = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
+        EditText FirstName = (EditText) findViewById(R.id.editText_IndivReg_FirstName);
+        EditText ContactNo = (EditText) findViewById(R.id.editText_IndivReg_ContactNum);
+        EditText Location = (EditText) findViewById(R.id.editText_IndivReg_Location);
+        EditText EmailAddress = (EditText) findViewById(R.id.editText_IndivReg_EmailAddress);
+        EditText Password = (EditText) findViewById(R.id.editText_IndivReg_Password);
         Button Register = (Button) findViewById(R.id.button3_IndivReg_Register);
 
         Register.setOnClickListener(new View.OnClickListener() {
@@ -62,21 +62,19 @@ public class IndivRegistration extends AppCompatActivity {
 
                 if (LastNametxt.isEmpty() || FirstNametxt.isEmpty() || ContactNotxt.isEmpty() || Locationtxt.isEmpty() || EmailAddresstxt.isEmpty() || Passwordtxt.isEmpty()){
                     Toast.makeText(IndivRegistration.this, "Please enter your complete account details.", Toast.LENGTH_LONG).show();
-                }else if(Passwordtxt.length() < 8 && !isValidPassword(Passwordtxt)){
-                    Toast.makeText(IndivRegistration.this, "Your password must have a minimum of 8 characters, and should include atleast 1 letter of the alphabet, 1 number & 1 Special Character.", Toast.LENGTH_LONG).show();
-                }else{
-                    dbref.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                }else if(isValidPassword(Passwordtxt)){
+                    dbref.child("RegisteredUser").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             if(snapshot.hasChild(EmailAddresstxt)){
                                 Toast.makeText(IndivRegistration.this, "Email address is already registered, please use a different one." , Toast.LENGTH_LONG).show();
                             }else{
-                                dbref.child("users").child(EmailAddresstxt).child("LastName").setValue(LastNametxt);
-                                dbref.child("users").child(EmailAddresstxt).child("FirstName").setValue(FirstNametxt);
-                                dbref.child("users").child(EmailAddresstxt).child("ContactNo").setValue(ContactNotxt);
-                                dbref.child("users").child(EmailAddresstxt).child("Location").setValue(Locationtxt);
-                                dbref.child("users").child(EmailAddresstxt).child("Password").setValue(Passwordtxt);
+                                dbref.child("RegisteredUser").child(EmailAddresstxt).child("LastName").setValue(LastNametxt);
+                                dbref.child("RegisteredUser").child(EmailAddresstxt).child("FirstName").setValue(FirstNametxt);
+                                dbref.child("RegisteredUser").child(EmailAddresstxt).child("ContactNo").setValue(ContactNotxt);
+                                dbref.child("RegisteredUser").child(EmailAddresstxt).child("Location").setValue(Locationtxt);
+                                dbref.child("RegisteredUser").child(EmailAddresstxt).child("Password").setValue(Passwordtxt);
 
                                 Toast.makeText(IndivRegistration.this, "Registration Successful, Client Verification is underway." , Toast.LENGTH_LONG).show();
 
@@ -91,6 +89,10 @@ public class IndivRegistration extends AppCompatActivity {
                         }
                     });
 
+                }else if( Passwordtxt.length() < 8){
+                    Toast.makeText(IndivRegistration.this, "Your password must have a minimum of 8 characters.", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(IndivRegistration.this, "Your password must include an uppercase letter, 1 Number & 1 Special Character.", Toast.LENGTH_LONG).show();
 
                 }
 
