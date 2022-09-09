@@ -1,7 +1,5 @@
 package com.example.byete_hunger_mobileapp;
 
-import static com.example.byete_hunger_mobileapp.IndivRegistration.isValidPassword;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
