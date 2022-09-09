@@ -24,16 +24,6 @@ public class IndivRegistration extends AppCompatActivity {
 
     DatabaseReference dbref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
 
-    // validate password if it has atleast 8 minimum characters, 1 Alphabet, 1 Number & 1 Special Character
-    public static boolean isValidPassword(final String Password) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "(/^(?=.*\\d)(?=.*[A-Z])([@$%&#])[0-9a-zA-Z]{4,}$/)";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(Password);
-        return matcher.matches();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,4 +110,15 @@ public class IndivRegistration extends AppCompatActivity {
         });
 
     }
+
+    // validate password if it has atleast 8 minimum characters, 1 Alphabet, 1 Number & 1 Special Character
+    public static boolean isValidPassword(final String Password) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "(/^(?=.*\\d)(?=.*[A-Z])([@$%&#])[0-9a-zA-Z]{4,}$/)";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(Password);
+        return matcher.matches();
+    }
+
 }
