@@ -68,18 +68,19 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="338dp"
-        android:layout_height="733dp"
+        android:layout_width="331dp"
+        android:layout_height="639dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/roundedcorners"
         android:backgroundTint="#1A6742"
-        android:translationZ="1dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:translationZ="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.935" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -87,10 +88,12 @@
         android:layout_height="85dp"
         android:layout_marginTop="16dp"
         android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.007"
         app:srcCompat="@drawable/profile_user"
         tools:ignore="MissingConstraints" />
 
@@ -126,32 +129,34 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button10"
-        app:layout_constraintEnd_toEndOf="@+id/button10"
+        app:layout_constraintBottom_toBottomOf="@+id/turnonnotif"
+        app:layout_constraintEnd_toEndOf="@+id/turnonnotif"
         app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="@+id/button10"
-        app:layout_constraintTop_toTopOf="@+id/button10"
+        app:layout_constraintStart_toStartOf="@+id/turnonnotif"
+        app:layout_constraintTop_toTopOf="@+id/turnonnotif"
         app:srcCompat="@drawable/arrow_go" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button10"
+        android:id="@+id/turnonnotif"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="68dp"
         android:background="@drawable/accountbuttonrounded"
         android:backgroundTint="#7D9133"
-        android:translationZ="10dp"
         android:padding="10dp"
         android:text="  TURN ON NOTIFICATIONS"
         android:textAlignment="textStart"
         android:textColor="#FFFFFF"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/DonationsMyAccount"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
@@ -161,13 +166,16 @@
         android:textAlignment="textStart"
         android:textColor="#FFFFFF"
         android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button10"
+        app:layout_constraintTop_toBottomOf="@+id/turnonnotif"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/ChangePassMyAccount"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
@@ -177,9 +185,12 @@
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
         android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/DonationsMyAccount"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -196,7 +207,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/ChangePassMyAccount"
         tools:ignore="MissingConstraints" />
 
 
@@ -221,7 +232,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:translationZ="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
+        app:layout_constraintBottom_toTopOf="@+id/turnonnotif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
@@ -246,11 +257,11 @@
         android:layout_height="20dp"
         android:background="@drawable/arrow_go"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/DonationsMyAccount"
+        app:layout_constraintEnd_toEndOf="@+id/DonationsMyAccount"
         app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button10"
+        app:layout_constraintStart_toStartOf="@+id/DonationsMyAccount"
+        app:layout_constraintTop_toBottomOf="@+id/turnonnotif"
         app:layout_constraintVertical_bias="0.727" />
 
     <ImageView
@@ -258,11 +269,11 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/ChangePassMyAccount"
+        app:layout_constraintEnd_toEndOf="@+id/ChangePassMyAccount"
         app:layout_constraintHorizontal_bias="0.842"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintStart_toStartOf="@+id/ChangePassMyAccount"
+        app:layout_constraintTop_toTopOf="@+id/ChangePassMyAccount"
         app:srcCompat="@drawable/arrow_go" />
 
 

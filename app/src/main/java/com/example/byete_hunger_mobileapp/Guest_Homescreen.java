@@ -18,8 +18,8 @@ public class Guest_Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_homescreen);
 
-        Button ClickHere = (Button)findViewById(R.id.button_guesthomescreen_register);
-        TextView Register = (TextView)findViewById(R.id.tv_guesthomescreen_clickhere);
+        Button Register =  (Button)findViewById(R.id.button_guesthomescreen_register);
+        TextView ClickHere = (TextView)findViewById(R.id.tv_guesthomescreen_clickhere);
 
         // redirect to registration main
         ClickHere.setOnClickListener(new View.OnClickListener() {

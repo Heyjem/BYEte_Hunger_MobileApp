@@ -32,6 +32,7 @@
                 android:backgroundTintMode="src_over" />
 
             <TextView
+                android:id="@+id/gobackFAQs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
