@@ -34,9 +34,8 @@ public class IndivRegistration extends AppCompatActivity {
     TextView PrivacyPolicy, LoginHere;
     Button Register;
     CheckBox checkbox;
-    String emailPattern1 = "[a-zA-Z9._-]+@[a-z]+\\.+[a-z]+", emailPattern2 = "[a-zA-Z9._-]+@[a-z]+\\.+[a-z]+\\.+[a-z]+";
-    FirebaseAuth fAuth;
-    FirebaseUser fUser;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
     Intent intent;
 
     @Override
@@ -44,23 +43,23 @@ public class IndivRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indiv_registration);
 
-        PrivacyPolicy = (TextView) findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
-        LoginHere = (TextView) findViewById(R.id.textView8_IndivReg_LoginHere);
-        LastName = (EditText) findViewById(R.id.editText_IndivOrg_LastName);
-        FirstName = (EditText) findViewById(R.id.editText_IndivReg_FirstName);
-        ContactNo = (EditText) findViewById(R.id.editText_IndivReg_ContactNum);
-        Location = (EditText) findViewById(R.id.editText_IndivReg_Location);
-        EmailAddress = (EditText) findViewById(R.id.editText_IndivReg_EmailAddress);
-        Password = (EditText) findViewById(R.id.editText_IndivReg_Password);
-        Register = (Button) findViewById(R.id.button3_IndivReg_Register);
-        checkbox = (CheckBox) findViewById(R.id.checkBox_IndivReg);
-        fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
+        PrivacyPolicy = (TextView)findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
+        LoginHere = (TextView)findViewById(R.id.textView8_IndivReg_LoginHere);
+        LastName = (EditText)findViewById(R.id.editText_IndivOrg_LastName);
+        FirstName = (EditText)findViewById(R.id.editText_IndivReg_FirstName);
+        ContactNo = (EditText)findViewById(R.id.editText_IndivReg_ContactNum);
+        Location = (EditText)findViewById(R.id.editText_IndivReg_Location);
+        EmailAddress = (EditText)findViewById(R.id.editText_IndivReg_EmailAddress);
+        Password = (EditText)findViewById(R.id.editText_IndivReg_Password);
+        Register = (Button)findViewById(R.id.button3_IndivReg_Register);
+        checkbox = (CheckBox)findViewById(R.id.checkBox_IndivReg);
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerforAuth();
+                Register();
             }
         });
 
@@ -71,7 +70,6 @@ public class IndivRegistration extends AppCompatActivity {
                 intent = new Intent(IndivRegistration.this, PrivacyPolicy.class);
                 startActivity(intent);
             }
-
         });
 
         // redirects to the login screen
@@ -81,41 +79,46 @@ public class IndivRegistration extends AppCompatActivity {
                 intent = new Intent(IndivRegistration.this, LoginScreen.class);
                 startActivity(intent);
             }
-
         });
-
     }
 
-    public void PerforAuth() {
+    public void Register() {
         String LastNametxt = LastName.getText().toString();
         String FirstNametxt = FirstName.getText().toString();
         String ContactNotxt = ContactNo.getText().toString();
         String Locationtxt = Location.getText().toString();
-        String EmailAddresstxt = EmailAddress.getText().toString();
-        String Passwordtxt = Password.getText().toString();
+        String EmailAddresstxt = EmailAddress.getText().toString().trim();
+        String Passwordtxt = Password.getText().toString().trim();
 
-        if (LastNametxt.isEmpty() || FirstNametxt.isEmpty() || ContactNotxt.isEmpty() || Locationtxt.isEmpty() || EmailAddresstxt.isEmpty() || Passwordtxt.isEmpty()){
-            Toast.makeText(IndivRegistration.this, "Please enter your complete account details.", Toast.LENGTH_LONG).show();
-        }else if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
-            Password.setError("Incomplete Password Credentials");
-        }else if(!checkbox.isChecked()){
-            Toast.makeText(IndivRegistration.this, "Please accept and tick our privacy policy", Toast.LENGTH_LONG).show();
-        }else if(EmailAddresstxt.matches(emailPattern1) || EmailAddresstxt.matches(emailPattern2)){
-            fAuth.createUserWithEmailAndPassword(EmailAddresstxt,Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if(LastNametxt.isEmpty()){
+            EmailAddress.setError("Please enter your last name.");
+        }
+        if(FirstNametxt.isEmpty()){
+            Password.setError("Please enter your first name");
+        }
+        if(ContactNotxt.isEmpty()){
+            EmailAddress.setError("Please enter your contact number.");
+        }
+        if(Locationtxt.isEmpty()){
+            Password.setError("Please enter your location");
+        }
+        if(EmailAddresstxt.isEmpty()){
+            EmailAddress.setError("Please enter your email address.");
+        }
+        if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
+            Password.setError("Please enter your password with more than 8 characters.");
+        }else{
+            mAuth.signInWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(IndivRegistration.this, "Registration successful, client verification is underway", Toast.LENGTH_LONG).show();
-                        intent = new Intent(IndivRegistration.this, LoginScreen.class);
-                        startActivity(intent);
+                    if(task.isSuccessful()){
+                        Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(IndivRegistration.this, Homescreen.class));
                     }else{
-                        Toast.makeText(IndivRegistration.this, "" + task.getException(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(IndivRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-        }else{
-            EmailAddress.setError("Incorrect Email Credentials.");
-
         }
 
     }

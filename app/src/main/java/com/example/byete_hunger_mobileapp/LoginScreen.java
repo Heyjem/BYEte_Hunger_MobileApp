@@ -11,6 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,68 +27,29 @@ import java.util.regex.Pattern;
 
 public class LoginScreen extends AppCompatActivity {
 
-    DatabaseReference dbref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
+    EditText EmailAddress, Password;
+    TextView ForgotPassword, Register;
+    Button Login;
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
 
-    // validate password if it has atleast 8 minimum characters, 1 Alphabet, 1 Number & 1 Special Character
-    public static boolean isValidPassword(final String Password) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(Password);
-        return matcher.matches();
-    }
+    DatabaseReference dbref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        TextView ForgotPassword = (TextView) this.findViewById(R.id.textView_LoginForgotPassword);
-        TextView Register = (TextView) this.findViewById(R.id.textView4_Login_RegisterNow);
-        Button Login = (Button) findViewById(R.id.button_Login);
-        EditText EmailAddress = (EditText) findViewById(R.id.editText_LoginEmailAddress);
-        EditText Password = (EditText) findViewById(R.id.editText_LoginPassword);
+        ForgotPassword = (TextView) this.findViewById(R.id.textView_LoginForgotPassword);
+        Register = (TextView) this.findViewById(R.id.textView4_Login_RegisterNow);
+        Login = (Button) findViewById(R.id.button_Login);
+        EmailAddress = (EditText) findViewById(R.id.editText_LoginEmailAddress);
+        Password = (EditText) findViewById(R.id.editText_LoginPassword);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String EmailAddresstxt = EmailAddress.getText().toString();
-                String Passwordtxt = Password.getText().toString();
-
-                if (EmailAddresstxt.isEmpty() || Passwordtxt.isEmpty()){
-                    Toast.makeText(LoginScreen.this, "Please enter your Email and Password.", Toast.LENGTH_LONG).show();
-                }else{
-                    dbref.child("RegisteredUser").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            if(snapshot.hasChild(EmailAddresstxt)){
-                                String getPassword = snapshot.child(EmailAddresstxt).child("Password").getValue(String.class);
-
-                                if (getPassword.equals(Passwordtxt)){
-                                    Toast.makeText(LoginScreen.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                                    Intent intent = new Intent(LoginScreen.this, Homescreen.class);
-                                    startActivity(intent);
-
-                                }else{
-                                    Toast.makeText(LoginScreen.this, "Incorrect Password, Try Again.", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }else{
-                                Toast.makeText(LoginScreen.this, "Incorrect Email, Try Again.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-
+                login();
                 }
         });
 
@@ -104,6 +70,30 @@ public class LoginScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
+
+    private void login(){
+        String user = EmailAddress.getText().toString().trim();
+        String pass = Password.getText().toString().trim();
+        if(user.isEmpty()){
+            EmailAddress.setError("Please enter your email.");
+        }
+        if(pass.isEmpty()){
+            Password.setError("Please enter your password");
+        }else{
+            fAuth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(LoginScreen.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginScreen.this, Homescreen.class));
+                    }else{
+                        Toast.makeText(LoginScreen.this, "Login Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+        }
+    }
+
 }

@@ -32,7 +32,6 @@ public class OrgRegistration extends AppCompatActivity {
     EditText Organization, ContactPerson, ContactNo, Location, EmailAddress, Password;
     CheckBox Checkbox;
     Button Register;
-    String emailPattern1 = "[a-zA-Z9._-]+@[a-z]+\\.+[a-z]+", emailPattern2 = "[a-zA-Z9._-]+@[a-z]+\\.+[a-z]+\\.+[a-z]+";
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     Intent intent;
@@ -58,7 +57,7 @@ public class OrgRegistration extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerforAuth();
+                Register();
             }
         });
 
@@ -66,7 +65,6 @@ public class OrgRegistration extends AppCompatActivity {
         PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(OrgRegistration.this, PrivacyPolicy.class);
                 startActivity(intent);
             }
@@ -85,7 +83,7 @@ public class OrgRegistration extends AppCompatActivity {
 
     }
 
-    public void PerforAuth() {
+    public void Register() {
         String Organizationtxt = Organization.getText().toString();
         String ContactPersontxt = ContactPerson.getText().toString();
         String ContactNotxt = ContactNo.getText().toString();
@@ -93,27 +91,35 @@ public class OrgRegistration extends AppCompatActivity {
         String EmailAddresstxt = EmailAddress.getText().toString();
         String Passwordtxt = Password.getText().toString();
 
-        if (Organizationtxt.isEmpty() || ContactPersontxt.isEmpty() || ContactNotxt.isEmpty() || Locationtxt.isEmpty() || EmailAddresstxt.isEmpty() || Passwordtxt.isEmpty()){
-            Toast.makeText(OrgRegistration.this, "Please enter your complete account details.", Toast.LENGTH_LONG).show();
-        }else if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
-            Password.setError("Incomplete Password Credentials");
-        }else if(!Checkbox.isChecked()){
-            Toast.makeText(OrgRegistration.this, "Please accept and tick our privacy policy", Toast.LENGTH_LONG).show();
-        }else if(EmailAddresstxt.matches(emailPattern1) || EmailAddresstxt.matches(emailPattern2)){
-            fAuth.createUserWithEmailAndPassword(EmailAddresstxt,Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if(Organizationtxt.isEmpty()){
+            EmailAddress.setError("Please enter your last name.");
+        }
+        if(ContactPersontxt.isEmpty()){
+            Password.setError("Please enter your first name");
+        }
+        if(ContactNotxt.isEmpty()){
+            EmailAddress.setError("Please enter your contact number.");
+        }
+        if(Locationtxt.isEmpty()){
+            Password.setError("Please enter your location");
+        }
+        if(EmailAddresstxt.isEmpty()){
+            EmailAddress.setError("Please enter your email address.");
+        }
+        if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
+            Password.setError("Please enter your password with more than 8 characters.");
+        }else{
+            fAuth.signInWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(OrgRegistration.this, "Registration successful, client verification is underway", Toast.LENGTH_LONG).show();
-                        intent = new Intent(OrgRegistration.this, LoginScreen.class);
-                        startActivity(intent);
+                    if(task.isSuccessful()){
+                        Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(OrgRegistration.this, Homescreen.class));
                     }else{
-                        Toast.makeText(OrgRegistration.this, "" + task.getException(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-        }else{
-            EmailAddress.setError("Incorrect Email Credentials.");
         }
 
     }
