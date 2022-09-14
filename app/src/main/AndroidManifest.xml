@@ -14,10 +14,7 @@
         android:theme="@style/Theme.BYEte_Hunger_MobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".acknowledgement_screen"
-            android:exported="false" />
-        <activity
-            android:name=".Guest_Homescreen"
+            android:name=".Chat_Screen2"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Chat_Screen"
+            android:name=".acknowledgement_screen"
+            android:exported="false" />
+        <activity
+            android:name=".Guest_Homescreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
