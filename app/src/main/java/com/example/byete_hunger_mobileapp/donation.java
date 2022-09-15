@@ -12,6 +12,7 @@ public class donation {
         this.notes = notes;
     }
 
+
     public String getType() {
         return type;
     }

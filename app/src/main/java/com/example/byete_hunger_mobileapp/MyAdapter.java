@@ -23,19 +23,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.donation_card, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-        donation donation = list.get(position);
-        holder.type.setTag(donation.getType());
-        holder.weight.setText(donation.getWeight());
-        holder.datePurchased.setText(donation.getDatePurchased());
-        holder.dateExpired.setText(donation.getDateExpired());
-        holder.notes.setText(donation.getNotes());
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        donation Donation = list.get(position);
+        holder.type.setTag(Donation.getType());
+        holder.weight.setText(Donation.getWeight());
+        holder.datePurchased.setText(Donation.getDatePurchased());
+        holder.dateExpired.setText(Donation.getDateExpired());
+        holder.notes.setText(Donation.getNotes());
     }
 
     @Override

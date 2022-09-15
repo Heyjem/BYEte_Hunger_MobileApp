@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:791717154010:android:80d354668850ebb9e5e9e3",
+        "mobilesdk_app_id": "1:791717154010:android:43082d265feec6a3e5e9e3",
         "android_client_info": {
           "package_name": "com.example.byete_hunger_mobileapp"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "791717154010-br6color052sfadfbg0h4dohv4ol6jcq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.byete_hunger_mobileapp",
-            "certificate_hash": "7b3c54c0420e9e0986588d66f57f9a80e7133acc"
-          }
-        },
         {
           "client_id": "791717154010-qpppvvghkjj36p19h1ta5fpigat9pkgq.apps.googleusercontent.com",
           "client_type": 3

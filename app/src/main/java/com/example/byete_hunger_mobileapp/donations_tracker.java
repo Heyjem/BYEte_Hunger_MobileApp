@@ -41,7 +41,7 @@ public class donations_tracker extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<donation> list;
     MyAdapter adapter;
-    DatabaseReference donations;
+    DatabaseReference donationsDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class donations_tracker extends AppCompatActivity {
         donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
         //donationcardplacement = findViewById(R.id.ll_donationcardplacement);
-        donations = FirebaseDatabase.getInstance().getReference("donations");
+        donationsDB = FirebaseDatabase.getInstance().getReference("donations");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -62,12 +62,12 @@ public class donations_tracker extends AppCompatActivity {
         donategenerate = findViewById(R.id.generateuid_sample); // sample button only
 
 
-        donations.addValueEventListener(new ValueEventListener() {
+        donationsDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    donation donation = dataSnapshot.getValue(donation.class);
-                    list.add(donation);
+                    donation Donation = dataSnapshot.getValue(donation.class);
+                    list.add(Donation);
                 }
                 adapter.notifyDataSetChanged();
             }
