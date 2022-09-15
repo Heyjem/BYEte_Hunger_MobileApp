@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".splashscreen"
+            android:name=".Chat_Screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,15 +65,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".welcome_screen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".uid_donations"
             android:exported="false" />
         <activity
@@ -84,14 +75,7 @@
             android:exported="false" />
         <activity
             android:name=".Account"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-
+            android:exported="false" />
         <activity
             android:name=".Homescreen"
             android:exported="true">
