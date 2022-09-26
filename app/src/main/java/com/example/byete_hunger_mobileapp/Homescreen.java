@@ -16,25 +16,23 @@ public class Homescreen extends AppCompatActivity {
     Button Chat, Track, Donate;
     TextView faqs;
     FirebaseAuth fAuth;
-    FirebaseUser fUser;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
 
-        Button Chat = (Button)findViewById(R.id.button_homescreen_chat);
-        Button Track = (Button)findViewById(R.id.button_homescreen_track);
-        Button Donate = (Button)findViewById(R.id.button_homescreen_donate);
-        TextView faqs = (TextView)findViewById(R.id.tv_homescreen_faqsclickhere);
-
+        Chat = findViewById(R.id.button_homescreen_chat);
+        Track = findViewById(R.id.button_homescreen_track);
+        Donate = findViewById(R.id.button_homescreen_donate);
+        faqs = findViewById(R.id.tv_homescreen_faqsclickhere);
 
         // redirect to chat
         Chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Homescreen.this, RegistrationMain.class);
-                startActivity(intent);
+                startActivity(new Intent(Homescreen.this, RegistrationMain.class));
             }
         });
 
@@ -42,8 +40,7 @@ public class Homescreen extends AppCompatActivity {
         Track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Homescreen.this, donations_tracker.class);
-                startActivity(intent);
+                startActivity(new Intent(Homescreen.this, donations_tracker.class));
             }
         });
 
@@ -51,8 +48,7 @@ public class Homescreen extends AppCompatActivity {
         Donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Homescreen.this, donate.class);
-                startActivity(intent);
+                startActivity(new Intent(Homescreen.this, donate.class));
             }
         });
 
@@ -60,11 +56,18 @@ public class Homescreen extends AppCompatActivity {
         faqs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Homescreen.this, FAQs.class);
-                startActivity(intent);
+                startActivity(new Intent(Homescreen.this, FAQs.class));
             }
         });
+    }
 
+    public void onStart(){
+        super.onStart();
+        fAuth = FirebaseAuth.getInstance();
+        currentUser = fAuth.getCurrentUser();
 
+        if (currentUser == null){
+            startActivity(new Intent(Homescreen.this, LoginScreen.class));
+        }
     }
 }

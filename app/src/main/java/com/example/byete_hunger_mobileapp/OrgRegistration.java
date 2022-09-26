@@ -33,26 +33,25 @@ public class OrgRegistration extends AppCompatActivity {
     CheckBox Checkbox;
     Button Register;
     FirebaseAuth fAuth;
-    FirebaseUser fUser;
-    Intent intent;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_registration);
 
-        PrivacyPolicy = (TextView) this.findViewById(R.id.textView_OrgRegistration_PrivacyPolicy);
-        LoginHere = (TextView) this.findViewById(R.id.textView6_OrgRegistration_LoginHere);
-        Organization = (EditText) findViewById(R.id.editText_OrgRegistration_Organization);
-        ContactPerson = (EditText) findViewById(R.id.editText_OrgRegistration_ContactPerson);
-        ContactNo = (EditText) findViewById(R.id.editText_OrgRegistration_Contact);
-        Location = (EditText) findViewById(R.id.editText_OrgRegistration_Location);
-        EmailAddress = (EditText) findViewById(R.id.editText_OrgRegistration_EmailAdd);
-        Password = (EditText) findViewById(R.id.editText_OrgRegistration_Password);
-        Checkbox = (CheckBox) findViewById(R.id.checkBox_OrgReg);
-        Register = (Button) findViewById(R.id.button3_OrgRegistration_Register);
+        PrivacyPolicy = findViewById(R.id.textView_OrgRegistration_PrivacyPolicy);
+        LoginHere = findViewById(R.id.textView6_OrgRegistration_LoginHere);
+        Organization = findViewById(R.id.editText_OrgRegistration_Organization);
+        ContactPerson = findViewById(R.id.editText_OrgRegistration_ContactPerson);
+        ContactNo = findViewById(R.id.editText_OrgRegistration_Contact);
+        Location = findViewById(R.id.editText_OrgRegistration_Location);
+        EmailAddress = findViewById(R.id.editText_OrgRegistration_EmailAdd);
+        Password = findViewById(R.id.editText_OrgRegistration_Password);
+        Checkbox = findViewById(R.id.checkBox_OrgReg);
+        Register = findViewById(R.id.button3_OrgRegistration_Register);
         fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
+        currentUser = fAuth.getCurrentUser();
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +64,7 @@ public class OrgRegistration extends AppCompatActivity {
         PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrgRegistration.this, PrivacyPolicy.class);
-                startActivity(intent);
+                startActivity(new Intent(OrgRegistration.this, PrivacyPolicy.class));
             }
 
         });
@@ -75,8 +73,7 @@ public class OrgRegistration extends AppCompatActivity {
         LoginHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
-                startActivity(intent);
+                startActivity(new Intent(OrgRegistration.this, LoginScreen.class));
             }
 
         });
@@ -109,7 +106,7 @@ public class OrgRegistration extends AppCompatActivity {
         if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
             Password.setError("Please enter your password with more than 8 characters.");
         }else{
-            fAuth.signInWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){

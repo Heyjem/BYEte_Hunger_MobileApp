@@ -35,26 +35,25 @@ public class IndivRegistration extends AppCompatActivity {
     Button Register;
     CheckBox checkbox;
     FirebaseAuth mAuth;
-    FirebaseUser mUser;
-    Intent intent;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indiv_registration);
 
-        PrivacyPolicy = (TextView)findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
-        LoginHere = (TextView)findViewById(R.id.textView8_IndivReg_LoginHere);
-        LastName = (EditText)findViewById(R.id.editText_IndivOrg_LastName);
-        FirstName = (EditText)findViewById(R.id.editText_IndivReg_FirstName);
-        ContactNo = (EditText)findViewById(R.id.editText_IndivReg_ContactNum);
-        Location = (EditText)findViewById(R.id.editText_IndivReg_Location);
-        EmailAddress = (EditText)findViewById(R.id.editText_IndivReg_EmailAddress);
-        Password = (EditText)findViewById(R.id.editText_IndivReg_Password);
-        Register = (Button)findViewById(R.id.button3_IndivReg_Register);
-        checkbox = (CheckBox)findViewById(R.id.checkBox_IndivReg);
+        PrivacyPolicy = findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
+        LoginHere = findViewById(R.id.textView8_IndivReg_LoginHere);
+        LastName = findViewById(R.id.editText_IndivOrg_LastName);
+        FirstName = findViewById(R.id.editText_IndivReg_FirstName);
+        ContactNo = findViewById(R.id.editText_IndivReg_ContactNum);
+        Location = findViewById(R.id.editText_IndivReg_Location);
+        EmailAddress = findViewById(R.id.editText_IndivReg_EmailAddress);
+        Password = findViewById(R.id.editText_IndivReg_Password);
+        Register = findViewById(R.id.button3_IndivReg_Register);
+        checkbox = findViewById(R.id.checkBox_IndivReg);
         mAuth = FirebaseAuth.getInstance();
-        mUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +66,7 @@ public class IndivRegistration extends AppCompatActivity {
         PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(IndivRegistration.this, PrivacyPolicy.class);
-                startActivity(intent);
+                startActivity(new Intent(IndivRegistration.this, PrivacyPolicy.class));
             }
         });
 
@@ -76,8 +74,7 @@ public class IndivRegistration extends AppCompatActivity {
         LoginHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(IndivRegistration.this, LoginScreen.class);
-                startActivity(intent);
+                startActivity(new Intent(IndivRegistration.this, LoginScreen.class));
             }
         });
     }
@@ -108,7 +105,7 @@ public class IndivRegistration extends AppCompatActivity {
         if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
             Password.setError("Please enter your password with more than 8 characters.");
         }else{
-            mAuth.signInWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
@@ -120,7 +117,5 @@ public class IndivRegistration extends AppCompatActivity {
                 }
             });
         }
-
     }
-
 }

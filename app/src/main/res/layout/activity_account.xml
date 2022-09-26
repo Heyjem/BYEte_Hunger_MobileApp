@@ -125,7 +125,7 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/iv_notifs"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:translationZ="15dp"
@@ -252,7 +252,7 @@
         app:srcCompat="@drawable/account_icon" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/iv_donations"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@drawable/arrow_go"
@@ -265,7 +265,7 @@
         app:layout_constraintVertical_bias="0.727" />
 
     <ImageView
-        android:id="@+id/imageView23"
+        android:id="@+id/iv_changepass"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:translationZ="15dp"

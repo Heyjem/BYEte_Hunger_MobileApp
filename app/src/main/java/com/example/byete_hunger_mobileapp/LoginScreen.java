@@ -31,7 +31,7 @@ public class LoginScreen extends AppCompatActivity {
     TextView ForgotPassword, Register;
     Button Login;
     FirebaseAuth fAuth;
-    FirebaseUser fUser;
+    FirebaseUser currentUser;
 
     DatabaseReference dbref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
 
@@ -40,11 +40,14 @@ public class LoginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        ForgotPassword = (TextView) this.findViewById(R.id.textView_LoginForgotPassword);
-        Register = (TextView) this.findViewById(R.id.textView4_Login_RegisterNow);
-        Login = (Button) findViewById(R.id.button_Login);
-        EmailAddress = (EditText) findViewById(R.id.editText_LoginEmailAddress);
-        Password = (EditText) findViewById(R.id.editText_LoginPassword);
+        fAuth = FirebaseAuth.getInstance();
+        currentUser = fAuth.getCurrentUser();
+
+        ForgotPassword = findViewById(R.id.textView_LoginForgotPassword);
+        Register = findViewById(R.id.textView4_Login_RegisterNow);
+        Login = findViewById(R.id.button_Login);
+        EmailAddress = findViewById(R.id.editText_LoginEmailAddress);
+        Password = findViewById(R.id.editText_LoginPassword);
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +60,7 @@ public class LoginScreen extends AppCompatActivity {
         ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginScreen.this, forgotPassword.class);
-                startActivity(intent);
+                startActivity(new Intent(LoginScreen.this, forgotPassword.class));
             }
         });
 
@@ -66,8 +68,7 @@ public class LoginScreen extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginScreen.this, RegistrationMain.class);
-                startActivity(intent);
+                startActivity(new Intent(LoginScreen.this, RegistrationMain.class));
             }
         });
     }

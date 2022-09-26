@@ -45,7 +45,6 @@ public class donate extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this);
 
-
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

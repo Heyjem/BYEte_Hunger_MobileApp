@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -43,6 +44,7 @@ public class donations_tracker extends AppCompatActivity {
     MyAdapter adapter;
     DatabaseReference donationsDB;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +54,13 @@ public class donations_tracker extends AppCompatActivity {
         donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
         //donationcardplacement = findViewById(R.id.ll_donationcardplacement);
-        donationsDB = FirebaseDatabase.getInstance().getReference("donations");
+        donationsDB = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
-        cardView = findViewById(R.id.cardView);
+        //cardView = findViewById(R.id.cardView);
         donategenerate = findViewById(R.id.generateuid_sample); // sample button only
 
 
