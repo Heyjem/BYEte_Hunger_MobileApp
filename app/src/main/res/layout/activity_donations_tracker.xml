@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".donations_tracker">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_donationstracker"
+        android:elevation="4dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
     <TextView
         android:id="@+id/tv1_donationstracker"
         android:layout_width="wrap_content"
@@ -49,6 +56,8 @@
         android:layout_marginBottom="50dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
     <!--
     <androidx.recyclerview.widget.RecyclerView

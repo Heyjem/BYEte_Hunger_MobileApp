@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Account extends AppCompatActivity {
 
     Button logout;
-    ImageView notif, donate, changepass;
+    ImageView notif, donate, changepass, back;
     FirebaseAuth fAuth;
 
 
@@ -25,6 +25,7 @@ public class Account extends AppCompatActivity {
         notif = findViewById(R.id.iv_notifs);
         donate = findViewById(R.id.iv_donations);
         changepass = findViewById(R.id.iv_changepass);
+        back = findViewById(R.id.donations_back);
         logout = findViewById(R.id.myaccount_logout_button);
         fAuth = FirebaseAuth.getInstance();
 
@@ -57,6 +58,13 @@ public class Account extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Account.this, account_change_password.class));
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

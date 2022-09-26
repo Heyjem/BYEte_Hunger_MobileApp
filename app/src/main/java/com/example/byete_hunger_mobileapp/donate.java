@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,34 +31,36 @@ public class donate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
 
-        spinner = (Spinner)findViewById(R.id.spinner_donate);
-        weight = (EditText)findViewById(R.id.et_donate_weight);
-        datePurchased = (EditText)findViewById(R.id.et_donate_donatePurchased);
-        dateExpired = (EditText)findViewById(R.id.et_donate_donateExpired);
-        contactNo = (EditText)findViewById(R.id.et_donate_contactNo);
-        notes = (EditText)findViewById(R.id.et_donate_notes);
-        Submit = (Button)findViewById(R.id.button4_donate_submit);
-        UID = (Button)findViewById(R.id.button5_donate_generateUID);
-        donationsDB = FirebaseDatabase.getInstance().getReference();
+        spinner = findViewById(R.id.spinner_donate);
+        weight = findViewById(R.id.et_donate_weight);
+        datePurchased = findViewById(R.id.et_donate_donatePurchased);
+        dateExpired = findViewById(R.id.et_donate_donateExpired);
+        contactNo = findViewById(R.id.et_donate_contactNo);
+        notes = findViewById(R.id.et_donate_notes);
+        Submit = findViewById(R.id.button4_donate_submit);
+        UID = findViewById(R.id.button5_donate_generateUID);
+        donationsDB = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
 
+        // dropdown for spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(donate.this, "pindot pa", Toast.LENGTH_SHORT).show();
+                InsertData();
+
             }
         });
 
         UID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertData();
+                Toast.makeText(donate.this, "pindot pa", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 
@@ -74,11 +77,14 @@ public class donate extends AppCompatActivity {
         donationsDB.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_SHORT).show();
+                if(spinner == null){
+                    Toast.makeText(donate.this,"Please select a donation type", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(task.isSuccessful()){
+                        Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
-        
     }
 }

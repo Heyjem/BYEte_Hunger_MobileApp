@@ -35,7 +35,7 @@ public class donations_tracker extends AppCompatActivity {
     Spinner spinner;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
 
-    Button donategenerate;
+    Button donategenerate, back;
     CardView cardView;
     RelativeLayout donationcardcontent;
     LinearLayout donationcardfront, donationcardplacement;
@@ -44,12 +44,13 @@ public class donations_tracker extends AppCompatActivity {
     MyAdapter adapter;
     DatabaseReference donationsDB;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_tracker);
 
+        back = findViewById(R.id.back_button_donationstracker);
         recyclerView = findViewById(R.id.rv_donationstracker);
         donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
@@ -62,6 +63,13 @@ public class donations_tracker extends AppCompatActivity {
 
         //cardView = findViewById(R.id.cardView);
         donategenerate = findViewById(R.id.generateuid_sample); // sample button only
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         donationsDB.addValueEventListener(new ValueEventListener() {

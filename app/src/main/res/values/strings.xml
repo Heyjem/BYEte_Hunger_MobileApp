@@ -1,14 +1,19 @@
 <resources>
+
     <string name="app_name">BYEte_Hunger_MobileApp</string>
     <string name="back_to_login">Back to login</string>
     <string name="forgot_password">FORGOT PASSWORD?</string>
     <string name="enter_email_address">ENTER EMAIL ADDRESS</string>
     <string name="email_address">Email Address</string>
     <string name="enter_your_email_address_below_and_click_send_to_receive_an_email_asking_to_change_your_password">Enter your email address below and click send to receive an email asking to change your password</string>
+
+    //Registration Main dropdown
     <string-array name="Options">
         <item>Organization</item>
         <item>Individual</item>
     </string-array>
+
+    //Donation type dropdown
     <string-array name="DonationType">
         <item>1</item>
         <item>2</item>
@@ -16,4 +21,5 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
 </resources>

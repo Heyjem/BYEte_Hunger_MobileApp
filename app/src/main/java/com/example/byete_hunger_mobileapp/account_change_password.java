@@ -11,16 +11,17 @@ import android.widget.TextView;
 
 public class account_change_password extends AppCompatActivity {
 
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_change_password);
 
-        ImageView donations_back = (ImageView) this.findViewById(R.id.donations_back);
+        back = findViewById(R.id.donations_back);
 
         // Back to Previous Page
-        donations_back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
