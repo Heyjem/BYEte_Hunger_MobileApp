@@ -73,7 +73,6 @@ public class uid_donations extends AppCompatActivity {
             }
         });
 
-
         donationsDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,21 +88,6 @@ public class uid_donations extends AppCompatActivity {
 
             }
         });
-
-
-        // donation card expands and collapses
-        /*cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (donationcardcontent.getVisibility()!=View.GONE){
-                    TransitionManager.beginDelayedTransition(cardview, new AutoTransition());
-                    donationcardcontent.setVisibility(View.GONE);
-                } else if (donationcardcontent.getVisibility()==View.GONE){
-                    TransitionManager.beginDelayedTransition(cardview, new AutoTransition());
-                    donationcardcontent.setVisibility(View.VISIBLE);
-                }
-            }
-        });*/
 
     }
 }

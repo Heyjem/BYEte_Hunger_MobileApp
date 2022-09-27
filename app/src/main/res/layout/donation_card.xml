@@ -18,10 +18,11 @@
         app:cardElevation="10dp"
         app:contentPadding="10dp"
         android:animateLayoutChanges="true"
-        tools:ignore="MissingConstraints,OnClick">
+        tools:ignore="MissingConstraints,onClick">
 
         <LinearLayout
             android:id="@+id/layout_donationcard_front"
+            android:animateLayoutChanges="true"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -67,7 +68,8 @@
             android:id="@+id/rl_donationcard_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/ll_donationcard_left"
