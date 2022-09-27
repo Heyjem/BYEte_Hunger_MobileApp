@@ -43,7 +43,7 @@ public class uid_donations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uid_donations);
 
-        // toolbar
+        // toolbar random comment
         back = findViewById(R.id.donationstracker_back_button);
         account = findViewById(R.id.donationstracker_account_page_icon);
 
