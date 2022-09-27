@@ -19,7 +19,7 @@
             android:src="@drawable/toolbar_icon" />
 
         <ImageView
-            android:id="@+id/account_page_icon"
+            android:id="@+id/homescreen_account_page_icon"
             android:layout_width="30dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
