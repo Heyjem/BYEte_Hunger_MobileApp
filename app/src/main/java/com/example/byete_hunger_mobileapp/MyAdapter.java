@@ -23,19 +23,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.donation_card, parent, false);
-        return new MyViewHolder(v);
+        return new MyAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        donation Donation = list.get(position);
-        holder.type.setTag(Donation.getType());
-        holder.weight.setText(Donation.getWeight());
-        holder.datePurchased.setText(Donation.getDatePurchased());
-        holder.dateExpired.setText(Donation.getDateExpired());
-        holder.notes.setText(Donation.getNotes());
+    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+        holder.type.setText(list.get(position).getType());
+        holder.weight.setText(list.get(position).getWeight());
+        holder.datePurchased.setText(list.get(position).getDatePurchased());
+        holder.dateExpired.setText(list.get(position).getDateExpired());
+        holder.notes.setText(list.get(position).getNotes());
     }
 
     @Override
@@ -44,8 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        Spinner type;
-        TextView weight, datePurchased, dateExpired, notes;
+        TextView type, weight, datePurchased, dateExpired, notes;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             type = itemView.findViewById(R.id.tv_donationcard_typedesc);
