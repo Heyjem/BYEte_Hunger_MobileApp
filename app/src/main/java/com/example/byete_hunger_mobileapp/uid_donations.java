@@ -50,7 +50,7 @@ public class uid_donations extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_donationstracker);
         donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
-        donationsDB = FirebaseDatabase.getInstance().getReference();
+        donationsDB = FirebaseDatabase.getInstance().getReference("donation");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -77,7 +77,7 @@ public class uid_donations extends AppCompatActivity {
         donationsDB.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     donation Donation = dataSnapshot.getValue(donation.class);
                     list.add(Donation);
                 }

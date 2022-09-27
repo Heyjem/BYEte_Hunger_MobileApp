@@ -53,13 +53,6 @@ public class donate extends AppCompatActivity {
         //spinner.setOnItemSelectedListener(this);
 
         Submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(donate.this, "pindot pa", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        UID.setOnClickListener(new View.OnClickListener() {
 
             public int nDigitRandomNo(int digits){
                 int max = (int) Math.pow(10,(digits)) - 1; //for digits =7, max will be 9999999
@@ -72,22 +65,29 @@ public class donate extends AppCompatActivity {
             }
 
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 InsertData();
 
-                    CardView newCard = new CardView(donate.this);
-                    getLayoutInflater().inflate(R.layout.donation_card, newCard);
+                /*
+                CardView newCard = new CardView(donate.this);
+                getLayoutInflater().inflate(R.layout.donation_card, newCard);
 
-                    int digits = 7;
-                    int n = nDigitRandomNo(digits);
-                    String uid = String.valueOf(n);
+                int digits = 7;
+                int n = nDigitRandomNo(digits);
+                String uid = String.valueOf(n);
 
-                    TextView t = newCard.findViewById(R.id.tv_donationcard_uidCode);
-                    t.setText(uid);
-                    newCard.setTag(uid);
+                TextView t = newCard.findViewById(R.id.tv_donationcard_uidCode);
+                t.setText(uid);
+                newCard.setTag(uid);
 
-                    recyclerView.addView(newCard);
+                recyclerView.addView(newCard);*/
+            }
+        });
 
+        UID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(donate.this, "pindot pa", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,6 +111,5 @@ public class donate extends AppCompatActivity {
                 }
             }
         });
-        
     }
 }

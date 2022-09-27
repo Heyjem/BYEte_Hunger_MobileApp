@@ -25,6 +25,7 @@ public class Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
 
+        account = findViewById(R.id.homescreen_account_page_icon);
         Chat = findViewById(R.id.button_homescreen_chat);
         Track = findViewById(R.id.button_homescreen_track);
         Donate = findViewById(R.id.button_homescreen_donate);
@@ -35,6 +36,13 @@ public class Homescreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Homescreen.this,Account.class));
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Homescreen.this, Account.class));
             }
         });
 

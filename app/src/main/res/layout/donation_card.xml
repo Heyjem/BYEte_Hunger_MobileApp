@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -66,8 +67,7 @@
             android:id="@+id/rl_donationcard_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:visibility="gone">
+            android:layout_marginTop="50dp">
 
             <LinearLayout
                 android:id="@+id/ll_donationcard_left"
@@ -141,7 +141,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Lorem ipsum"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -151,7 +150,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Lorem ipsum"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -161,7 +159,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="00 KG"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -171,7 +168,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="MM / DD / YY (OPTIONAL)"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -181,7 +177,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="MM / DD / YY (OPTIONAL)"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -208,7 +203,6 @@
                     android:layout_height="80dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Lorem Ipsum rambu rat gr abean glakin yan lodsah naolma lakiang ari. Lorem Ipsum rambu rat gr abean glakin yan lodsah naolma lakiang ari. "
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
