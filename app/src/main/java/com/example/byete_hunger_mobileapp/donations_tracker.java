@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -33,6 +35,7 @@ import java.util.Random;
 public class donations_tracker extends AppCompatActivity {
 
     Button donategenerate;
+    ImageView back,account;
     CardView cardView;
     RelativeLayout donationcardcontent;
     LinearLayout donationcardfront, donationcardplacement;
@@ -47,6 +50,10 @@ public class donations_tracker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_tracker);
 
+        // toolbar
+        back = findViewById(R.id.donationstracker_back_button);
+        account = findViewById(R.id.donationstracker_account_page_icon);
+
         recyclerView = findViewById(R.id.rv_donationstracker);
         donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
@@ -57,8 +64,22 @@ public class donations_tracker extends AppCompatActivity {
         adapter = new MyAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
-        cardView = findViewById(R.id.cardView);
+        cardView = findViewById(R.id.cv_donationCard);
         donategenerate = findViewById(R.id.generateuid_sample); // sample button only
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(donations_tracker.this,Account.class));
+            }
+        });
 
 
         donationsDB.addValueEventListener(new ValueEventListener() {

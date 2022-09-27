@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Homescreen extends AppCompatActivity {
 
     Button Chat, Track, Donate;
+    ImageView account;
     TextView faqs;
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
@@ -27,6 +29,14 @@ public class Homescreen extends AppCompatActivity {
         Track = findViewById(R.id.button_homescreen_track);
         Donate = findViewById(R.id.button_homescreen_donate);
         faqs = findViewById(R.id.tv_homescreen_faqsclickhere);
+        account = findViewById(R.id.homescreen_account_page_icon);
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Homescreen.this,Account.class));
+            }
+        });
 
         // redirect to chat
         Chat.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +50,7 @@ public class Homescreen extends AppCompatActivity {
         Track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, donations_tracker.class));
+                startActivity(new Intent(Homescreen.this, uid_donations.class));
             }
         });
 

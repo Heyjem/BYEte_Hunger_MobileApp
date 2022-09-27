@@ -2,6 +2,8 @@ package com.example.byete_hunger_mobileapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,12 +20,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 public class donate extends AppCompatActivity {
 
     Spinner spinner;
     Button Submit, UID;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference donationsDB;
+    RecyclerView recyclerView;
 
 
     @Override
@@ -30,6 +36,7 @@ public class donate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
 
+        recyclerView = findViewById(R.id.rv_donationstracker);
         spinner = (Spinner)findViewById(R.id.spinner_donate);
         weight = (EditText)findViewById(R.id.et_donate_weight);
         datePurchased = (EditText)findViewById(R.id.et_donate_donatePurchased);
@@ -53,9 +60,34 @@ public class donate extends AppCompatActivity {
         });
 
         UID.setOnClickListener(new View.OnClickListener() {
+
+            public int nDigitRandomNo(int digits){
+                int max = (int) Math.pow(10,(digits)) - 1; //for digits =7, max will be 9999999
+                int min = (int) Math.pow(10, digits-1); //for digits = 7, min will be 1000000
+                int range = max-min; //This is 8999999
+                Random r = new Random();
+                int x = r.nextInt(range);// This will generate random integers in range 0 - 8999999
+                int nDigitRandomNo = x+min; //Our random rumber will be any random number x + min
+                return nDigitRandomNo;
+            }
+
             @Override
             public void onClick(View view) {
                 InsertData();
+
+                    CardView newCard = new CardView(donate.this);
+                    getLayoutInflater().inflate(R.layout.donation_card, newCard);
+
+                    int digits = 7;
+                    int n = nDigitRandomNo(digits);
+                    String uid = String.valueOf(n);
+
+                    TextView t = newCard.findViewById(R.id.tv_donationcard_uidCode);
+                    t.setText(uid);
+                    newCard.setTag(uid);
+
+                    recyclerView.addView(newCard);
+
             }
         });
 
