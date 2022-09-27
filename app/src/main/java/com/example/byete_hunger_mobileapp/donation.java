@@ -3,6 +3,9 @@ package com.example.byete_hunger_mobileapp;
 public class donation {
     private String type, weight, datePurchased, dateExpired, contactNo, notes;
 
+    public donation() {
+    }
+
     public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes) {
         this.type = type;
         this.weight = weight;

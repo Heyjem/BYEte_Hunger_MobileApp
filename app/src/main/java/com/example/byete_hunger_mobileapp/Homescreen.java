@@ -32,7 +32,7 @@ public class Homescreen extends AppCompatActivity {
         Chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, RegistrationMain.class));
+                startActivity(new Intent(Homescreen.this, Chat_Screen.class));
             }
         });
 

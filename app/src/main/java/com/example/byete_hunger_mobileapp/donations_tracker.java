@@ -32,9 +32,6 @@ import java.util.Random;
 
 public class donations_tracker extends AppCompatActivity {
 
-    Spinner spinner;
-    EditText weight, datePurchased, dateExpired, contactNo, notes;
-
     Button donategenerate;
     CardView cardView;
     RelativeLayout donationcardcontent;
@@ -60,7 +57,7 @@ public class donations_tracker extends AppCompatActivity {
         adapter = new MyAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
-        //cardView = findViewById(R.id.cardView);
+        cardView = findViewById(R.id.cardView);
         donategenerate = findViewById(R.id.generateuid_sample); // sample button only
 
 
@@ -104,12 +101,13 @@ public class donations_tracker extends AppCompatActivity {
                 t.setText(uid);
                 newCard.setTag(uid);
 
-                donationcardplacement.addView(newCard);
+                recyclerView.addView(newCard);
             }
         });
 
+
         // donation card expands and collapses
-        cardView.setOnClickListener(new View.OnClickListener() {
+        /*cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (donationcardcontent.getVisibility()!=View.GONE){
@@ -120,29 +118,8 @@ public class donations_tracker extends AppCompatActivity {
                     donationcardcontent.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
+
     }
-
-    /*
-    private void InsertData() {
-        String type = spinner.getSelectedItem().toString();
-        String wt = weight.getText().toString();
-        String dP = datePurchased.getText().toString();
-        String dE = dateExpired.getText().toString();
-        String cN = contactNo.getText().toString();
-        String nts = notes.getText().toString();
-        String id = donations.push().getKey();
-
-        donation donation = new donation(type, wt, dP, dE, cN, nts);
-        donations.child("donation").child(id).setValue(donation).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(donations_tracker.this,"Donation details inserted", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }*/
 
 }
