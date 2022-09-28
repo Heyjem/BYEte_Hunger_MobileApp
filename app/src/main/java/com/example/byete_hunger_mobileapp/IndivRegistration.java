@@ -1,13 +1,11 @@
 package com.example.byete_hunger_mobileapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class IndivRegistration extends AppCompatActivity {
 
@@ -34,6 +26,7 @@ public class IndivRegistration extends AppCompatActivity {
     TextView PrivacyPolicy, LoginHere;
     Button Register;
     CheckBox checkbox;
+    DatabaseReference dbRef;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
@@ -52,6 +45,8 @@ public class IndivRegistration extends AppCompatActivity {
         Password = findViewById(R.id.editText_IndivReg_Password);
         Register = findViewById(R.id.button3_IndivReg_Register);
         checkbox = findViewById(R.id.checkBox_IndivReg);
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -109,8 +104,32 @@ public class IndivRegistration extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(IndivRegistration.this, Homescreen.class));
+                        currentUser = mAuth.getCurrentUser();
+
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(LastNametxt,FirstNametxt,ContactNotxt,Locationtxt,EmailAddresstxt);
+
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
+
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    //Send Verification Email
+                                    //currentUser.sendEmailVerification();
+
+                                    //startActivity(new Intent(IndivRegistration.this, Homescreen.class));
+                                    Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
+
+                                    // Prevent user to return to Indiv Registration
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(IndivRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }else{
                         Toast.makeText(IndivRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

@@ -17,14 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class OrgRegistration extends AppCompatActivity {
 
@@ -32,7 +26,9 @@ public class OrgRegistration extends AppCompatActivity {
     EditText Organization, ContactPerson, ContactNo, Location, EmailAddress, Password;
     CheckBox Checkbox;
     Button Register;
-    FirebaseAuth fAuth;
+
+    DatabaseReference dbRef;
+    FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
     @Override
@@ -50,8 +46,10 @@ public class OrgRegistration extends AppCompatActivity {
         Password = findViewById(R.id.editText_OrgRegistration_Password);
         Checkbox = findViewById(R.id.checkBox_OrgReg);
         Register = findViewById(R.id.button3_OrgRegistration_Register);
-        fAuth = FirebaseAuth.getInstance();
-        currentUser = fAuth.getCurrentUser();
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +83,8 @@ public class OrgRegistration extends AppCompatActivity {
         String ContactPersontxt = ContactPerson.getText().toString();
         String ContactNotxt = ContactNo.getText().toString();
         String Locationtxt = Location.getText().toString();
-        String EmailAddresstxt = EmailAddress.getText().toString();
-        String Passwordtxt = Password.getText().toString();
+        String EmailAddresstxt = EmailAddress.getText().toString().trim();
+        String Passwordtxt = Password.getText().toString().trim();
 
         if(Organizationtxt.isEmpty()){
             EmailAddress.setError("Please enter your last name.");
@@ -106,12 +104,36 @@ public class OrgRegistration extends AppCompatActivity {
         if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
             Password.setError("Please enter your password with more than 8 characters.");
         }else{
-            fAuth.createUserWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(OrgRegistration.this, Homescreen.class));
+                        currentUser = mAuth.getCurrentUser();
+
+                        ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(Organizationtxt,ContactPersontxt,ContactNotxt,Locationtxt,EmailAddresstxt);
+
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
+
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    //Send Verification Email
+                                    //currentUser.sendEmailVerification();
+
+                                    //startActivity(new Intent(OrgRegistration.this, Homescreen.class));
+                                    Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
+
+                                    // Prevent user to return to Indiv Registration
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }else{
                         Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
