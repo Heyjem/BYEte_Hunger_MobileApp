@@ -20,6 +20,10 @@ public class forgotPassword extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     String email;
+    ImageView GoBack;
+    TextView BackToLogin;
+    Button Send;
+    EditText forEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +31,10 @@ public class forgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         fAuth = FirebaseAuth.getInstance();
-        ImageView GoBack = (ImageView) this.findViewById(R.id.imageView5_ForgotPass_BackImage);
-        TextView BackToLogin = (TextView) this.findViewById(R.id.textView2_ForgotPass_BackToLogin);
-        Button Send = (Button) this.findViewById(R.id.button_ForgotPass_Send);
-        EditText forEmail = (EditText) this.findViewById(R.id.editText_Forgot_EmailAddress);
+        GoBack = findViewById(R.id.imageView5_ForgotPass_BackImage);
+        BackToLogin = findViewById(R.id.textView2_ForgotPass_BackToLogin);
+        Send = findViewById(R.id.button_ForgotPass_Send);
+        forEmail = findViewById(R.id.editText_Forgot_EmailAddress);
 
         //Forgot Password
         Send.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +56,7 @@ public class forgotPassword extends AppCompatActivity {
         BackToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(forgotPassword.this, LoginScreen.class);
-                startActivity(intent);
+                finish();
             }
         });
 

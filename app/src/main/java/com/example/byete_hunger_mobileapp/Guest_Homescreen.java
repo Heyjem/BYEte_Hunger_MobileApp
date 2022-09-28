@@ -10,23 +10,22 @@ import android.widget.TextView;
 
 public class Guest_Homescreen extends AppCompatActivity {
 
-    Button ClickHere;
-    TextView Register;
+    TextView ClickHere;
+    Button Register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_homescreen);
 
-        Button Register =  (Button)findViewById(R.id.button_guesthomescreen_register);
-        TextView ClickHere = (TextView)findViewById(R.id.tv_guesthomescreen_clickhere);
+        Register =  findViewById(R.id.button_guesthomescreen_register);
+        ClickHere = findViewById(R.id.tv_guesthomescreen_clickhere);
 
         // redirect to registration main
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Guest_Homescreen.this, FAQs.class);
-                startActivity(intent);
+                startActivity(new Intent(Guest_Homescreen.this, FAQs.class));
             }
         });
 
@@ -34,8 +33,7 @@ public class Guest_Homescreen extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Guest_Homescreen.this, RegistrationMain.class);
-                startActivity(intent);
+                startActivity(new Intent(Guest_Homescreen.this, RegistrationMain.class));
             }
         });
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class donate extends AppCompatActivity {
 
     Spinner spinner;
     Button Submit, UID;
+    ImageView back, account;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference donationsDB;
     RecyclerView recyclerView;
@@ -36,6 +38,8 @@ public class donate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
 
+        back = findViewById(R.id.donate_back_button);
+        account = findViewById(R.id.donate_account_page_icon);
         recyclerView = findViewById(R.id.rv_donationstracker);
         spinner = (Spinner)findViewById(R.id.spinner_donate);
         weight = (EditText)findViewById(R.id.et_donate_weight);
@@ -51,6 +55,20 @@ public class donate extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         //spinner.setOnItemSelectedListener(this);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(donate.this, Account.class));
+            }
+        });
 
         Submit.setOnClickListener(new View.OnClickListener() {
 

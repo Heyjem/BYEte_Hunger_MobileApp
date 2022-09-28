@@ -10,14 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class PrivacyPolicy extends AppCompatActivity {
 
+    ImageView GoBack;
+    TextView textview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_policy);
 
-        ImageView GoBack = (ImageView) this.findViewById(R.id.imageView14_PrivPol_GoBack);
+        GoBack = findViewById(R.id.imageView14_PrivPol_GoBack);
+        textview = findViewById(R.id.textView2_PrivPol_Text);
 
-        TextView textview = (TextView) findViewById(R.id.textView2_PrivPol_Text);
         textview.setMovementMethod(new ScrollingMovementMethod());
 
         // Back to Previous Page

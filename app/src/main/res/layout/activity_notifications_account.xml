@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/donations_back"
+        android:id="@+id/accountNotifs_back"
         android:layout_width="30dp"
         android:layout_height="24dp"
         android:layout_marginStart="28dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/myaccount_account"
+        android:id="@+id/accountNotifs_account"
         android:layout_width="30dp"
         android:layout_height="31dp"
         android:layout_marginTop="24dp"

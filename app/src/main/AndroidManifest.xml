@@ -47,15 +47,6 @@
             android:name=".statustracker"
             android:exported="false" />
         <activity
-            android:name=".donations_tracker"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".donate"
             android:exported="true">
             <intent-filter>

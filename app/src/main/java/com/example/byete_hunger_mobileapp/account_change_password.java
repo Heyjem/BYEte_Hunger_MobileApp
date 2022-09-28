@@ -23,6 +23,7 @@ public class account_change_password extends AppCompatActivity {
     FirebaseAuth fAuth;
     String email;
     Button send;
+    ImageView back, account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class account_change_password extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         send = (Button) this.findViewById(R.id.turnonnotif);
+        back = findViewById(R.id.donations_back);
+        account = findViewById(R.id.myaccount_account);
         EditText forEmail = (EditText) this.findViewById(R.id.editTextTextPassword1);
 
         //Change Password
@@ -48,7 +51,19 @@ public class account_change_password extends AppCompatActivity {
             }
         });
 
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(account_change_password.this, Account.class));
+            }
+        });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

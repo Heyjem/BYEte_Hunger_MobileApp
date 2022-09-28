@@ -30,14 +30,6 @@ public class Homescreen extends AppCompatActivity {
         Track = findViewById(R.id.button_homescreen_track);
         Donate = findViewById(R.id.button_homescreen_donate);
         faqs = findViewById(R.id.tv_homescreen_faqsclickhere);
-        account = findViewById(R.id.homescreen_account_page_icon);
-
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this,Account.class));
-            }
-        });
 
         account.setOnClickListener(new View.OnClickListener() {
             @Override
