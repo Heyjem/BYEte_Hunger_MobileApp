@@ -18,7 +18,7 @@ public class notifications_account extends AppCompatActivity {
         setContentView(R.layout.activity_notifications_account);
 
         back = findViewById(R.id.accountNotifs_back);
-        back = findViewById(R.id.accountNotifs_account);
+        account = findViewById(R.id.accountNotifs_account);
 
         // Back to Previous Page
         back.setOnClickListener(new View.OnClickListener() {
