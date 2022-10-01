@@ -50,7 +50,7 @@ public class Homescreen extends AppCompatActivity {
         Track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, statustracker.class));
+                startActivity(new Intent(Homescreen.this, uid_donations.class));
             }
         });
 

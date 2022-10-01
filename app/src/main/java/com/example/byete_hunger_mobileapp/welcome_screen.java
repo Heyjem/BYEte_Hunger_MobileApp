@@ -18,18 +18,15 @@ public class welcome_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 
-        Button Register = (Button)findViewById(R.id.button_welcome_screen);
-        TextView Login = (TextView)findViewById(R.id.textView_login_welcome_screen);
-        TextView ClickHere = (TextView)findViewById(R.id.textView_clickhere_welcome_screen);
+        Register = findViewById(R.id.button_welcome_screen);
+        Login = findViewById(R.id.textView_login_welcome_screen);
+        ClickHere = findViewById(R.id.textView_clickhere_welcome_screen);
 
         // redirect to registration main
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent=new Intent(welcome_screen.this,RegistrationMain.class);
-                startActivity(intent);
-
+                startActivity(new Intent(welcome_screen.this,RegistrationMain.class));
             }
         });
 
@@ -37,10 +34,7 @@ public class welcome_screen extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent=new Intent(welcome_screen.this,LoginScreen.class);
-                startActivity(intent);
-
+                startActivity(new Intent(welcome_screen.this,LoginScreen.class));
             }
         });
 
@@ -48,10 +42,7 @@ public class welcome_screen extends AppCompatActivity {
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent=new Intent(welcome_screen.this,Guest_Homescreen.class);
-                startActivity(intent);
-
+                startActivity(new Intent(welcome_screen.this,Guest_Homescreen.class));
             }
         });
 

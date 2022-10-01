@@ -2,7 +2,7 @@ package com.example.byete_hunger_mobileapp;
 
 public class donation {
     private String type, weight, datePurchased, dateExpired, contactNo, notes;
-    private boolean isShrink = false;
+    //private boolean isShrink = false;
 
     public donation() {
     }
@@ -37,7 +37,7 @@ public class donation {
         return notes;
     }
 
-
+    /*
     public boolean isShrink() {
         return isShrink;
     }
@@ -45,6 +45,6 @@ public class donation {
     public void setShrink(boolean shrink) {
         isShrink = shrink;
     }
-
+    */
 
 }
