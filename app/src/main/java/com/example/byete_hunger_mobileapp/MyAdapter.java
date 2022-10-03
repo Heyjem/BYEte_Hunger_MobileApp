@@ -1,20 +1,28 @@
 package com.example.byete_hunger_mobileapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
@@ -34,11 +42,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+
+
         holder.type.setText(list.get(position).getType());
         holder.weight.setText(list.get(position).getWeight());
         holder.datePurchased.setText(list.get(position).getDatePurchased());
         holder.dateExpired.setText(list.get(position).getDateExpired());
         holder.notes.setText(list.get(position).getNotes());
+        holder.id.setText(list.get(position).getId());
+
 
     }
 
@@ -49,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView type, weight, datePurchased, dateExpired, notes;
+        TextView type, weight, datePurchased, dateExpired, notes, id;
         CardView cardView;
         RelativeLayout donationcardcontent;
 
@@ -62,21 +74,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
             cardView = itemView.findViewById(R.id.cv_donationCard);
             donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
+            id = itemView.findViewById(R.id.tv_donationcard_uidCode);
 
             // donation card expands and collapses
             cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (donationcardcontent.getVisibility()==View.GONE){
+                if (donationcardcontent.getVisibility() == View.GONE) {
                     TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                     donationcardcontent.setVisibility(View.VISIBLE);
-                } else if (donationcardcontent.getVisibility()!=View.GONE){
+                } else if (donationcardcontent.getVisibility() != View.GONE) {
                     TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
                     donationcardcontent.setVisibility(View.GONE);
                 }
             }
         });
-
         }
     }
 }
+

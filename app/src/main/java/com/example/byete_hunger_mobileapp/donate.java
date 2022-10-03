@@ -41,20 +41,19 @@ public class donate extends AppCompatActivity {
         back = findViewById(R.id.donate_back_button);
         account = findViewById(R.id.donate_account_page_icon);
         recyclerView = findViewById(R.id.rv_donationstracker);
-        spinner = (Spinner)findViewById(R.id.spinner_donate);
-        weight = (EditText)findViewById(R.id.et_donate_weight);
-        datePurchased = (EditText)findViewById(R.id.et_donate_donatePurchased);
-        dateExpired = (EditText)findViewById(R.id.et_donate_donateExpired);
-        contactNo = (EditText)findViewById(R.id.et_donate_contactNo);
-        notes = (EditText)findViewById(R.id.et_donate_notes);
-        Submit = (Button)findViewById(R.id.button4_donate_submit);
-        UID = (Button)findViewById(R.id.button5_donate_generateUID);
+        spinner = findViewById(R.id.spinner_donate);
+        weight = findViewById(R.id.et_donate_weight);
+        datePurchased = findViewById(R.id.et_donate_donatePurchased);
+        dateExpired = findViewById(R.id.et_donate_donateExpired);
+        contactNo = findViewById(R.id.et_donate_contactNo);
+        notes = findViewById(R.id.et_donate_notes);
+        Submit = findViewById(R.id.button4_donate_submit);
+        UID = findViewById(R.id.button5_donate_generateUID);
         donationsDB = FirebaseDatabase.getInstance().getReference();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,16 +71,6 @@ public class donate extends AppCompatActivity {
 
         Submit.setOnClickListener(new View.OnClickListener() {
 
-            public int nDigitRandomNo(int digits){
-                int max = (int) Math.pow(10,(digits)) - 1; //for digits =7, max will be 9999999
-                int min = (int) Math.pow(10, digits-1); //for digits = 7, min will be 1000000
-                int range = max-min; //This is 8999999
-                Random r = new Random();
-                int x = r.nextInt(range);// This will generate random integers in range 0 - 8999999
-                int nDigitRandomNo = x+min; //Our random rumber will be any random number x + min
-                return nDigitRandomNo;
-            }
-
             @Override
             public void onClick(View v) {
                 InsertData();
@@ -98,7 +87,8 @@ public class donate extends AppCompatActivity {
                 t.setText(uid);
                 newCard.setTag(uid);
 
-                recyclerView.addView(newCard);*/
+                recyclerView.addView(newCard);
+                */
             }
         });
 
@@ -111,6 +101,16 @@ public class donate extends AppCompatActivity {
 
     }
 
+    public int nDigitRandomNo(int digits){
+        int max = (int) Math.pow(10,(digits)) - 1; //for digits =7, max will be 9999999
+        int min = (int) Math.pow(10, digits-1); //for digits = 7, min will be 1000000
+        int range = max-min; //This is 8999999
+        Random r = new Random();
+        int x = r.nextInt(range);// This will generate random integers in range 0 - 8999999
+        int nDigitRandomNo = x+min; //Our random rumber will be any random number x + min
+        return nDigitRandomNo;
+    }
+
     public void InsertData() {
         String type = spinner.getSelectedItem().toString();
         String wt = weight.getText().toString();
@@ -120,12 +120,13 @@ public class donate extends AppCompatActivity {
         String nts = notes.getText().toString();
         String id = donationsDB.push().getKey();
 
-        donation Donation = new donation(type, wt, dP, dE, cN, nts);
+        donation Donation = new donation(type, wt, dP, dE, cN, nts, id);
         donationsDB.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

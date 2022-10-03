@@ -1,19 +1,20 @@
 package com.example.byete_hunger_mobileapp;
 
 public class donation {
-    private String type, weight, datePurchased, dateExpired, contactNo, notes;
+    private String type, weight, datePurchased, dateExpired, contactNo, notes, id;
     //private boolean isShrink = false;
 
     public donation() {
     }
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes) {
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
         this.dateExpired = dateExpired;
         this.contactNo = contactNo;
         this.notes = notes;
+        this.id = id;
     }
 
 
@@ -36,6 +37,11 @@ public class donation {
     public String getNotes() {
         return notes;
     }
+
+    public String getId() {
+        return id;
+    }
+
 
     /*
     public boolean isShrink() {
