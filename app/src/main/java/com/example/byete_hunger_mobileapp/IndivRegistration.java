@@ -81,6 +81,7 @@ public class IndivRegistration extends AppCompatActivity {
         String Locationtxt = Location.getText().toString();
         String EmailAddresstxt = EmailAddress.getText().toString().trim();
         String Passwordtxt = Password.getText().toString().trim();
+        String Representative = "N/A";
 
         if(LastNametxt.isEmpty()){
             EmailAddress.setError("Please enter your last name.");
@@ -106,7 +107,7 @@ public class IndivRegistration extends AppCompatActivity {
                     if(task.isSuccessful()){
                         currentUser = mAuth.getCurrentUser();
 
-                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(LastNametxt,FirstNametxt,ContactNotxt,Locationtxt,EmailAddresstxt);
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(LastNametxt, FirstNametxt, ContactNotxt, Locationtxt, EmailAddresstxt, Representative);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 
