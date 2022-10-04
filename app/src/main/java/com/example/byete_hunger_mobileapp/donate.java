@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class donate extends AppCompatActivity {
@@ -31,7 +33,6 @@ public class donate extends AppCompatActivity {
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference donationsDB;
     RecyclerView recyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,21 +75,6 @@ public class donate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InsertData();
-
-                /*
-                CardView newCard = new CardView(donate.this);
-                getLayoutInflater().inflate(R.layout.donation_card, newCard);
-
-                int digits = 7;
-                int n = nDigitRandomNo(digits);
-                String uid = String.valueOf(n);
-
-                TextView t = newCard.findViewById(R.id.tv_donationcard_uidCode);
-                t.setText(uid);
-                newCard.setTag(uid);
-
-                recyclerView.addView(newCard);
-                */
             }
         });
 
@@ -101,16 +87,6 @@ public class donate extends AppCompatActivity {
 
     }
 
-    public int nDigitRandomNo(int digits){
-        int max = (int) Math.pow(10,(digits)) - 1; //for digits =7, max will be 9999999
-        int min = (int) Math.pow(10, digits-1); //for digits = 7, min will be 1000000
-        int range = max-min; //This is 8999999
-        Random r = new Random();
-        int x = r.nextInt(range);// This will generate random integers in range 0 - 8999999
-        int nDigitRandomNo = x+min; //Our random rumber will be any random number x + min
-        return nDigitRandomNo;
-    }
-
     public void InsertData() {
         String type = spinner.getSelectedItem().toString();
         String wt = weight.getText().toString();
@@ -120,7 +96,18 @@ public class donate extends AppCompatActivity {
         String nts = notes.getText().toString();
         String id = donationsDB.push().getKey();
 
-        donation Donation = new donation(type, wt, dP, dE, cN, nts, id);
+        //show when new card was added to donations
+        Date date = new Date();
+        Date time = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss");
+        String dateAdded = formatter.format(date);
+        String dateAddedTime = formatter2.format(time);
+
+        //date.setTime(System.currentTimeMillis()); //set to current time
+        //Submit.setText(date.toString());
+
+        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
         donationsDB.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

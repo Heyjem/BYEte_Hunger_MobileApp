@@ -89,7 +89,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -261,8 +262,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
                 android:background="#2B2A2A"
-                android:translationZ="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:translationZ="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -331,10 +332,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="57dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="For Frequently Ask Questions"
+                    android:text="For Frequently Asked Questions"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="13sp" />
@@ -343,8 +344,8 @@
                     android:id="@+id/tv_guesthomescreen_clickhere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="Click Here"
                     android:textAlignment="center"
@@ -363,8 +364,8 @@
                 android:elevation="4dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="BECOME A DONOR NOW!"
-                android:translationZ="20dp"
-                android:textColor="#525252" />
+                android:textColor="#525252"
+                android:translationZ="20dp" />
 
         </LinearLayout>
 

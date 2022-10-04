@@ -42,16 +42,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-
-
         holder.type.setText(list.get(position).getType());
         holder.weight.setText(list.get(position).getWeight());
         holder.datePurchased.setText(list.get(position).getDatePurchased());
         holder.dateExpired.setText(list.get(position).getDateExpired());
         holder.notes.setText(list.get(position).getNotes());
         holder.id.setText(list.get(position).getId());
-
-
+        holder.dateAdded.setText(list.get(position).getDateAdded());
+        holder.dateAddedTime.setText(list.get(position).getDateAddedTime());
     }
 
     @Override
@@ -61,7 +59,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView type, weight, datePurchased, dateExpired, notes, id;
+        TextView type, weight, datePurchased, dateExpired, notes, id, dateAdded, dateAddedTime;
         CardView cardView;
         RelativeLayout donationcardcontent;
 
@@ -75,6 +73,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             cardView = itemView.findViewById(R.id.cv_donationCard);
             donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
             id = itemView.findViewById(R.id.tv_donationcard_uidCode);
+            dateAdded = itemView.findViewById(R.id.tv_donationcard_dateadded);
+            dateAddedTime = itemView.findViewById(R.id.tv_donationcard_dateaddedTime);
 
             // donation card expands and collapses
             cardView.setOnClickListener(new View.OnClickListener() {

@@ -35,7 +35,6 @@ public class uid_donations extends AppCompatActivity {
     ImageView back,account;
     CardView cardview;
     RelativeLayout donationcardcontent;
-    LinearLayout donationcardfront;
     RecyclerView recyclerView;
     ArrayList<donation> list;
     MyAdapter adapter;
@@ -51,7 +50,6 @@ public class uid_donations extends AppCompatActivity {
         account = findViewById(R.id.donationstracker_account_page_icon);
 
         recyclerView = findViewById(R.id.rv_donationstracker);
-        donationcardfront = findViewById(R.id.layout_donationcard_front);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
         donationsDB = FirebaseDatabase.getInstance().getReference("donation");
         list = new ArrayList<>();

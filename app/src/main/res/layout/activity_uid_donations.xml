@@ -17,13 +17,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_donationstracker"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="640dp"
         android:layout_below="@+id/include"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="30dp"
-        app:stackFromEnd="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:stackFromEnd="true">
 
     </androidx.recyclerview.widget.RecyclerView>
 
