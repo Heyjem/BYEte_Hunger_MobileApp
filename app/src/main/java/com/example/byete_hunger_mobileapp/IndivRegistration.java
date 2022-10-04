@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class IndivRegistration extends AppCompatActivity {
 
-    EditText LastName, FirstName, ContactNo, Location, EmailAddress, Password;
+    EditText lastName, firstName, contactNo, location, emailAddress, password;
     TextView PrivacyPolicy, LoginHere;
     Button Register;
     CheckBox checkbox;
@@ -37,12 +37,12 @@ public class IndivRegistration extends AppCompatActivity {
 
         PrivacyPolicy = findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
         LoginHere = findViewById(R.id.textView8_IndivReg_LoginHere);
-        LastName = findViewById(R.id.editText_IndivOrg_LastName);
-        FirstName = findViewById(R.id.editText_IndivReg_FirstName);
-        ContactNo = findViewById(R.id.editText_IndivReg_ContactNum);
-        Location = findViewById(R.id.editText_IndivReg_Location);
-        EmailAddress = findViewById(R.id.editText_IndivReg_EmailAddress);
-        Password = findViewById(R.id.editText_IndivReg_Password);
+        lastName = findViewById(R.id.editText_IndivOrg_LastName);
+        firstName = findViewById(R.id.editText_IndivReg_FirstName);
+        contactNo = findViewById(R.id.editText_IndivReg_ContactNum);
+        location = findViewById(R.id.editText_IndivReg_Location);
+        emailAddress = findViewById(R.id.editText_IndivReg_EmailAddress);
+        password = findViewById(R.id.editText_IndivReg_Password);
         Register = findViewById(R.id.button3_IndivReg_Register);
         checkbox = findViewById(R.id.checkBox_IndivReg);
 
@@ -75,39 +75,40 @@ public class IndivRegistration extends AppCompatActivity {
     }
 
     public void Register() {
-        String LastNametxt = LastName.getText().toString();
-        String FirstNametxt = FirstName.getText().toString();
-        String ContactNotxt = ContactNo.getText().toString();
-        String Locationtxt = Location.getText().toString();
-        String EmailAddresstxt = EmailAddress.getText().toString().trim();
-        String Passwordtxt = Password.getText().toString().trim();
-        String Representative = "N/A";
+        String lastNametxt = lastName.getText().toString();
+        String firstNametxt = firstName.getText().toString();
+        String contactNotxt = contactNo.getText().toString();
+        String locationtxt = location.getText().toString();
+        String emailAddresstxt = emailAddress.getText().toString().trim();
+        String passwordtxt = password.getText().toString().trim();
+        String organization = "N/A";
+        String contactPerson = "N/A";
 
-        if(LastNametxt.isEmpty()){
-            EmailAddress.setError("Please enter your last name.");
+        if(lastNametxt.isEmpty()){
+            emailAddress.setError("Please enter your last name.");
         }
-        if(FirstNametxt.isEmpty()){
-            Password.setError("Please enter your first name");
+        if(firstNametxt.isEmpty()){
+            password.setError("Please enter your first name");
         }
-        if(ContactNotxt.isEmpty()){
-            EmailAddress.setError("Please enter your contact number.");
+        if(contactNotxt.isEmpty()){
+            emailAddress.setError("Please enter your contact number.");
         }
-        if(Locationtxt.isEmpty()){
-            Password.setError("Please enter your location");
+        if(locationtxt.isEmpty()){
+            password.setError("Please enter your location");
         }
-        if(EmailAddresstxt.isEmpty()){
-            EmailAddress.setError("Please enter your email address.");
+        if(emailAddresstxt.isEmpty()){
+            emailAddress.setError("Please enter your email address.");
         }
-        if(Passwordtxt.isEmpty() || Passwordtxt.length() < 8){
-            Password.setError("Please enter your password with more than 8 characters.");
+        if(passwordtxt.isEmpty() || passwordtxt.length() < 8){
+            password.setError("Please enter your password with more than 8 characters.");
         }else{
-            mAuth.createUserWithEmailAndPassword(EmailAddresstxt, Passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         currentUser = mAuth.getCurrentUser();
 
-                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(LastNametxt, FirstNametxt, ContactNotxt, Locationtxt, EmailAddresstxt, Representative);
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 

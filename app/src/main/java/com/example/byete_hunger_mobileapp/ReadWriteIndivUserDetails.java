@@ -2,18 +2,21 @@ package com.example.byete_hunger_mobileapp;
 
 public class ReadWriteIndivUserDetails {
 
-    public String lastName,firstName,contactNo,location,emailAddress, Representative;
+    public String lastName,firstName,contactNo,location,emailAddress, organization, contactPerson;
 
     public ReadWriteIndivUserDetails() {
     }
 
-    public ReadWriteIndivUserDetails(String LastNametxt, String FirstNametxt, String ContactNotxt, String Locationtxt, String EmailAddresstxt, String Representative) {
-        this.lastName = LastNametxt;
-        this.firstName = FirstNametxt;
-        this.contactNo = ContactNotxt;
-        this.location = Locationtxt;
-        this.emailAddress = EmailAddresstxt;
-        this.Representative = Representative;
+    public ReadWriteIndivUserDetails(String lastNametxt, String firstNametxt, String contactNotxt, String locationtxt,
+                                     String emailAddresstxt, String organization, String contactPerson) {
+        this.lastName = lastNametxt;
+        this.firstName = firstNametxt;
+        this.contactNo = contactNotxt;
+        this.location = locationtxt;
+        this.emailAddress = emailAddresstxt;
+        this.organization = organization;
+        this.contactPerson = contactPerson;
+
     }
 
 }
