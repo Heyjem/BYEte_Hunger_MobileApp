@@ -81,6 +81,7 @@ public class IndivRegistration extends AppCompatActivity {
         String locationtxt = location.getText().toString();
         String emailAddresstxt = emailAddress.getText().toString().trim();
         String passwordtxt = password.getText().toString().trim();
+        String fullName = firstNametxt + " " + lastNametxt;
         String organization = "N/A";
         String contactPerson = "N/A";
 
@@ -108,7 +109,7 @@ public class IndivRegistration extends AppCompatActivity {
                     if(task.isSuccessful()){
                         currentUser = mAuth.getCurrentUser();
 
-                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson);
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 
