@@ -27,7 +27,7 @@ public class IndivRegistration extends AppCompatActivity {
     Button Register;
     CheckBox checkbox;
     DatabaseReference dbRef;
-    FirebaseAuth mAuth;
+    FirebaseAuth fAuth;
     FirebaseUser currentUser;
 
     @Override
@@ -47,8 +47,8 @@ public class IndivRegistration extends AppCompatActivity {
         checkbox = findViewById(R.id.checkBox_IndivReg);
 
         dbRef = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        fAuth = FirebaseAuth.getInstance();
+        currentUser = fAuth.getCurrentUser();
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,17 +103,17 @@ public class IndivRegistration extends AppCompatActivity {
         if(passwordtxt.isEmpty() || passwordtxt.length() < 8){
             password.setError("Please enter your password with more than 8 characters.");
         }else{
-            mAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        currentUser = mAuth.getCurrentUser();
+                        currentUser = fAuth.getCurrentUser();
 
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 
-                        dbRef.child(currentUser.getUid()).child("User Information").setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){

@@ -115,7 +115,7 @@ public class OrgRegistration extends AppCompatActivity {
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 
-                        dbRef.child(currentUser.getUid()).child("User Information").setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
