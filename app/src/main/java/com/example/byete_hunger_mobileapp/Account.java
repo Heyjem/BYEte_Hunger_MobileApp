@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Account extends AppCompatActivity {
 
     Button logout;
     ImageView notif, donations, changepass, back;
     FirebaseAuth fAuth;
+    FirebaseUser currentUser;
 
 
     @Override

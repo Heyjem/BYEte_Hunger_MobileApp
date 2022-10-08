@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +33,9 @@ public class donate extends AppCompatActivity {
     Button Submit, UID;
     ImageView back, account;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
-    DatabaseReference donationsDB;
+    DatabaseReference dbRef;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     RecyclerView recyclerView;
 
     @Override
@@ -50,7 +54,9 @@ public class donate extends AppCompatActivity {
         notes = findViewById(R.id.et_donate_notes);
         Submit = findViewById(R.id.button4_donate_submit);
         UID = findViewById(R.id.button5_donate_generateUID);
-        donationsDB = FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,7 +100,7 @@ public class donate extends AppCompatActivity {
         String dE = dateExpired.getText().toString();
         String cN = contactNo.getText().toString();
         String nts = notes.getText().toString();
-        String id = donationsDB.push().getKey();
+        String id = dbRef.push().getKey();
 
         //show when new card was added to donations
         Date date = new Date();
@@ -104,11 +110,9 @@ public class donate extends AppCompatActivity {
         String dateAdded = formatter.format(date);
         String dateAddedTime = formatter2.format(time);
 
-        //date.setTime(System.currentTimeMillis()); //set to current time
-        //Submit.setText(date.toString());
 
         donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
-        donationsDB.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
+        dbRef.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
