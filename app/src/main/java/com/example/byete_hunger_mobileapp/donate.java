@@ -34,7 +34,7 @@ public class donate extends AppCompatActivity {
     ImageView back, account;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference dbRef;
-    FirebaseAuth mAuth;
+    FirebaseAuth fAuth;
     FirebaseUser currentUser;
     RecyclerView recyclerView;
 
@@ -54,9 +54,10 @@ public class donate extends AppCompatActivity {
         notes = findViewById(R.id.et_donate_notes);
         Submit = findViewById(R.id.button4_donate_submit);
         UID = findViewById(R.id.button5_donate_generateUID);
+        fAuth = FirebaseAuth.getInstance();
+        currentUser = fAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -112,7 +113,7 @@ public class donate extends AppCompatActivity {
 
 
         donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
-        dbRef.child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
+        dbRef.child("Unverified Registered User").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -123,3 +124,4 @@ public class donate extends AppCompatActivity {
         });
     }
 }
+//"Unverified Registered Users").child(currentUser.getUid()

@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,20 +40,24 @@ public class uid_donations extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<donation> list;
     MyAdapter adapter;
-    DatabaseReference donationsDB;
+    DatabaseReference dbRef;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uid_donations);
 
-        // toolbar random comment
+        // toolbar
         back = findViewById(R.id.donationstracker_back_button);
         account = findViewById(R.id.donationstracker_account_page_icon);
 
         recyclerView = findViewById(R.id.rv_donationstracker);
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
-        donationsDB = FirebaseDatabase.getInstance().getReference("donation");
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -74,7 +80,7 @@ public class uid_donations extends AppCompatActivity {
             }
         });
 
-        donationsDB.addValueEventListener(new ValueEventListener() {
+        dbRef.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
