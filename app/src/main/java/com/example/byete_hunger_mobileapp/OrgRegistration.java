@@ -86,6 +86,7 @@ public class OrgRegistration extends AppCompatActivity {
         String emailAddresstxt = emailAddress.getText().toString().trim();
         String passwordtxt = password.getText().toString().trim();
         String fullName = "N/A";
+        String status = "Pending";
 
         if(organizationtxt.isEmpty()){
             emailAddress.setError("Please enter your last name.");
@@ -111,7 +112,7 @@ public class OrgRegistration extends AppCompatActivity {
                     if(task.isSuccessful()){
                         currentUser = mAuth.getCurrentUser();
 
-                        ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName);
+                        ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
 

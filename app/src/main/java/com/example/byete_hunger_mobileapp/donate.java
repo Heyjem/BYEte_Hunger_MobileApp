@@ -60,12 +60,13 @@ public class donate extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     RecyclerView recyclerView;
-    ActivityDonateBinding binding;
+    //ActivityDonateBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
+        //setContentView(binding.getRoot());
 
         uploadImage = findViewById(R.id.donate_uploadImage);
         back = findViewById(R.id.donate_back_button);
@@ -85,8 +86,7 @@ public class donate extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
-        binding = ActivityDonateBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        //binding = ActivityDonateBinding.inflate(getLayoutInflater());
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -117,12 +117,12 @@ public class donate extends AppCompatActivity {
         ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
-                binding.donateUploadImage.setImageURI(result);
+                uploadImage.setImageURI(result);
                 uploadPhoto();
             }
         });
 
-        binding.donateUploadImage.setOnClickListener(new View.OnClickListener() {
+        uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launcher.launch("images/*");

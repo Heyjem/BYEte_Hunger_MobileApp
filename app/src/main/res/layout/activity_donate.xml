@@ -206,7 +206,6 @@
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
         android:background="@color/white"
-        android:fontFamily="@font/montserrat_semibold"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
