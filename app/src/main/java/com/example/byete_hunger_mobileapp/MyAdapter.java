@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.datePurchased.setText(list.get(position).getDatePurchased());
         holder.dateExpired.setText(list.get(position).getDateExpired());
         holder.notes.setText(list.get(position).getNotes());
+        //holder.uploadImage.setImageDrawable(list.get(position).getUploadImage());
         holder.id.setText(list.get(position).getId());
         holder.dateAdded.setText(list.get(position).getDateAdded());
         holder.dateAddedTime.setText(list.get(position).getDateAddedTime());
@@ -61,6 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         TextView type, weight, datePurchased, dateExpired, notes, id, dateAdded, dateAddedTime;
         CardView cardView;
+        ImageView uploadImage;
         RelativeLayout donationcardcontent;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -70,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             datePurchased = itemView.findViewById(R.id.tv_donationcard_dateofpurchasedesc);
             dateExpired = itemView.findViewById(R.id.tv_donationcard_expirationdatedesc);
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
+            uploadImage = itemView.findViewById(R.id.donate_uploadImage);
             cardView = itemView.findViewById(R.id.cv_donationCard);
             donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
             id = itemView.findViewById(R.id.tv_donationcard_uidCode);

@@ -1,13 +1,16 @@
 package com.example.byete_hunger_mobileapp;
 
+import android.graphics.drawable.Drawable;
+
 public class donation {
     private String type, weight, datePurchased, dateExpired, contactNo, notes, id, dateAdded, dateAddedTime;
+    //private Drawable uploadImage;
     //private boolean isShrink = false;
 
     public donation() {
     }
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id, String dateAdded, String dateAddedTime) {
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id, String dateAdded, String dateAddedTime /*, Drawable uploadImage*/) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
@@ -17,6 +20,7 @@ public class donation {
         this.id = id;
         this.dateAdded = dateAdded;
         this.dateAddedTime = dateAddedTime;
+        //this.uploadImage = uploadImage;
     }
 
 
@@ -51,6 +55,8 @@ public class donation {
     public String getDateAddedTime() {
         return dateAddedTime;
     }
+
+    //public Drawable getUploadImage(){ return uploadImage;}
 
 
 
