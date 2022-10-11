@@ -57,7 +57,7 @@ public class uid_donations extends AppCompatActivity {
         donationcardcontent = findViewById(R.id.rl_donationcard_content);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
+        dbRef = FirebaseDatabase.getInstance().getReference("Users");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
