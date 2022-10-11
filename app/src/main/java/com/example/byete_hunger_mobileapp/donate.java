@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -60,7 +61,8 @@ public class donate extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     RecyclerView recyclerView;
-    //ActivityDonateBinding binding;
+    ActivityResultLauncher<String> launcher;
+    ActivityDonateBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,29 +120,26 @@ public class donate extends AppCompatActivity {
             @Override
             public void onActivityResult(Uri result) {
                 uploadImage.setImageURI(result);
-                uploadPhoto();
+                String randomkey = UUID.randomUUID().toString();
+                StorageReference riversRef = storageRef.child("images/*" + randomkey);
+
+                riversRef.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
+
+
             }
         });
 
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launcher.launch("images/*");
+                launcher.launch("image/*");
             }
         });
-
-    }
-
-    private void uploadPhoto() {
-        String randomkey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageRef.child("images/*" + randomkey);
-
-        riversRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Snackbar.make(findViewById(androidx.appcompat.R.id.content),"Image Uploaded.",Snackbar.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
 
     }
 
