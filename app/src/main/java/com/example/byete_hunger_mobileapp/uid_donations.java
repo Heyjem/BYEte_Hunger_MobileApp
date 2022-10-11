@@ -64,7 +64,7 @@ public class uid_donations extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         cardview = findViewById(R.id.cv_donationCard);
-        //donategenerate = findViewById(R.id.button5_donate_generateUID);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +85,12 @@ public class uid_donations extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     donation Donation = dataSnapshot.getValue(donation.class);
-                    list.add(Donation);
+                    list.add(0,Donation);
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

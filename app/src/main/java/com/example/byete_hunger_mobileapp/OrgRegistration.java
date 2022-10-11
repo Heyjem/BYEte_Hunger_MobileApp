@@ -114,7 +114,7 @@ public class OrgRegistration extends AppCompatActivity {
 
                         ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
 
-                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

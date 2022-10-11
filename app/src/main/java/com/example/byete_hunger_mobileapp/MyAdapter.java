@@ -62,6 +62,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView type, weight, datePurchased, dateExpired, notes, id, dateAdded, dateAddedTime;
+        Button track;
         CardView cardView;
         ImageView uploadImage;
         RelativeLayout donationcardcontent;
@@ -74,11 +75,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             dateExpired = itemView.findViewById(R.id.tv_donationcard_expirationdatedesc);
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
             uploadImage = itemView.findViewById(R.id.donate_uploadImage);
-            cardView = itemView.findViewById(R.id.cv_donationCard);
-            donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
             id = itemView.findViewById(R.id.tv_donationcard_uidCode);
             dateAdded = itemView.findViewById(R.id.tv_donationcard_dateadded);
             dateAddedTime = itemView.findViewById(R.id.tv_donationcard_dateaddedTime);
+
+            track = itemView.findViewById(R.id.btn_donationcard_track);
+
+            cardView = itemView.findViewById(R.id.cv_donationCard);
+            donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
+
+            track.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(cardView.getContext(),statustracker.class);
+                    cardView.getContext().startActivity(intent);
+                }
+            });
+
 
             // donation card expands and collapses
             cardView.setOnClickListener(new View.OnClickListener() {

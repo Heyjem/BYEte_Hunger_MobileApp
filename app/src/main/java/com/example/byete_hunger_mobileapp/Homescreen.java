@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Homescreen extends AppCompatActivity {
 
@@ -50,11 +52,11 @@ public class Homescreen extends AppCompatActivity {
         Track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Homescreen.this, uid_donations.class));
+                startActivity(new Intent(Homescreen.this, statustracker.class));
             }
         });
 
-        // redirect to guest donate
+        // redirect to donate
         Donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

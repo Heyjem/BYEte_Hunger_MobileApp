@@ -112,7 +112,7 @@ public class IndivRegistration extends AppCompatActivity {
 
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
 
-                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Unverified Registered User");
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

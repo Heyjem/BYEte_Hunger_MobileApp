@@ -163,7 +163,8 @@ public class donate extends AppCompatActivity {
         String dateAddedTime = formatter2.format(time);
 
         donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime  /*, image*/);
-        dbRef.child("Unverified Registered User").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){

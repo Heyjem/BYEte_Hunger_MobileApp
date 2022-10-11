@@ -20,23 +20,8 @@
         android:layout_height="640dp"
         android:layout_below="@+id/include"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:stackFromEnd="true">
-
+        app:layout_constraintStart_toStartOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
-
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_donationstracker"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_below="@+id/tv1_donationstracker"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="49dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
-     -->
 
 
 </RelativeLayout>

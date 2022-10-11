@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:visibility="gone">
+            >
 
             <LinearLayout
                 android:id="@+id/ll_donationcard_left"
@@ -244,6 +244,7 @@
                     android:layout_height="35dp"
                     android:layout_marginHorizontal="93dp"
                     android:layout_marginTop="20dp"
+                    android:onClick="track"
                     android:background="@drawable/yellowbutton_rounded_corners"
                     android:elevation="15dp"
                     android:text="TRACK"
