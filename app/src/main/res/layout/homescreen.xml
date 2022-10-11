@@ -154,9 +154,9 @@
                 android:layout_marginEnd="25dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:justificationMode="inter_word"
-                android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
+                android:text=""
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="10sp"/>
 
             <ImageView
                 android:id="@+id/newsF_Image"
@@ -165,19 +165,6 @@
                 android:layout_margin="25dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/newsF_Content2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="25dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:justificationMode="inter_word"
-                android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
-                android:textColor="@color/white"
-                android:textSize="10sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

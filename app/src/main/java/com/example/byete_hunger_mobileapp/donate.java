@@ -52,7 +52,6 @@ public class donate extends AppCompatActivity {
 
     Spinner spinner;
     Button Submit;
-    Uri imageUri;
     ImageView back, account, uploadImage;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference dbRef;
