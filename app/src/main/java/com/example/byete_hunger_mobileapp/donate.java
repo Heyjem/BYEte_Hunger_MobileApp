@@ -54,7 +54,7 @@ public class donate extends AppCompatActivity {
 
     Spinner spinner;
     Button Submit;
-    ImageView back, account, uploadImage;
+    ImageView back, account, chooseImage;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference dbRef;
     FirebaseStorage storage;
@@ -64,7 +64,7 @@ public class donate extends AppCompatActivity {
     RecyclerView recyclerView;
     Timer timer;
     ActivityResultLauncher<String> launcher;
-    ActivityDonateBinding binding;
+    //ActivityDonateBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class donate extends AppCompatActivity {
         setContentView(R.layout.activity_donate);
         //setContentView(binding.getRoot());
 
-        uploadImage = findViewById(R.id.donate_uploadImage);
+        chooseImage = findViewById(R.id.donate_uploadImage);
         back = findViewById(R.id.donate_back_button);
         account = findViewById(R.id.donate_account_page_icon);
         recyclerView = findViewById(R.id.rv_donationstracker);
@@ -110,39 +110,75 @@ public class donate extends AppCompatActivity {
             }
         });
 
-        Submit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                InsertData();
-                timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 1000);
-
-            }
-        });
-
-        ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        // for uploading image
+        launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
-                uploadImage.setImageURI(result);
-                String randomkey = UUID.randomUUID().toString();
-                StorageReference riversRef = storageRef.child("images/*" + randomkey);
+                chooseImage.setImageURI(result);
 
-                riversRef.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
+                Submit.setOnClickListener(new View.OnClickListener() {
+
+                    public void InsertData() {
+                        String type = spinner.getSelectedItem().toString();
+                        String wt = weight.getText().toString();
+                        String dP = datePurchased.getText().toString();
+                        String dE = dateExpired.getText().toString();
+                        String cN = contactNo.getText().toString();
+                        String nts = notes.getText().toString();
+                        //Drawable image = uploadImage.getDrawable();
+                        String id = dbRef.push().getKey();
+
+                        //show when new card was added to donations
+                        Date date = new Date();
+                        Date time = new Date();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss");
+                        String dateAdded = formatter.format(date);
+                        String dateAddedTime = formatter2.format(time);
+
+                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
+
+                        assert id != null;
+                        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+
+                        // random uid name in fireabase storage
+                        String randomkey = UUID.randomUUID().toString();
+                        StorageReference riversRef = storageRef.child("images/*" + id);
+
+                        // uploads image to firebase storage
+                        riversRef.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
                     }
-                }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
+
+                    @Override
+                    public void onClick(View v) {
+                        InsertData();
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 1000);
+                    }
+                });
             }
         });
 
-        uploadImage.setOnClickListener(new View.OnClickListener() {
+        //choose image in files
+        chooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launcher.launch("image/*");
@@ -150,35 +186,5 @@ public class donate extends AppCompatActivity {
         });
     }
 
-    public void InsertData() {
-        String type = spinner.getSelectedItem().toString();
-        String wt = weight.getText().toString();
-        String dP = datePurchased.getText().toString();
-        String dE = dateExpired.getText().toString();
-        String cN = contactNo.getText().toString();
-        String nts = notes.getText().toString();
-        //Drawable image = uploadImage.getDrawable();
-        String id = dbRef.push().getKey();
-
-        //show when new card was added to donations
-        Date date = new Date();
-        Date time = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss");
-        String dateAdded = formatter.format(date);
-        String dateAddedTime = formatter2.format(time);
-
-        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
-
-        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
-    }
 
 }
