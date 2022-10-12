@@ -36,6 +36,13 @@ public class Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
 
+        fAuth = FirebaseAuth.getInstance();
+        currentUser = fAuth.getCurrentUser();
+
+        if (currentUser == null){
+            startActivity(new Intent(Homescreen.this, LoginScreen.class));
+        }
+
         account = findViewById(R.id.homescreen_account_page_icon);
         Chat = findViewById(R.id.button_homescreen_chat);
         Track = findViewById(R.id.button_homescreen_track);

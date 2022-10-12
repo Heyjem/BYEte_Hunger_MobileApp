@@ -46,6 +46,8 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 public class donate extends AppCompatActivity {
@@ -60,6 +62,7 @@ public class donate extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     RecyclerView recyclerView;
+    Timer timer;
     ActivityResultLauncher<String> launcher;
     ActivityDonateBinding binding;
 
@@ -112,6 +115,14 @@ public class donate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 InsertData();
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
+
             }
         });
 
@@ -128,8 +139,6 @@ public class donate extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
-
-
             }
         });
 
@@ -139,9 +148,7 @@ public class donate extends AppCompatActivity {
                 launcher.launch("image/*");
             }
         });
-
     }
-
 
     public void InsertData() {
         String type = spinner.getSelectedItem().toString();
@@ -161,16 +168,17 @@ public class donate extends AppCompatActivity {
         String dateAdded = formatter.format(date);
         String dateAddedTime = formatter2.format(time);
 
-        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime  /*, image*/);
+        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime);
 
         dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
 
                 }
             }
         });
     }
+
 }
