@@ -2,6 +2,7 @@ package com.example.byete_hunger_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,8 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class IndivRegistration extends AppCompatActivity {
 
@@ -86,6 +90,7 @@ public class IndivRegistration extends AppCompatActivity {
         String contactPerson = "N/A";
         String status = "Pending";
 
+
         if(lastNametxt.isEmpty()){
             emailAddress.setError("Please enter your last name.");
         }
@@ -109,18 +114,13 @@ public class IndivRegistration extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         currentUser = fAuth.getCurrentUser();
-
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
-
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    //Send Verification Email
-                                    //currentUser.sendEmailVerification();
-
                                     //startActivity(new Intent(IndivRegistration.this, Homescreen.class));
                                     Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);

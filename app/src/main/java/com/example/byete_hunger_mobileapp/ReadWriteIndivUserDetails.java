@@ -18,7 +18,6 @@ public class ReadWriteIndivUserDetails {
         this.organization = organization;
         this.contactPerson = contactPerson;
         this.status = status;
-
     }
 
 }

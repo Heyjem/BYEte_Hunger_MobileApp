@@ -2,6 +2,7 @@ package com.example.byete_hunger_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,14 +33,14 @@ public class LoginScreen extends AppCompatActivity {
     Button Login;
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
-
-    DatabaseReference dbref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://byete-hunger-application-default-rtdb.firebaseio.com/");
+    DatabaseReference dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
+        dbRef = FirebaseDatabase.getInstance().getReference("Users");
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
 
@@ -48,6 +49,8 @@ public class LoginScreen extends AppCompatActivity {
         Login = findViewById(R.id.button_Login);
         EmailAddress = findViewById(R.id.editText_LoginEmailAddress);
         Password = findViewById(R.id.editText_LoginPassword);
+
+
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +98,6 @@ public class LoginScreen extends AppCompatActivity {
                 }
             });
         }
-
-
     }
-
-
 
 }
