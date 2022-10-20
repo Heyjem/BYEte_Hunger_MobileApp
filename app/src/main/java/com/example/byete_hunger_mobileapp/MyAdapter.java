@@ -2,6 +2,7 @@ package com.example.byete_hunger_mobileapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -16,11 +17,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,15 +51,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
-        holder.type.setText(list.get(position).getType());
-        holder.weight.setText(list.get(position).getWeight());
-        holder.datePurchased.setText(list.get(position).getDatePurchased());
-        holder.dateExpired.setText(list.get(position).getDateExpired());
-        holder.notes.setText(list.get(position).getNotes());
-        //holder.uploadImage.setImageDrawable(list.get(position).getUploadImage());
-        holder.id.setText(list.get(position).getId());
-        holder.dateAdded.setText(list.get(position).getDateAdded());
-        holder.dateAddedTime.setText(list.get(position).getDateAddedTime());
+        donation Donation = list.get(position);
+
+        holder.type.setText(Donation.getType());
+        holder.weight.setText(Donation.getWeight());
+        holder.datePurchased.setText(Donation.getDatePurchased());
+        holder.dateExpired.setText(Donation.getDateExpired());
+        holder.notes.setText(Donation.getNotes());
+        holder.id.setText(Donation.getId());
+        holder.dateAdded.setText(Donation.getDateAdded());
+        holder.dateAddedTime.setText(Donation.getDateAddedTime());
+        Glide.with(context).load(Donation.getUrl()).into(holder.donationCardImage);
     }
 
     @Override
@@ -64,25 +74,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView type, weight, datePurchased, dateExpired, notes, id, dateAdded, dateAddedTime;
         Button track;
         CardView cardView;
-        ImageView uploadImage;
+        ImageView donationCardImage;
+
         RelativeLayout donationcardcontent;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
             type = itemView.findViewById(R.id.tv_donationcard_typedesc);
             weight = itemView.findViewById(R.id.tv_donationcard_weightdesc);
             datePurchased = itemView.findViewById(R.id.tv_donationcard_dateofpurchasedesc);
             dateExpired = itemView.findViewById(R.id.tv_donationcard_expirationdatedesc);
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
-            uploadImage = itemView.findViewById(R.id.donate_uploadImage);
             id = itemView.findViewById(R.id.tv_donationcard_uidCode);
             dateAdded = itemView.findViewById(R.id.tv_donationcard_dateadded);
             dateAddedTime = itemView.findViewById(R.id.tv_donationcard_dateaddedTime);
+            donationCardImage = itemView.findViewById(R.id.iV_donationcard);
 
             track = itemView.findViewById(R.id.btn_donationcard_track);
 
             cardView = itemView.findViewById(R.id.cv_donationCard);
             donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
+
 
             track.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,7 +104,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     cardView.getContext().startActivity(intent);
                 }
             });
-
 
             // donation card expands and collapses
             cardView.setOnClickListener(new View.OnClickListener() {

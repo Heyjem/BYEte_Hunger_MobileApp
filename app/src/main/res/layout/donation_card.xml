@@ -80,7 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            >
+            android:visibility="gone">
+
 
             <LinearLayout
                 android:id="@+id/ll_donationcard_left"
@@ -142,7 +143,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_donationcard_right"
-                android:layout_width="165dp"
+                android:layout_width="185dp"
                 android:layout_height="135dp"
                 android:layout_marginLeft="145dp"
                 android:layout_marginTop="10dp"
@@ -230,10 +231,10 @@
                     android:textSize="12sp" />
 
                 <ImageView
-                    android:id="@+id/imageView_donationcard"
+                    android:id="@+id/iV_donationcard"
                     android:layout_width="250dp"
                     android:layout_height="150dp"
-                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginHorizontal="40dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/profile_user"
                     android:elevation="15dp" />
@@ -242,7 +243,7 @@
                     android:id="@+id/btn_donationcard_track"
                     android:layout_width="130dp"
                     android:layout_height="35dp"
-                    android:layout_marginHorizontal="93dp"
+                    android:layout_marginHorizontal="100dp"
                     android:layout_marginTop="20dp"
                     android:onClick="track"
                     android:background="@drawable/yellowbutton_rounded_corners"

@@ -40,7 +40,7 @@ public class uid_donations extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<donation> list;
     MyAdapter adapter;
-    DatabaseReference dbRef;
+    DatabaseReference dbRef, dbref2;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
@@ -58,6 +58,7 @@ public class uid_donations extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
+        //dbref2 = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("donation").child("donationImages");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
