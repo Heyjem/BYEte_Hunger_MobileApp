@@ -40,7 +40,7 @@ public class uid_donations extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<donation> list;
     MyAdapter adapter;
-    DatabaseReference dbRef, dbref2;
+    DatabaseReference dbRef;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
 
@@ -49,7 +49,7 @@ public class uid_donations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uid_donations);
 
-        // toolbar
+
         back = findViewById(R.id.donationstracker_back_button);
         account = findViewById(R.id.donationstracker_account_page_icon);
 
@@ -58,7 +58,7 @@ public class uid_donations extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
-        //dbref2 = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid()).child("donation").child("donationImages");
+
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -92,6 +92,7 @@ public class uid_donations extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                throw error.toException(); // never ignore errors
             }
         });
 

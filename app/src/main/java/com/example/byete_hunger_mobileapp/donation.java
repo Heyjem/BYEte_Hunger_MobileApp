@@ -5,13 +5,13 @@ import android.net.Uri;
 import com.google.android.gms.tasks.Task;
 
 public class donation {
-    private String type, weight, datePurchased, dateExpired, contactNo, notes, id, dateAdded, dateAddedTime, url;
+    private String type, weight, datePurchased, dateExpired, contactNo, notes, id, dateAdded, dateAddedTime, imageUrl;
 
 
     public donation() {
     }
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id, String dateAdded, String dateAddedTime, String photo) {
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
@@ -21,7 +21,7 @@ public class donation {
         this.id = id;
         this.dateAdded = dateAdded;
         this.dateAddedTime = dateAddedTime;
-        this.url = url;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -57,8 +57,8 @@ public class donation {
         return dateAddedTime;
     }
 
-    public String getUrl() {
-        return url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
 

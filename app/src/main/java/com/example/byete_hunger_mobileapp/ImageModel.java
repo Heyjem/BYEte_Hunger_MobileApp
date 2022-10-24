@@ -4,7 +4,6 @@ public class ImageModel {
     private String imageUrl;
 
     public ImageModel(){
-
     }
 
     public ImageModel(String imageUrl) {
@@ -15,7 +14,4 @@ public class ImageModel {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

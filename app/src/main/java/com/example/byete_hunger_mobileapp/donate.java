@@ -53,6 +53,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -141,7 +142,9 @@ public class donate extends AppCompatActivity {
                         String cN = contactNo.getText().toString();
                         String nts = notes.getText().toString();
                         String id = dbRef.push().getKey();
-                        String url = "";
+                        String imageUrl = "";
+
+
 
                         //show when new card was added to donations
                         Date date = new Date();
@@ -151,9 +154,8 @@ public class donate extends AppCompatActivity {
                         String dateAdded = formatter.format(date);
                         String dateAddedTime = formatter2.format(time);
 
-                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime, url);
+                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime, imageUrl);
 
-                        assert id != null;
                         dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -164,17 +166,17 @@ public class donate extends AppCompatActivity {
                         });
 
                         // random uid name in fireabase storage
-                        StorageReference riversRef = storageRef.child("images/*" + id + "." + GetFileExtension(result));
+                        StorageReference riversRef = storageRef.child("images/").child(currentUser.getUid()).child(date.toString());
 
                         // uploads image to firebase storage
-                        riversRef.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        riversRef.child(id + "." + GetFileExtension(result)).putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        ImageModel image = new ImageModel(uri.toString());
-                                        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).child("photo").child(url).setValue(image);
+                                        //donation Donation = new donation(uri.toString());
+                                        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).child("image").setValue(Donation);
                                     }
                                 });
                                 Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
