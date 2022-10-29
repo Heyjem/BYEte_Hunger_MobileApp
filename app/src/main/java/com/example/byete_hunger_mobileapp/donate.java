@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -52,6 +54,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
@@ -63,7 +66,7 @@ public class donate extends AppCompatActivity {
 
     Spinner spinner;
     Button Submit;
-    ImageView back, account, chooseImage;
+    ImageView back, account, chooseImage, datepurchasedCal, expiredCal;
     EditText weight, datePurchased, dateExpired, contactNo, notes;
     DatabaseReference dbRef;
     FirebaseStorage storage;
@@ -71,6 +74,7 @@ public class donate extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     RecyclerView recyclerView;
+    int mDate, mMonth, mYear;
     Timer timer;
     ActivityResultLauncher<String> launcher;
 
@@ -90,6 +94,8 @@ public class donate extends AppCompatActivity {
         contactNo = findViewById(R.id.et_donate_contactNo);
         notes = findViewById(R.id.et_donate_notes);
         Submit = findViewById(R.id.button4_donate_submit);
+        datepurchasedCal = findViewById(R.id.datepurchased_image);
+        expiredCal = findViewById(R.id.expired_image);
 
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
@@ -100,6 +106,40 @@ public class donate extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        datepurchasedCal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal = Calendar.getInstance();
+                mDate = cal.get(Calendar.DATE);
+                mMonth = cal.get(Calendar.MONTH);
+                mYear = cal.get(Calendar.YEAR);
+                DatePickerDialog dpg = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int Year, int Month, int Date) {
+                        datePurchased.setText(Date + "-" + Month + "-" + Year);
+                    }
+                },mYear,mMonth,mDate);
+                dpg.show();
+            }
+        });
+
+        expiredCal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal2 = Calendar.getInstance();
+                mDate = cal2.get(Calendar.DATE);
+                mMonth = cal2.get(Calendar.MONTH);
+                mYear = cal2.get(Calendar.YEAR);
+                DatePickerDialog dpg2 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int Year, int Month, int Date) {
+                        dateExpired.setText(Date + "-" + Month + "-" + Year);
+                    }
+                },mYear,mMonth,mDate);
+                dpg2.show();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +152,14 @@ public class donate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(donate.this, Account.class));
+            }
+        });
+
+        //choose image in files
+        chooseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launcher.launch("image/*");
             }
         });
 
@@ -144,8 +192,6 @@ public class donate extends AppCompatActivity {
                         String id = dbRef.push().getKey();
                         String imageUrl = "";
 
-
-
                         //show when new card was added to donations
                         Date date = new Date();
                         Date time = new Date();
@@ -154,7 +200,7 @@ public class donate extends AppCompatActivity {
                         String dateAdded = formatter.format(date);
                         String dateAddedTime = formatter2.format(time);
 
-                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime, imageUrl);
+                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime,imageUrl);
 
                         dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -165,7 +211,7 @@ public class donate extends AppCompatActivity {
                             }
                         });
 
-                        // random uid name in fireabase storage
+                        // firebase storage folder location
                         StorageReference riversRef = storageRef.child("images/").child(currentUser.getUid()).child(date.toString());
 
                         // uploads image to firebase storage
@@ -175,8 +221,8 @@ public class donate extends AppCompatActivity {
                                 riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        //donation Donation = new donation(uri.toString());
-                                        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).child("image").setValue(Donation);
+                                        //donation image = new donation(uri.toString());
+                                        //dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).child("image").setValue(image);
                                     }
                                 });
                                 Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
@@ -188,13 +234,6 @@ public class donate extends AppCompatActivity {
             }
         });
 
-        //choose image in files
-        chooseImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launcher.launch("image/*");
-            }
-        });
     }
 
     public String GetFileExtension(Uri uri){
