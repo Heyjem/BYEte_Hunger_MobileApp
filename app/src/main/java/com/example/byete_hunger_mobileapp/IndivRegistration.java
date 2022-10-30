@@ -50,7 +50,7 @@ public class IndivRegistration extends AppCompatActivity {
         Register = findViewById(R.id.button3_IndivReg_Register);
         checkbox = findViewById(R.id.checkBox_IndivReg);
 
-        dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference("Users");
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
 
@@ -113,9 +113,7 @@ public class IndivRegistration extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        currentUser = fAuth.getCurrentUser();
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
-                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

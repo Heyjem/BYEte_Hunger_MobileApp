@@ -116,7 +116,6 @@ public class OrgRegistration extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
-                        dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -142,7 +141,5 @@ public class OrgRegistration extends AppCompatActivity {
                 }
             });
         }
-
     }
-
 }
