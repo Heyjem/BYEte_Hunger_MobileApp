@@ -17,16 +17,16 @@
         android:id="@+id/imageView25"
         android:layout_width="1139dp"
         android:layout_height="898dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/donations_screen_background_2"
         android:tintMode="src_over"
         android:translationZ="1dp"
-        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956"
+        app:layout_constraintVertical_bias="0.943"
         app:tint="#99000000" />
 
     <EditText
@@ -37,14 +37,14 @@
         android:alpha=".50"
         android:background="@drawable/edittext_rounded_corners"
         android:backgroundTint="@color/black"
+        android:clickable="false"
         android:ems="10"
+        android:fontFamily="@font/montserrat_regular"
         android:inputType="textPersonName"
         android:paddingHorizontal="20dp"
-        android:text="Enter your full donation details below \nSelect Donation Image \nClick Submit"
         android:textColor="#ffffff"
         android:textSize="12sp"
         android:translationZ="10dp"
-        android:fontFamily="@font/montserrat_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,6 +76,53 @@
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName5"
         app:layout_constraintVertical_bias="0.160" />
+
+    <TextView
+        android:id="@+id/tv_donatetext1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="1. Enter your complete donation details below"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView24"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/tv_donatetext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="2. Select your donation image to be uploaded"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:translationZ="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView24"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintTop_toBottomOf="@+id/tv_donatetext1" />
+
+    <TextView
+        android:id="@+id/tv_donatetext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="3. Finally, Click the submit button"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName5"
+        app:layout_constraintEnd_toStartOf="@+id/imageView24"
+        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+        app:layout_constraintTop_toBottomOf="@+id/tv_donatetext2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView11"

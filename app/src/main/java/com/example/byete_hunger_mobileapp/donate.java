@@ -42,8 +42,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -116,8 +119,8 @@ public class donate extends AppCompatActivity {
                 mYear = cal.get(Calendar.YEAR);
                 DatePickerDialog dpg = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int Year, int Month, int Date) {
-                        datePurchased.setText(Date + "-" + Month + "-" + Year);
+                    public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
+                        datePurchased.setText(DD + "-" + MM + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg.show();
@@ -133,11 +136,45 @@ public class donate extends AppCompatActivity {
                 mYear = cal2.get(Calendar.YEAR);
                 DatePickerDialog dpg2 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int Year, int Month, int Date) {
-                        dateExpired.setText(Date + "-" + Month + "-" + Year);
+                    public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
+                        dateExpired.setText(DD + "-" + MM + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg2.show();
+            }
+        });
+
+        datePurchased.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal3 = Calendar.getInstance();
+                mDate = cal3.get(Calendar.DATE);
+                mMonth = cal3.get(Calendar.MONTH);
+                mYear = cal3.get(Calendar.YEAR);
+                DatePickerDialog dpg3 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
+                        datePurchased.setText(DD + "-" + MM + "-" + YYYY);
+                    }
+                },mYear,mMonth,mDate);
+                dpg3.show();
+            }
+        });
+
+        dateExpired.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal4 = Calendar.getInstance();
+                mDate = cal4.get(Calendar.DATE);
+                mMonth = cal4.get(Calendar.MONTH);
+                mYear = cal4.get(Calendar.YEAR);
+                DatePickerDialog dpg4 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
+                        dateExpired.setText(DD + "-" + MM + "-" + YYYY);
+                    }
+                },mYear,mMonth,mDate);
+                dpg4.show();
             }
         });
 
@@ -160,6 +197,17 @@ public class donate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 launcher.launch("image/*");
+            }
+        });
+
+        dbRef.child("Users").child(currentUser.getUid()).child("contactNo").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String Cn = dataSnapshot.getValue(String.class);
+                contactNo.setText(Cn);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
 
