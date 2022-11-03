@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ public class statustracker extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
     DatabaseReference dbRef;
+    ImageView back, account;
 
 
     @Override
@@ -33,10 +35,27 @@ public class statustracker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statustracker);
 
+        back = findViewById(R.id.donationstracker_back_button);
+        account = findViewById(R.id.donationstracker_account_page_icon);
         donationUID = findViewById(R.id.tv_statustracker_uidvalue);
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(statustracker.this, Account.class));
+            }
+        });
+
 
 
 

@@ -39,6 +39,7 @@ public class uid_donations extends AppCompatActivity {
     RelativeLayout donationcardcontent;
     RecyclerView recyclerView;
     ArrayList<donation> list;
+    ArrayList<ImageModel> list2;
     MyAdapter adapter;
     DatabaseReference dbRef;
     FirebaseAuth mAuth;
@@ -95,6 +96,7 @@ public class uid_donations extends AppCompatActivity {
                 throw error.toException(); // never ignore errors
             }
         });
+
 
     }
 }

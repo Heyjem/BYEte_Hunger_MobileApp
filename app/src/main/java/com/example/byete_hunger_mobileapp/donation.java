@@ -1,29 +1,33 @@
 package com.example.byete_hunger_mobileapp;
 
-import android.net.Uri;
-
-import com.google.android.gms.tasks.Task;
+import java.util.HashMap;
+import java.util.Map;
 
 public class donation {
-    private String type, weight, datePurchased, dateExpired, contactNo, notes, id, dateAdded, dateAddedTime, imageUrl;
-
+    private String type, weight, datePurchased, dateExpired, contactNo,location, notes, id, dateAdded, dateAddedTime , imageUrl;
+    private Map timestamp;
 
     public donation() {
     }
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl) {
+
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo,String location, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl, Map timestamp) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
         this.dateExpired = dateExpired;
         this.contactNo = contactNo;
+        this.location = location;
         this.notes = notes;
         this.id = id;
         this.dateAdded = dateAdded;
         this.dateAddedTime = dateAddedTime;
         this.imageUrl = imageUrl;
+        this.timestamp = timestamp;
     }
 
+    public donation(String imageUrl, String url) {
+    }
 
     public String getType() {return type;}
 
@@ -39,6 +43,10 @@ public class donation {
 
     public String getContactNo() {
         return contactNo;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getNotes() {
@@ -57,9 +65,15 @@ public class donation {
         return dateAddedTime;
     }
 
+    public Map getTime() {return timestamp;}
+
+
     public String getImageUrl() {
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.example.byete_hunger_mobileapp;
 
+import static java.text.DateFormat.getDateTimeInstance;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -46,6 +48,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -56,10 +59,12 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,7 +75,7 @@ public class donate extends AppCompatActivity {
     Spinner spinner;
     Button Submit;
     ImageView back, account, chooseImage, datepurchasedCal, expiredCal;
-    EditText weight, datePurchased, dateExpired, contactNo, notes;
+    EditText weight, datePurchased, dateExpired, contactNo, location, notes;
     DatabaseReference dbRef;
     FirebaseStorage storage;
     StorageReference storageRef;
@@ -95,6 +100,7 @@ public class donate extends AppCompatActivity {
         datePurchased = findViewById(R.id.et_donate_donatePurchased);
         dateExpired = findViewById(R.id.et_donate_donateExpired);
         contactNo = findViewById(R.id.et_donate_contactNo);
+        location = findViewById(R.id.et_donate_location);
         notes = findViewById(R.id.et_donate_notes);
         Submit = findViewById(R.id.button4_donate_submit);
         datepurchasedCal = findViewById(R.id.datepurchased_image);
@@ -102,6 +108,7 @@ public class donate extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
+        String uid = currentUser.getUid();
         dbRef = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
@@ -200,11 +207,22 @@ public class donate extends AppCompatActivity {
             }
         });
 
-        dbRef.child("Users").child(currentUser.getUid()).child("contactNo").addValueEventListener(new ValueEventListener() {
+        dbRef.child("Users").child(uid).child("contactNo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String Cn = dataSnapshot.getValue(String.class);
                 contactNo.setText(Cn);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        dbRef.child("Users").child(uid).child("location").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String loc = dataSnapshot.getValue(String.class);
+                location.setText(loc);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -231,11 +249,13 @@ public class donate extends AppCompatActivity {
                     }
 
                     public void InsertData() {
+
                         String type = spinner.getSelectedItem().toString();
                         String wt = weight.getText().toString();
                         String dP = datePurchased.getText().toString();
                         String dE = dateExpired.getText().toString();
                         String cN = contactNo.getText().toString();
+                        String loc = location.getText().toString();
                         String nts = notes.getText().toString();
                         String id = dbRef.push().getKey();
                         String imageUrl = "";
@@ -248,9 +268,12 @@ public class donate extends AppCompatActivity {
                         String dateAdded = formatter.format(date);
                         String dateAddedTime = formatter2.format(time);
 
-                        donation Donation = new donation(type, wt, dP, dE, cN, nts, id, dateAdded, dateAddedTime,imageUrl);
+                        Map map = new HashMap();
+                        map.put("timestamp", ServerValue.TIMESTAMP);
 
-                        dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, ServerValue.TIMESTAMP);
+
+                        dbRef.child("Users").child(uid).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
@@ -260,24 +283,24 @@ public class donate extends AppCompatActivity {
                         });
 
                         // firebase storage folder location
-                        StorageReference riversRef = storageRef.child("images/").child(currentUser.getUid()).child(date.toString());
+                        StorageReference riversRef = storageRef.child("images/").child(uid).child(dateAdded).child(id + "." + GetFileExtension(result));
 
                         // uploads image to firebase storage
-                        riversRef.child(id + "." + GetFileExtension(result)).putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        riversRef.putFile(result).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        //donation image = new donation(uri.toString());
-                                        //dbRef.child("Users").child(currentUser.getUid()).child("donation").child(id).child("image").setValue(image);
+                                        String url = uri.toString();
+                                        Donation.setImageUrl(url);
+                                        dbRef.child("Users").child(uid).child("donation").child(id).child("imageUrl").setValue(Donation.getImageUrl());
                                     }
                                 });
                                 Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
                     }
-
                 });
             }
         });
