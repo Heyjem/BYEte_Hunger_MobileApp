@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.denzcoskun.imageslider.ImageSlider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -22,19 +27,27 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Homescreen extends AppCompatActivity {
 
     Button Chat, Track, Donate;
-    ImageView account, newsImage;
+    ImageView account, newsImage, announcementImage;
     TextView faqs, newsFeed, triviaFeed;
     FirebaseDatabase fDB;
     DatabaseReference dbRef, dbRef2;
     FirebaseAuth fAuth;
     FirebaseUser currentUser;
+    FirebaseStorage storage;
+    StorageReference storageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +57,6 @@ public class Homescreen extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
 
-
         account = findViewById(R.id.homescreen_account_page_icon);
         Chat = findViewById(R.id.button_homescreen_chat);
         Track = findViewById(R.id.button_homescreen_track);
@@ -53,14 +65,18 @@ public class Homescreen extends AppCompatActivity {
         newsFeed = findViewById(R.id.newsF_Content);
         newsImage = findViewById(R.id.newsF_Image);
         triviaFeed = findViewById(R.id.Trivia_Content);
+        announcementImage = findViewById(R.id.announcementImage);
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
         fDB = FirebaseDatabase.getInstance();
         dbRef = fDB.getReference("page-content");
         dbRef2 = fDB.getReference("Users");
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        String id = dbRef2.push().getKey();
+
 
         String uid = currentUser.getUid();
-
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",uid);
 
@@ -69,7 +85,6 @@ public class Homescreen extends AppCompatActivity {
             public void onSuccess(Void unused) {
             }
         });
-
 
         dbRef.child("newsfeed").child("newsfeedText").addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,7 +131,27 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        // redirect to donate
+        dbRef2.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    String dS = dataSnapshot.child("donationStatus").getValue(String.class);
+                    String disabled = "Donation in process";
+                    if(!Objects.equals(dS, "Completed")){
+                        Donate.setEnabled(false);
+                        Donate.setText(disabled);
+                        Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+                    }else{
+                        Donate.setEnabled(true);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         Donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

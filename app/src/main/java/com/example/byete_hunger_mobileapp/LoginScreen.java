@@ -91,6 +91,7 @@ public class LoginScreen extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(LoginScreen.this, "Login successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginScreen.this, Homescreen.class));
+                        finish();
                     }else{
                         Toast.makeText(LoginScreen.this, "Login Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 

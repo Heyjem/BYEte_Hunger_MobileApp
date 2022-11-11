@@ -30,7 +30,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         this.list = list;
     }
 
-
     @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,11 +45,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.weight.setText(Donation.getWeight());
         holder.datePurchased.setText(Donation.getDatePurchased());
         holder.dateExpired.setText(Donation.getDateExpired());
+        holder.contactNo.setText(Donation.getContactNo());
+        holder.location.setText(Donation.getLocation());
         holder.notes.setText(Donation.getNotes());
         holder.id.setText(Donation.getId());
         holder.dateAdded.setText(Donation.getDateAdded());
         holder.dateAddedTime.setText(Donation.getDateAddedTime());
-        //Glide.with(context).load(Donation.getUrl()).into(holder.donationCardImage);
+        Glide.with(context).load(Donation.getImageUrl()).into(holder.donationCardImage);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView type, weight, datePurchased, dateExpired, notes, id, dateAdded, dateAddedTime;
+        TextView type, weight, datePurchased, dateExpired, contactNo, location, notes, id, dateAdded, dateAddedTime;
         Button track;
         CardView cardView;
         ImageView donationCardImage;
@@ -74,25 +75,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             weight = itemView.findViewById(R.id.tv_donationcard_weightdesc);
             datePurchased = itemView.findViewById(R.id.tv_donationcard_dateofpurchasedesc);
             dateExpired = itemView.findViewById(R.id.tv_donationcard_expirationdatedesc);
+            contactNo = itemView.findViewById(R.id.tv_donationcard_contactNoDesc);
+            location = itemView.findViewById(R.id.tv_donationcard_locationDesc);
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
             id = itemView.findViewById(R.id.tv_donationcard_uidCode);
             dateAdded = itemView.findViewById(R.id.tv_donationcard_dateadded);
             dateAddedTime = itemView.findViewById(R.id.tv_donationcard_dateaddedTime);
             donationCardImage = itemView.findViewById(R.id.iV_donationcard);
 
-            track = itemView.findViewById(R.id.btn_donationcard_track);
-
             cardView = itemView.findViewById(R.id.cv_donationCard);
             donationcardcontent = itemView.findViewById(R.id.rl_donationcard_content);
-
-
-            track.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(cardView.getContext(),statustracker.class);
-                    cardView.getContext().startActivity(intent);
-                }
-            });
 
             // donation card expands and collapses
             cardView.setOnClickListener(new View.OnClickListener() {

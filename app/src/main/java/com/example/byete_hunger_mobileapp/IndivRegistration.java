@@ -57,7 +57,11 @@ public class IndivRegistration extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register();
+                if(!checkbox.isChecked()){
+                    Toast.makeText(IndivRegistration.this, "Please agree to our privacy policy by ticking the checkbox.", Toast.LENGTH_SHORT).show();
+                }else if(checkbox.isChecked()){
+                    Register();
+                }
             }
         });
 
@@ -92,34 +96,41 @@ public class IndivRegistration extends AppCompatActivity {
 
 
         if(lastNametxt.isEmpty()){
-            emailAddress.setError("Please enter your last name.");
+            lastName.setError("Please enter your last name.");
+            lastName.requestFocus();
         }
         if(firstNametxt.isEmpty()){
-            password.setError("Please enter your first name");
+            firstName.setError("Please enter your first name");
+            firstName.requestFocus();
         }
         if(contactNotxt.isEmpty()){
-            emailAddress.setError("Please enter your contact number.");
+            contactNo.setError("Please enter your contact number.");
+            contactNo.requestFocus();
         }
         if(locationtxt.isEmpty()){
-            password.setError("Please enter your location");
+            location.setError("Please enter your address.");
+            location.requestFocus();
         }
         if(emailAddresstxt.isEmpty()){
             emailAddress.setError("Please enter your email address.");
+            emailAddress.requestFocus();
         }
-        if(passwordtxt.isEmpty() || passwordtxt.length() < 8){
-            password.setError("Please enter your password with more than 8 characters.");
-        }else{
+        if(passwordtxt.isEmpty() || passwordtxt.matches("^(.{0,7}|[^0-9]*|[^A-Z]*|[a-zA-Z0-9]*)$")){
+            password.setError("Password must have more than 8 characters, 1 number, 1 uppercase, & 1 special symbol.");
+            password.requestFocus();
+        }
+        else{
             fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
                         dbRef = FirebaseDatabase.getInstance().getReference("Users");
+
                         dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    //startActivity(new Intent(IndivRegistration.this, Homescreen.class));
                                     Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
 

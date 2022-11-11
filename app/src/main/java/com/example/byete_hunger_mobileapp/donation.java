@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class donation {
-    private String type, weight, datePurchased, dateExpired, contactNo,location, notes, id, dateAdded, dateAddedTime , imageUrl;
+    private String type, weight, datePurchased, dateExpired, contactNo,location, notes, id, dateAdded, dateAddedTime , imageUrl, donationStatus;
     private Map timestamp;
 
     public donation() {
     }
 
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo,String location, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl, Map timestamp) {
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo,String location, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl, String donationStatus, Map timestamp) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
@@ -23,6 +23,7 @@ public class donation {
         this.dateAdded = dateAdded;
         this.dateAddedTime = dateAddedTime;
         this.imageUrl = imageUrl;
+        this.donationStatus = donationStatus;
         this.timestamp = timestamp;
     }
 
@@ -65,8 +66,9 @@ public class donation {
         return dateAddedTime;
     }
 
-    public Map getTime() {return timestamp;}
+    public String getDonationStatus(){return donationStatus; }
 
+    public Map getTime() {return timestamp;}
 
     public String getImageUrl() {
         return imageUrl;

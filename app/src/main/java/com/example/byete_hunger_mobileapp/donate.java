@@ -117,6 +117,7 @@ public class donate extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        //Pop-up calendar when calendar image is clicked
         datepurchasedCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +135,7 @@ public class donate extends AppCompatActivity {
             }
         });
 
+        //Pop-up calendar when calendar image is clicked
         expiredCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +153,7 @@ public class donate extends AppCompatActivity {
             }
         });
 
+        //Pop-up calendar when edittext is clicked
         datePurchased.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +171,7 @@ public class donate extends AppCompatActivity {
             }
         });
 
+        //Pop-up calendar when edittext is clicked
         dateExpired.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +210,7 @@ public class donate extends AppCompatActivity {
                 launcher.launch("image/*");
             }
         });
+
 
         dbRef.child("Users").child(uid).child("contactNo").addValueEventListener(new ValueEventListener() {
             @Override
@@ -259,26 +264,54 @@ public class donate extends AppCompatActivity {
                         String nts = notes.getText().toString();
                         String id = dbRef.push().getKey();
                         String imageUrl = "";
+                        String donationStatus = "Pending";
 
                         //show when new card was added to donations
                         Date date = new Date();
                         Date time = new Date();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-                        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss");
+                        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss a");
                         String dateAdded = formatter.format(date);
                         String dateAddedTime = formatter2.format(time);
 
                         Map map = new HashMap();
                         map.put("timestamp", ServerValue.TIMESTAMP);
 
-                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, ServerValue.TIMESTAMP);
+                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, donationStatus, ServerValue.TIMESTAMP);
 
+                        //insert donation details to firebase realtime database
                         dbRef.child("Users").child(uid).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
                                 }
+                            }
+                        });
+
+                        HashMap<String,Object> hashMap = new HashMap<>();
+                        hashMap.put("uid",uid);
+
+                        dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                            }
+                        });
+
+                        //insert current users fullname, contactperson, and organization details to firebase realtime database
+                        dbRef.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String cP = dataSnapshot.child("contactPerson").getValue(String.class);
+                                String fN = dataSnapshot.child("fullName").getValue(String.class);
+                                String org = dataSnapshot.child("organization").getValue(String.class);
+
+                                dbRef.child("Users").child(uid).child("donation").child(id).child("fullName").setValue(fN);
+                                dbRef.child("Users").child(uid).child("donation").child(id).child("contactPerson").setValue(cP);
+                                dbRef.child("Users").child(uid).child("donation").child(id).child("organization").setValue(org);
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
                             }
                         });
 
@@ -300,6 +333,7 @@ public class donate extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
+
                     }
                 });
             }

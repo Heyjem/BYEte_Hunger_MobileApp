@@ -58,7 +58,11 @@ public class OrgRegistration extends AppCompatActivity {
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register();
+                if(!Checkbox.isChecked()){
+                    Toast.makeText(OrgRegistration.this, "Please agree to our privacy policy by ticking the checkbox.", Toast.LENGTH_SHORT).show();
+                }else if(Checkbox.isChecked()){
+                    Register();
+                }
             }
         });
 
@@ -94,23 +98,30 @@ public class OrgRegistration extends AppCompatActivity {
 
         
         if(organizationtxt.isEmpty()){
-            emailAddress.setError("Please enter your last name.");
+            organization.setError("Please enter your organization's name.");
+            organization.requestFocus();
         }
         if(contactPersontxt.isEmpty()){
-            password.setError("Please enter your first name");
+            contactPerson.setError("Please enter your contact person's name");
+            contactPerson.requestFocus();
         }
         if(contactNotxt.isEmpty()){
-            emailAddress.setError("Please enter your contact number.");
+            contactNo.setError("Please enter your contact number.");
+            contactNo.requestFocus();
         }
         if(locationtxt.isEmpty()){
-            password.setError("Please enter your location");
+            location.setError("Please enter your address.");
+            location.requestFocus();
         }
         if(emailAddresstxt.isEmpty()){
             emailAddress.setError("Please enter your email address.");
+            emailAddress.requestFocus();
         }
-        if(passwordtxt.isEmpty() || passwordtxt.length() < 8){
-            password.setError("Please enter your password with more than 8 characters.");
-        }else{
+        if(passwordtxt.isEmpty() || passwordtxt.matches("^(.{0,7}|[^0-9]*|[^A-Z]*|[a-zA-Z0-9]*)$")){
+            password.setError("Password must have more than 8 characters, 1 number, 1 uppercase, & 1 special symbol.");
+            password.requestFocus();
+        }
+        else{
             mAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -122,8 +133,6 @@ public class OrgRegistration extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    //startActivity(new Intent(OrgRegistration.this, Homescreen.class));
-
                                     Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
 
