@@ -68,9 +68,6 @@ public class account_change_password extends AppCompatActivity {
     }
 
     private void changepassword() {
-
-        fAuth.getInstance();
-
         fAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
