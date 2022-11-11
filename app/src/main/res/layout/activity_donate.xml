@@ -320,8 +320,8 @@
 
     <ImageView
         android:id="@+id/donate_uploadImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"

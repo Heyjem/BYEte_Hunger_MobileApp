@@ -70,6 +70,8 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#007D41"
             android:elevation="4dp"
+            android:enabled="true"
+            android:maxWidth="370dp"
             android:text="DONATE NOW"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -101,15 +103,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/imageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        app:iss_auto_cycle="true"
-                        app:iss_corner_radius="10"
-                        app:iss_delay="1000"
-                        app:iss_period="1000"
-                        app:iss_title_background="@color/white" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/announcementImage"
+                        android:src="@drawable/ic_launcher_foreground">
+                    </ImageView>
+
 
                 </LinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/ic_launcher_foreground" />
 
 
             <LinearLayout
@@ -214,7 +214,7 @@
                     android:layout_height="96dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="25dp"
-                    tools:srcCompat="@drawable/trivia_icon" />
+                    android:src="@drawable/trivia_icon" />
 
                 <TextView
                     android:id="@+id/Trivia_Content"
@@ -270,7 +270,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    tools:srcCompat="@drawable/client_logo" />
+                    android:src="@drawable/client_logo" />
 
                 <TextView
                     android:layout_width="match_parent"

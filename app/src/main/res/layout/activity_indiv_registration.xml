@@ -111,7 +111,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/edittext_rounded_corners"
         android:ems="10"
-        android:hint="Location"
+        android:hint="Address"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
         android:textColor="#000000"
