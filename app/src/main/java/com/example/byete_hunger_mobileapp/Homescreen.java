@@ -137,12 +137,15 @@ public class Homescreen extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     String dS = dataSnapshot.child("donationStatus").getValue(String.class);
                     String disabled = "Donation in process";
-                    if(!Objects.equals(dS, "Completed")){
+                    String enabled = "Donate Now";
+                    if(Objects.equals(dS, "Pending") || Objects.equals(dS, "Accepted") || Objects.equals(dS, "Picked Up") || Objects.equals(dS, "Dropped Off") ){
                         Donate.setEnabled(false);
                         Donate.setText(disabled);
                         Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-                    }else{
+                    }else if(Objects.equals(dS, "Donated") || Objects.equals(dS, "Cancelled")){
                         Donate.setEnabled(true);
+                        Donate.setText(enabled);
+                        Donate.getBackground().setColorFilter(Color.rgb(0,125,70), PorterDuff.Mode.SRC_ATOP);
                     }
                 }
             }
