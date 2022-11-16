@@ -11,18 +11,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -85,6 +91,7 @@ public class donate extends AppCompatActivity {
     int mDate, mMonth, mYear;
     Timer timer;
     ActivityResultLauncher<String> launcher;
+    boolean pushBool, emailBool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,6 +251,7 @@ public class donate extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         InsertData();
+                        notification();
                         timer = new Timer();
                         timer.schedule(new TimerTask() {
                             @Override
@@ -346,5 +354,36 @@ public class donate extends AppCompatActivity {
         MimeTypeMap map = MimeTypeMap.getSingleton();
         return map.getExtensionFromMimeType(contentResolver.getType(uri));
     }
+
+    public void notification(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("Notif", "notif", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"Notif")
+                .setContentTitle("Donation Submitted")
+                .setSmallIcon(R.drawable.client_logo_png)
+                .setAutoCancel(true)
+                .setContentText("Donation in process, kindly wait for completion to submit a new donation.");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(1, builder.build());
+
+    }
+
+    /*
+    @Override
+    protected void onResume() {
+        SharedPreferences getPushNotif = getSharedPreferences("pushNotif", MODE_PRIVATE);
+        SharedPreferences getEmailNotif = getSharedPreferences("emailNotif", MODE_PRIVATE);
+        pushBool = getPushNotif.getBoolean("pushNotif", false);
+        emailBool = getEmailNotif.getBoolean("emailNotif", false);
+
+        super.onResume();
+    }
+     */
 
 }

@@ -86,7 +86,7 @@
         android:background="@drawable/rounded_cornerbtn"
         android:textColor="#FFF"
         android:textSize="18dp"
-        android:backgroundTint="#505050"
+        android:backgroundTint="#2eb674"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

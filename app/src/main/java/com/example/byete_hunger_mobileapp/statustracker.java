@@ -2,16 +2,27 @@ package com.example.byete_hunger_mobileapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +49,8 @@ public class statustracker extends AppCompatActivity {
     ImageView back, account;
     ProgressBar pB;
     String dS;
+    FirebaseMessaging fMess;
+    Handler handler;
 
 
     @Override
@@ -53,15 +67,15 @@ public class statustracker extends AppCompatActivity {
         donationDropped = findViewById(R.id.tv_statustracker_donationdropped);
         donationComplete = findViewById(R.id.tv_statustracker_donationdonated);
 
-
         pB = findViewById(R.id.pB_statTracker);
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
+        fMess = FirebaseMessaging.getInstance();
+
         list = new ArrayList<>();
         adapter = new MyAdapter(this, list);
-
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +91,7 @@ public class statustracker extends AppCompatActivity {
             }
         });
 
+
         pB.setMax(100);
         dbRef.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
             @Override
@@ -91,26 +106,35 @@ public class statustracker extends AppCompatActivity {
                     dS = dataSnapshot2.child("donationStatus").getValue(String.class);
                     if(Objects.equals(dS, "Pending")){
                         donationAccepted.setVisibility(View.VISIBLE);
+                        donationPicked.setVisibility(View.INVISIBLE);
+                        donationDropped.setVisibility(View.INVISIBLE);
+                        donationComplete.setVisibility(View.INVISIBLE);
                         donationAccepted.setText("Donation Pending");
                         pB.setProgress(0);
                     }else if(Objects.equals(dS, "Accepted")){
                         donationAccepted.setVisibility(View.VISIBLE);
+                        donationPicked.setVisibility(View.INVISIBLE);
+                        donationDropped.setVisibility(View.INVISIBLE);
+                        donationComplete.setVisibility(View.INVISIBLE);
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
-                        pB.setProgress(16);
+                        pB.setProgress(22);
                     }else if(Objects.equals(dS, "Picked up")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.VISIBLE);
+                        donationDropped.setVisibility(View.INVISIBLE);
+                        donationComplete.setVisibility(View.INVISIBLE);
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
-                        pB.setProgress(42);
+                        pB.setProgress(45);
                     }else if(Objects.equals(dS, "Dropped off")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.VISIBLE);
                         donationDropped.setVisibility(View.VISIBLE);
+                        donationComplete.setVisibility(View.INVISIBLE);
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
-                        pB.setProgress(68);
+                        pB.setProgress(70);
                     }else if(Objects.equals(dS, "Donated")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.VISIBLE);
@@ -129,6 +153,18 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgress(100);
                     }
                 }
+
+                if(donationComplete.getVisibility() == View.VISIBLE){
+                    handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
+                            startActivity(intent);
+                        }
+                    },1000);
+                }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -136,23 +172,5 @@ public class statustracker extends AppCompatActivity {
             }
         });
     }
-
-
-    public String date(String dateAdded){
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
-        dateAdded = formatter.format(date);
-
-        return dateAdded;
-    }
-
-    public String time(String dateAddedTime){
-        Date time = new Date();
-        SimpleDateFormat formatter2 = new SimpleDateFormat("hh:mm:ss a");
-        dateAddedTime = formatter2.format(time);
-
-        return dateAddedTime;
-    }
-
 
 }

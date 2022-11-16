@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -75,10 +77,10 @@ public class Homescreen extends AppCompatActivity {
         storageRef = storage.getReference();
         String id = dbRef2.push().getKey();
 
-
         String uid = currentUser.getUid();
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",uid);
+
 
         dbRef2.child(uid).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -86,6 +88,31 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
+        // insert image in newsfeed
+        dbRef.child("newsfeed").child("newsfeedImg").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String img = (String)snapshot.getValue();
+                Glide.with(Homescreen.this).load(img).override(Target.SIZE_ORIGINAL).into(newsImage);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        // insert image in announcements
+        dbRef.child("announcement").child("announcementImg").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String img = (String)snapshot.getValue();
+                Glide.with(Homescreen.this).load(img).override(Target.SIZE_ORIGINAL).into(announcementImage);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        // insert text in news feed
         dbRef.child("newsfeed").child("newsfeedText").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,6 +124,7 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
+        // insert text in trivia feed
         dbRef.child("trivia").child("triviaText").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

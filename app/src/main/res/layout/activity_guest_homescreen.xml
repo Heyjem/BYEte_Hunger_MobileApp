@@ -97,35 +97,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <ImageView
+                android:id="@+id/guestannouncementImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/imageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        app:iss_auto_cycle="true"
-                        app:iss_corner_radius="10"
-                        app:iss_delay="1000"
-                        app:iss_period="1000"
-                        app:iss_title_background="@color/white" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_launcher_foreground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="25dp"
                 android:orientation="horizontal">
 
@@ -150,7 +133,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/newsF_Content"
+                android:id="@+id/guest_newsF_Content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -159,36 +142,21 @@
                 android:layout_marginEnd="25dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:justificationMode="inter_word"
-                android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
+                android:text=" hi"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
             <ImageView
-                android:id="@+id/newsF_Image"
+                android:id="@+id/guest_newsF_Image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/newsF_Content2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="25dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:justificationMode="inter_word"
-                android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
-                android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:src="@drawable/ic_launcher_foreground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -232,10 +200,10 @@
                     android:layout_height="96dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="25dp"
-                    tools:srcCompat="@drawable/trivia_icon" />
+                    android:src="@drawable/trivia_icon" />
 
                 <TextView
-                    android:id="@+id/Trivia_Content"
+                    android:id="@+id/guest_Trivia_Content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -244,9 +212,9 @@
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
-                    android:text="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
+                    android:text="insert text here"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -288,7 +256,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    tools:srcCompat="@drawable/client_logo" />
+                    android:src="@drawable/client_logo" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -309,10 +277,10 @@
                     android:layout_marginBottom="35dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
-                    android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus. Praesent elementum feugiat tortor, scelerisque laoreet felis aliquet eget. Pellentesque at fringilla sapien, eu aliquet ligula. Sed faucibus tellus congue, rhoncus lorem a, ultricies neque. In tristique aliquam magna, non tristique felis auctor at. Nullam vehicula mollis vulputate. Nullam quis pulvinar sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+                    android:text= "We rescue and redistribute perishable food 'waste' to charities that serve homeless and low income individuals. Our goal is to help solve the problems of hunger, malnutrition, and food wastage and promote cycling culture in our community. \n\nWe also are involving jeepneys and tricycles/tuktuks to create and promote an ASEAN identity to the project. \n\nThe project draws inspiration from Hana Dansky of Boulder Food Rescue , a successful food rescue organization since 2011. \n\nFood Rescue Philippines was recognized at the YSEALI Seeds for the Future 2015 and was awarded a grant by the U.S. Mission to ASEAN, and is one of the Ten Accomplished Youth Organizations (TAYO) of the 14th TAYO Awards in 2017, with 'Better World' Award from San Miguel Corporation. FRP is a Youth Champion for The 2030 Project: SDG2 Zero Hunger."
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 

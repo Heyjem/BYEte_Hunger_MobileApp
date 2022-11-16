@@ -56,181 +56,69 @@
         android:id="@+id/tv_statustracker_donationconfirmed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginTop="65dp"
         android:fontFamily="@font/montserrat_regular"
-        android:textStyle="bold"
-        android:visibility="invisible"
         android:text="Donation Accepted"
         android:textColor="#646464"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_uidvalue" />
 
-    <TextView
-        android:id="@+id/tv_statustracker_donationconfirmeddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="00/00/00"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationconfirmed" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationconfirmedtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="--:--:--"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationconfirmeddate" />
 
     <TextView
         android:id="@+id/tv_statustracker_donationpicked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="60dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been picked up"
-        android:textStyle="bold"
         android:textColor="#646464"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationconfirmedtime" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationpickeddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="00/00/00"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationpicked" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationpickedtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="--:--:--"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationpickeddate" />
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
+        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationconfirmed" />
 
     <TextView
         android:id="@+id/tv_statustracker_donationdropped"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="46dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been dropped off"
-        android:textStyle="bold"
         android:textColor="#646464"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationpickedtime" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationdroppeddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="00/00/00"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdropped" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationdroppedtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="--:--:--"
-        android:textStyle="bold"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdroppeddate" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
+        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationpicked" />
 
     <TextView
         android:id="@+id/tv_statustracker_donationdonated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="68dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been donated\nThank You!"
-        android:textStyle="bold"
         android:textColor="#ffc91e"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdroppedtime" />
-    <TextView
-        android:id="@+id/tv_statustracker_donationdonateddate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="00/00/00"
-        android:textStyle="bold"
-        android:textColor="#ffc91e"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdonated" />
-
-    <TextView
-        android:id="@+id/tv_statustracker_donationdonatedtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="--:--:--"
-        android:textStyle="bold"
-        android:textColor="#ffc91e"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdonateddate" />
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
+        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdropped" />
 
     <ProgressBar
         android:id="@+id/pB_statTracker"
@@ -243,6 +131,18 @@
         app:layout_constraintHorizontal_bias="0.150"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_uidvalue" />
+
+    <EditText
+        android:id="@+id/edittext900"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="hi"
+        android:inputType="textMultiLine"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdonated" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
