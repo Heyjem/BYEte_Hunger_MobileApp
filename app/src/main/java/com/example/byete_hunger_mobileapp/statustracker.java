@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,8 +51,6 @@ public class statustracker extends AppCompatActivity {
     ProgressBar pB;
     String dS;
     FirebaseMessaging fMess;
-    Handler handler;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,6 @@ public class statustracker extends AppCompatActivity {
                 startActivity(new Intent(statustracker.this, Account.class));
             }
         });
-
 
         pB.setMax(100);
         dbRef.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
@@ -153,18 +151,15 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgress(100);
                     }
                 }
-
                 if(donationComplete.getVisibility() == View.VISIBLE){
-                    handler = new Handler();
-                    handler.postDelayed(new Runnable() {
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
                             startActivity(intent);
                         }
-                    },1000);
+                    }, 1000);
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

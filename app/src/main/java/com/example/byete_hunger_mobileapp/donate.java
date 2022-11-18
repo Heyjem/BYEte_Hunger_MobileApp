@@ -30,6 +30,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
@@ -92,6 +93,7 @@ public class donate extends AppCompatActivity {
     Timer timer;
     ActivityResultLauncher<String> launcher;
     boolean pushBool, emailBool;
+    SharedPreferences getPushNotif, getEmailNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class donate extends AppCompatActivity {
         Submit = findViewById(R.id.button4_donate_submit);
         datepurchasedCal = findViewById(R.id.datepurchased_image);
         expiredCal = findViewById(R.id.expired_image);
+
 
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
@@ -251,7 +254,13 @@ public class donate extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         InsertData();
-                        notification();
+                        if(pushBool){
+                            notification();
+                        }
+                        if(emailBool){
+                            //notification();
+                        }
+
                         timer = new Timer();
                         timer.schedule(new TimerTask() {
                             @Override
@@ -374,16 +383,16 @@ public class donate extends AppCompatActivity {
 
     }
 
-    /*
+
     @Override
     protected void onResume() {
-        SharedPreferences getPushNotif = getSharedPreferences("pushNotif", MODE_PRIVATE);
-        SharedPreferences getEmailNotif = getSharedPreferences("emailNotif", MODE_PRIVATE);
-        pushBool = getPushNotif.getBoolean("pushNotif", false);
-        emailBool = getEmailNotif.getBoolean("emailNotif", false);
-
         super.onResume();
+        getPushNotif = PreferenceManager.getDefaultSharedPreferences(this);
+        getEmailNotif = PreferenceManager.getDefaultSharedPreferences(this);
+
+        pushBool =  getPushNotif.getBoolean("pushNotif", true);
+        emailBool = getEmailNotif.getBoolean("emailNotif", true);
     }
-     */
+
 
 }
