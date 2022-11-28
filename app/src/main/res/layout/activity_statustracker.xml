@@ -45,7 +45,7 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:fontFamily="@font/montserrat_semibold"
-        android:text="123456789976"
+        android:text=""
         android:textColor="#2eb674"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tv_statustracker_uidtitle"
@@ -131,18 +131,6 @@
         app:layout_constraintHorizontal_bias="0.150"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_uidvalue" />
-
-    <EditText
-        android:id="@+id/edittext900"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="hi"
-        android:inputType="textMultiLine"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdonated" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

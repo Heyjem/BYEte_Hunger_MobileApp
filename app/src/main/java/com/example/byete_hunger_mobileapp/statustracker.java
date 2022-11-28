@@ -117,7 +117,7 @@ public class statustracker extends AppCompatActivity {
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
                         pB.setProgress(22);
-                    }else if(Objects.equals(dS, "Picked up")){
+                    }else if(Objects.equals(dS, "Picked-Up")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.VISIBLE);
                         donationDropped.setVisibility(View.INVISIBLE);
@@ -125,7 +125,7 @@ public class statustracker extends AppCompatActivity {
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
                         pB.setProgress(45);
-                    }else if(Objects.equals(dS, "Dropped off")){
+                    }else if(Objects.equals(dS, "Dropped-Off")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.VISIBLE);
                         donationDropped.setVisibility(View.VISIBLE);
