@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
@@ -72,6 +74,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -256,9 +259,6 @@ public class donate extends AppCompatActivity {
                         InsertData();
                         if(pushBool){
                             notification();
-                        }
-                        if(emailBool){
-                            //notification();
                         }
 
                         timer = new Timer();

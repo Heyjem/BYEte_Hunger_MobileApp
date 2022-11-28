@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,7 @@ import java.util.Objects;
 
 public class Homescreen extends AppCompatActivity {
 
+    String id, uid;
     Button Chat, Track, Donate;
     ImageView account, newsImage, announcementImage;
     TextView faqs, newsFeed, triviaFeed;
@@ -56,6 +58,7 @@ public class Homescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
         onStart();
+        onStop();
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
 
@@ -75,16 +78,22 @@ public class Homescreen extends AppCompatActivity {
         dbRef2 = fDB.getReference("Users");
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-        String id = dbRef2.push().getKey();
+        id = dbRef2.push().getKey();
 
-        String uid = currentUser.getUid();
+        uid = currentUser.getUid();
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",uid);
-
 
         dbRef2.child(uid).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+            }
+        });
+
+        fAuth.addAuthStateListener(firebaseAuth -> {
+            if(currentUser == null){
+                startActivity(new Intent(Homescreen.this, LoginScreen.class));
+                finish();
             }
         });
 
@@ -159,6 +168,28 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
+        //donate if only user is already verified
+        dbRef2.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String stat = dataSnapshot.child("status").getValue(String.class);
+                String unveri = "Donation Unavailable: User Unverified";
+                String veri = "DONATE NOW";
+                if(Objects.equals(stat, "Pending") || Objects.equals(stat, "Declined")){
+                    Donate.setEnabled(false);
+                    Donate.setText(unveri);
+                    Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+                }else if(Objects.equals(stat, "Verified")){
+                    Donate.setEnabled(true);
+                    Donate.setText(veri);
+                    Donate.getBackground().setColorFilter(Color.rgb(36,120,60), PorterDuff.Mode.SRC_ATOP);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
         dbRef2.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -199,14 +230,5 @@ public class Homescreen extends AppCompatActivity {
         });
     }
 
-    public void onStart(){
-        super.onStart();
-        fAuth = FirebaseAuth.getInstance();
-        currentUser = fAuth.getCurrentUser();
-
-        if (currentUser == null){
-            startActivity(new Intent(Homescreen.this, LoginScreen.class));
-        }
-    }
 
 }

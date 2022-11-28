@@ -50,13 +50,20 @@ public class LoginScreen extends AppCompatActivity {
         EmailAddress = findViewById(R.id.editText_LoginEmailAddress);
         Password = findViewById(R.id.editText_LoginPassword);
 
-
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login();
                 }
+        });
+
+        //display homescreen when user returns to app without logging out
+        fAuth.addAuthStateListener(firebaseAuth -> {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if(firebaseUser != null){
+                startActivity(new Intent(LoginScreen.this, Homescreen.class));
+                finish();
+            }
         });
 
         // Redirect to Forgot Password Page
