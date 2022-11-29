@@ -20,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Objects;
+
 public class Account extends AppCompatActivity implements View.OnClickListener{
 
     Button logout;
@@ -59,21 +61,21 @@ public class Account extends AppCompatActivity implements View.OnClickListener{
 
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
-        dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference("Users");
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
 
-        dbRef.child("Users").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        dbRef.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String cP = dataSnapshot.child("contactPerson").getValue(String.class);
                 String fN = dataSnapshot.child("fullName").getValue(String.class);
                 String org = dataSnapshot.child("organization").getValue(String.class);
-                if(cP.equals("N/A")){
+                if(Objects.equals(cP, "N/A")){
                     fullname.setText(fN);
                     orgname.setVisibility(View.INVISIBLE);
-                }else if(fN.equals("N/A")){
+                }else if(Objects.equals(fN, "N/A")){
                     fullname.setText(cP);
                     orgname.setText(org);
                 }

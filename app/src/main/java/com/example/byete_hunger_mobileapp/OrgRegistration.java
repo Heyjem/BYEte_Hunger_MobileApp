@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class OrgRegistration extends AppCompatActivity {
 
     TextView PrivacyPolicy, LoginHere;
@@ -101,23 +103,23 @@ public class OrgRegistration extends AppCompatActivity {
             organization.setError("Please enter your organization's name.");
             organization.requestFocus();
         }
-        if(contactPersontxt.isEmpty()){
+        else if(contactPersontxt.isEmpty()){
             contactPerson.setError("Please enter your contact person's name");
             contactPerson.requestFocus();
         }
-        if(contactNotxt.isEmpty()){
+        else if(contactNotxt.isEmpty()){
             contactNo.setError("Please enter your contact number.");
             contactNo.requestFocus();
         }
-        if(locationtxt.isEmpty()){
+        else if(locationtxt.isEmpty()){
             location.setError("Please enter your address.");
             location.requestFocus();
         }
-        if(emailAddresstxt.isEmpty()){
+        else if(emailAddresstxt.isEmpty()){
             emailAddress.setError("Please enter your email address.");
             emailAddress.requestFocus();
         }
-        if(passwordtxt.isEmpty() || passwordtxt.matches("^(.{0,7}|[^0-9]*|[^A-Z]*|[a-zA-Z0-9]*)$")){
+        else if(passwordtxt.isEmpty() || passwordtxt.matches("^(.{0,7}|[^0-9]*|[^A-Z]*|[a-zA-Z0-9]*)$")){
             password.setError("Password must have more than 8 characters, 1 number, 1 uppercase, & 1 special symbol.");
             password.requestFocus();
         }
@@ -129,24 +131,18 @@ public class OrgRegistration extends AppCompatActivity {
                         ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
                         dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
-                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
-
-                                    // Prevent user to return to Indiv Registration
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                }else{
-                                    Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
+                            if(task1.isSuccessful()){
+                                Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }else{
-                        Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
