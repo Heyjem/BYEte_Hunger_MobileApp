@@ -9,6 +9,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -51,6 +52,7 @@ public class statustracker extends AppCompatActivity {
     ProgressBar pB;
     String dS;
     FirebaseMessaging fMess;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,9 @@ public class statustracker extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        sharedPref = getSharedPreferences("Preference", 0);
+        String acknowledged = sharedPref.getString("acknowledged", "No");
 
         fMess = FirebaseMessaging.getInstance();
 
@@ -151,14 +156,19 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgress(100);
                     }
                 }
-                if(donationComplete.getVisibility() == View.VISIBLE){
-                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
-                            startActivity(intent);
-                        }
-                    }, 1000);
+                if(acknowledged.equals("No")){
+                    if(donationComplete.getVisibility() == View.VISIBLE){
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
+                                startActivity(intent);
+                            }
+                        }, 1000);
+                    }
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("acknowledged", "Yes");
+                    editor.apply();
                 }
             }
             @Override
