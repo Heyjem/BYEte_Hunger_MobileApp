@@ -52,7 +52,6 @@ public class statustracker extends AppCompatActivity {
     ProgressBar pB;
     String dS;
     FirebaseMessaging fMess;
-    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,16 +90,6 @@ public class statustracker extends AppCompatActivity {
                 startActivity(new Intent(statustracker.this, Account.class));
             }
         });
-
-        if(donationComplete.getVisibility() == View.VISIBLE){
-            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
-                    startActivity(intent);
-                }
-            }, 1000);
-        }
 
         pB.setMax(100);
         dbRef.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
@@ -162,6 +151,15 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgressTintList(ColorStateList.valueOf(Color.RED));
                         pB.setProgress(100);
                     }
+                }
+                if(donationComplete.getVisibility() == View.VISIBLE){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
+                            startActivity(intent);
+                        }
+                    }, 1000); // wait for 5 seconds
                 }
             }
             @Override
