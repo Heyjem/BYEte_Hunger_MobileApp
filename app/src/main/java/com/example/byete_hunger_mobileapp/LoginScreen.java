@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,14 +58,6 @@ public class LoginScreen extends AppCompatActivity {
                 }
         });
 
-        //display homescreen when user returns to app without logging out
-        fAuth.addAuthStateListener(firebaseAuth -> {
-            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-            if(firebaseUser != null){
-                startActivity(new Intent(LoginScreen.this, Homescreen.class));
-                finish();
-            }
-        });
 
         // Redirect to Forgot Password Page
         ForgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +93,7 @@ public class LoginScreen extends AppCompatActivity {
                         startActivity(new Intent(LoginScreen.this, Homescreen.class));
                         finish();
                     }else{
-                        Toast.makeText(LoginScreen.this, "Login Unsuccessful" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginScreen.this, "Login Unsuccessful" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }

@@ -42,7 +42,7 @@ import java.util.Objects;
 
 public class Homescreen extends AppCompatActivity {
 
-    String id, uid;
+    String uid;
     Button Chat, Track, Donate;
     ImageView account, newsImage, announcementImage;
     TextView faqs, newsFeed, triviaFeed;
@@ -78,24 +78,17 @@ public class Homescreen extends AppCompatActivity {
         dbRef2 = fDB.getReference("Users");
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-        id = dbRef2.push().getKey();
-
         uid = currentUser.getUid();
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("uid",uid);
 
-        dbRef2.child(uid).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-            }
-        });
 
+        /*
         fAuth.addAuthStateListener(firebaseAuth -> {
             if(currentUser == null){
                 startActivity(new Intent(Homescreen.this, LoginScreen.class));
                 finish();
             }
         });
+         */
 
         // insert image in newsfeed
         dbRef.child("newsfeed").child("newsfeedImg").addValueEventListener(new ValueEventListener() {
@@ -168,11 +161,11 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        //donate if only user is already verified
+        //donate if only user is already verified and when recent donation is donated or cancelled
         dbRef2.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String stat = dataSnapshot.child("status").getValue(String.class);
+            public void onDataChange(DataSnapshot snapshot) {
+                String stat = snapshot.child("status").getValue(String.class);
                 String unveri = "Donation Unavailable: User Unverified";
                 String veri = "DONATE NOW";
                 if(Objects.equals(stat, "Pending") || Objects.equals(stat, "Declined")){
@@ -180,39 +173,37 @@ public class Homescreen extends AppCompatActivity {
                     Donate.setText(unveri);
                     Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
                 }else if(Objects.equals(stat, "Verified")){
-                    Donate.setEnabled(true);
-                    Donate.setText(veri);
-                    Donate.getBackground().setColorFilter(Color.rgb(36,120,60), PorterDuff.Mode.SRC_ATOP);
+                    for(DataSnapshot dataSnapshot: snapshot.child("donation").getChildren()){
+                        String dS = dataSnapshot.child("donationStatus").getValue(String.class);
+                        String disabled = "Donation in process";
+                        if(Objects.equals(dS, "Pending") || Objects.equals(dS, "Accepted") || Objects.equals(dS, "Picked-Up") || Objects.equals(dS, "Dropped-Off") ){
+                            Donate.setEnabled(false);
+                            Donate.setText(disabled);
+                            Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+                        }else if(Objects.equals(dS, "Donated") || Objects.equals(dS, "Cancelled")){
+                            Donate.setEnabled(true);
+                            Donate.setText(veri);
+                            Donate.getBackground().setColorFilter(Color.rgb(0,125,70), PorterDuff.Mode.SRC_ATOP);
+                        }
+                    }
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
-        dbRef2.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    String dS = dataSnapshot.child("donationStatus").getValue(String.class);
-                    String disabled = "Donation in process";
-                    String enabled = "Donate Now";
-                    if(Objects.equals(dS, "Pending") || Objects.equals(dS, "Accepted") || Objects.equals(dS, "Picked Up") || Objects.equals(dS, "Dropped Off") ){
-                        Donate.setEnabled(false);
-                        Donate.setText(disabled);
-                        Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-                    }else if(Objects.equals(dS, "Donated") || Objects.equals(dS, "Cancelled")){
-                        Donate.setEnabled(true);
-                        Donate.setText(enabled);
-                        Donate.getBackground().setColorFilter(Color.rgb(0,125,70), PorterDuff.Mode.SRC_ATOP);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("uid",currentUser.getUid());
 
+        //store uid inside current user
+        dbRef2.child(currentUser.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
             }
         });
+
 
         Donate.setOnClickListener(new View.OnClickListener() {
             @Override

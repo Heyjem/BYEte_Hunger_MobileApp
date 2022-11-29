@@ -73,9 +73,6 @@ public class statustracker extends AppCompatActivity {
         currentUser = fAuth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
 
-        sharedPref = getSharedPreferences("Preference", 0);
-        String acknowledged = sharedPref.getString("acknowledged", "No");
-
         fMess = FirebaseMessaging.getInstance();
 
         list = new ArrayList<>();
@@ -94,6 +91,16 @@ public class statustracker extends AppCompatActivity {
                 startActivity(new Intent(statustracker.this, Account.class));
             }
         });
+
+        if(donationComplete.getVisibility() == View.VISIBLE){
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
+                    startActivity(intent);
+                }
+            }, 1000);
+        }
 
         pB.setMax(100);
         dbRef.child(currentUser.getUid()).child("donation").addValueEventListener(new ValueEventListener() {
@@ -155,20 +162,6 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgressTintList(ColorStateList.valueOf(Color.RED));
                         pB.setProgress(100);
                     }
-                }
-                if(acknowledged.equals("No")){
-                    if(donationComplete.getVisibility() == View.VISIBLE){
-                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
-                                startActivity(intent);
-                            }
-                        }, 1000);
-                    }
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("acknowledged", "Yes");
-                    editor.apply();
                 }
             }
             @Override

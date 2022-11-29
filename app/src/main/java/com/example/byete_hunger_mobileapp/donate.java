@@ -32,6 +32,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -95,8 +97,8 @@ public class donate extends AppCompatActivity {
     int mDate, mMonth, mYear;
     Timer timer;
     ActivityResultLauncher<String> launcher;
-    boolean pushBool, emailBool;
-    SharedPreferences getPushNotif, getEmailNotif;
+    boolean pushBool;
+    SharedPreferences getPushNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,13 +120,13 @@ public class donate extends AppCompatActivity {
         datepurchasedCal = findViewById(R.id.datepurchased_image);
         expiredCal = findViewById(R.id.expired_image);
 
-
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
         String uid = currentUser.getUid();
         dbRef = FirebaseDatabase.getInstance().getReference();
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.DonationType, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -253,7 +255,6 @@ public class donate extends AppCompatActivity {
                 chooseImage.setImageURI(result);
 
                 Submit.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
                         InsertData();
@@ -315,6 +316,7 @@ public class donate extends AppCompatActivity {
                             }
                         });
 
+
                         //insert current users fullname, contactperson, and organization details to firebase realtime database
                         dbRef.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
                             @Override
@@ -365,6 +367,7 @@ public class donate extends AppCompatActivity {
     }
 
     public void notification(){
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("Notif", "notif", NotificationManager.IMPORTANCE_DEFAULT);
 
@@ -388,10 +391,7 @@ public class donate extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getPushNotif = PreferenceManager.getDefaultSharedPreferences(this);
-        getEmailNotif = PreferenceManager.getDefaultSharedPreferences(this);
-
         pushBool =  getPushNotif.getBoolean("pushNotif", true);
-        emailBool = getEmailNotif.getBoolean("emailNotif", true);
     }
 
 
