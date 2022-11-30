@@ -81,15 +81,6 @@ public class Homescreen extends AppCompatActivity {
         uid = currentUser.getUid();
 
 
-        /*
-        fAuth.addAuthStateListener(firebaseAuth -> {
-            if(currentUser == null){
-                startActivity(new Intent(Homescreen.this, LoginScreen.class));
-                finish();
-            }
-        });
-         */
-
         // insert image in newsfeed
         dbRef.child("newsfeed").child("newsfeedImg").addValueEventListener(new ValueEventListener() {
             @Override
@@ -173,6 +164,9 @@ public class Homescreen extends AppCompatActivity {
                     Donate.setText(unveri);
                     Donate.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
                 }else if(Objects.equals(stat, "Verified")){
+                    Donate.setEnabled(true);
+                    Donate.setText(veri);
+                    Donate.getBackground().setColorFilter(Color.rgb(0,125,70), PorterDuff.Mode.SRC_ATOP);
                     for(DataSnapshot dataSnapshot: snapshot.child("donation").getChildren()){
                         String dS = dataSnapshot.child("donationStatus").getValue(String.class);
                         String disabled = "Donation in process";
