@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "791717154010-br6color052sfadfbg0h4dohv4ol6jcq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.byete_hunger_mobileapp",
+            "certificate_hash": "7b3c54c0420e9e0986588d66f57f9a80e7133acc"
+          }
+        },
+        {
           "client_id": "791717154010-qpppvvghkjj36p19h1ta5fpigat9pkgq.apps.googleusercontent.com",
           "client_type": 3
         }
