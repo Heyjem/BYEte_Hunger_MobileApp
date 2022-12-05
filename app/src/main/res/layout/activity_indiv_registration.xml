@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="550dp"
         android:background="#FFC91E"
         android:translationZ="1dp"
@@ -38,12 +38,13 @@
         android:id="@+id/textView2_IndivReg_createAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="100dp"
         android:text="Create your account"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:translationZ="5dp"
+        android:translationZ="10dp"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -228,29 +229,31 @@
         app:layout_constraintTop_toBottomOf="@+id/editText_IndivReg_EmailAddress" />
 
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_marginBottom="436dp"
-        android:background="@drawable/registration_page_background_1"
-        android:alpha="0.90"
-        android:backgroundTint="#99000000"
-        android:backgroundTintMode="src_over"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
         android:id="@+id/imageView21"
-        android:layout_width="394dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/yellowgradienteffect"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2_IndivReg_createAccount"
+        app:layout_constraintBottom_toTopOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_IndivReg_Hello"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:alpha="0.90"
+        android:background="@drawable/registration_page_background_1"
+        android:backgroundTint="#99000000"
+        android:backgroundTintMode="src_over"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

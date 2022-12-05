@@ -61,7 +61,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginTop="144dp"
+                android:layout_marginTop="155dp"
                 android:background="@drawable/faqs_shadoweffect" />
 
         </androidx.cardview.widget.CardView>

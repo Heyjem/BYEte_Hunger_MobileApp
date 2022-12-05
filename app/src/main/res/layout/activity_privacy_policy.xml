@@ -39,12 +39,13 @@
         android:layout_height="450dp"
         android:layout_marginTop="80dp"
         android:fontFamily="@font/montserrat_regular"
+        android:justificationMode="inter_word"
         android:scrollbars="vertical"
         android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         android:textColor="#000000"
         android:textSize="15sp"
-        android:justificationMode="inter_word"
         android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,22 +65,23 @@
 
     <ImageView
         android:id="@+id/imageView15"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_marginBottom="436dp"
         android:alpha="0.90"
+        android:background="@drawable/registration_page_background_1"
         android:backgroundTint="#99000000"
         android:backgroundTintMode="src_over"
-        android:background="@drawable/registration_page_background_1"
         android:translationZ="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="530dp"
         android:background="#FFC91E"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,19 +89,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_PrivPol_PrivPol"
-        app:layout_constraintVertical_bias="0.98" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView22"
-        android:layout_width="394dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/yellowgradienteffect"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2_PrivPol_Text"
+        app:layout_constraintBottom_toTopOf="@+id/imageView16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView_PrivPol_PrivPol"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -213,7 +213,7 @@
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
-                    android:text="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet, ipsum vel fringilla lobortis, lectus ligula ultrices massa, ut hendrerit ante quam sed nisl. Sed vitae augue nec orci auctor eleifend. Integer vestibulum sagittis aliquam. Quisque luctus purus ut ex euismod tristique. Aenean elementum libero ut semper luctus."
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
