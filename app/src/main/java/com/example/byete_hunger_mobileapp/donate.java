@@ -320,17 +320,24 @@ public class donate extends AppCompatActivity {
                         //insert current users fullname, contactperson, and organization details to firebase realtime database
                         dbRef.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String cP = dataSnapshot.child("contactPerson").getValue(String.class);
                                 String fN = dataSnapshot.child("fullName").getValue(String.class);
                                 String org = dataSnapshot.child("organization").getValue(String.class);
 
-                                dbRef.child("Users").child(uid).child("donation").child(id).child("fullName").setValue(fN);
-                                dbRef.child("Users").child(uid).child("donation").child(id).child("contactPerson").setValue(cP);
-                                dbRef.child("Users").child(uid).child("donation").child(id).child("organization").setValue(org);
+                                HashMap<String,Object> Fn = new HashMap<>();
+                                HashMap<String,Object> Cp = new HashMap<>();
+                                HashMap<String,Object> Org = new HashMap<>();
+                                Cp.put("contactPerson",cP);
+                                Fn.put("fullName",fN);
+                                Org.put("organization",org);
+
+                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Fn);
+                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Cp);
+                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Org);
                             }
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
                             }
                         });
 
