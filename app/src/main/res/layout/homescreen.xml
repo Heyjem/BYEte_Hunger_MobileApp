@@ -165,7 +165,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat_semibold"
                     android:letterSpacing="0.40"
-                    android:text="TRIVIA!"
+                    android:text="- - - - TRIVIA! - - - -"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textColor="#FFC91E"
