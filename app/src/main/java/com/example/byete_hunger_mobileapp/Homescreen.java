@@ -86,7 +86,7 @@ public class Homescreen extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String img = (String)snapshot.getValue();
-                Glide.with(Homescreen.this).load(img).override(Target.SIZE_ORIGINAL).into(newsImage);
+                Glide.with(Homescreen.this).load(img).into(newsImage);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -98,7 +98,7 @@ public class Homescreen extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String img = (String)snapshot.getValue();
-                Glide.with(Homescreen.this).load(img).override(Target.SIZE_ORIGINAL).into(announcementImage);
+                Glide.with(Homescreen.this).load(img).into(announcementImage);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
