@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.lifecycle.Lifecycle;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -152,14 +153,14 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgress(100);
                     }
                 }
-                if(donationComplete.getVisibility() == View.VISIBLE){
+                if(donationComplete.getVisibility() == View.VISIBLE && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
                             startActivity(intent);
                         }
-                    }, 1000); // wait for 5 seconds
+                    }, 1000); // wait for 1 seconds
                 }
             }
             @Override
