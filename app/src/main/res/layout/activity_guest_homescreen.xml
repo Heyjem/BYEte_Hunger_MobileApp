@@ -97,12 +97,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
             <ImageView
                 android:id="@+id/guestannouncementImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:src="@drawable/ic_launcher_foreground" />
+
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,12 +154,21 @@
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
             <ImageView
                 android:id="@+id/guest_newsF_Image"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_margin="5dp"
                 android:src="@drawable/ic_launcher_foreground" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -159,30 +177,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:letterSpacing="0.27"
-                    android:text="----------"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat_semibold"
                     android:letterSpacing="0.40"
-                    android:text="TRIVIA!"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="- - - - TRIVIA! - - - -"
                     android:textColor="#FFC91E"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:letterSpacing="0.27"
-                    android:text="----------"
-                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -211,7 +213,7 @@
                     android:layout_marginEnd="25dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
-                    android:text="insert text here"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 

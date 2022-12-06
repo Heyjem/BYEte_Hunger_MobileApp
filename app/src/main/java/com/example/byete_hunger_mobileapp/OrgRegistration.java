@@ -135,6 +135,8 @@ public class OrgRegistration extends AppCompatActivity {
                             if(task1.isSuccessful()){
                                 Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
+                                // Prevent user to return to Org Registration
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             }else{

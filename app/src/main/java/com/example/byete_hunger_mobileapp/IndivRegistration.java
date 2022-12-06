@@ -8,8 +8,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -112,25 +117,28 @@ public class IndivRegistration extends AppCompatActivity {
             password.requestFocus();
         }
         else{
-            fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
-                    ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
+            fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
 
-                    dbRef = FirebaseDatabase.getInstance().getReference("Users");
-                    dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
-                        if(task1.isSuccessful()){
-                            Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
-                            // Prevent user to return to Indiv Registration
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }else{
-                            Toast.makeText(IndivRegistration.this, "Registration Unsuccessful", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else{
-                    Toast.makeText(IndivRegistration.this, "Error with Registration, Please try again later.", Toast.LENGTH_SHORT).show();
+                        dbRef = FirebaseDatabase.getInstance().getReference("Users");
+                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
+                                // Prevent user to return to Indiv Registration
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(IndivRegistration.this, "Registration Unsuccessful", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(IndivRegistration.this, "Error with Registration, Please try again later.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
