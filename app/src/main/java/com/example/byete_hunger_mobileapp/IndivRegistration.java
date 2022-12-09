@@ -132,12 +132,16 @@ public class IndivRegistration extends AppCompatActivity {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
-                            } else {
+                            }else{
                                 Toast.makeText(IndivRegistration.this, "Registration Unsuccessful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(IndivRegistration.this, RegistrationMain.class);
+                                startActivity(intent);
                             }
                         });
-                    } else {
+                    }else{
                         Toast.makeText(IndivRegistration.this, "Error with Registration, Please try again later.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(IndivRegistration.this, RegistrationMain.class);
+                        startActivity(intent);
                     }
                 }
             });

@@ -141,10 +141,14 @@ public class OrgRegistration extends AppCompatActivity {
                                 finish();
                             }else{
                                 Toast.makeText(OrgRegistration.this, "Registration Unsuccessful",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(OrgRegistration.this, RegistrationMain.class);
+                                startActivity(intent);
                             }
                         });
                     }else{
                         Toast.makeText(OrgRegistration.this, "Error with Registration, Please try again later.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(OrgRegistration.this, RegistrationMain.class);
+                        startActivity(intent);
                     }
                 }
             });
