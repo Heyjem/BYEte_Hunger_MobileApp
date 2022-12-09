@@ -130,8 +130,10 @@ public class OrgRegistration extends AppCompatActivity {
                     if(task.isSuccessful()){
                         ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
                         dbRef = FirebaseDatabase.getInstance().getReference("Users");
+                        assert currentUser != null;
+                        String uid = currentUser.getUid();
 
-                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
+                        dbRef.child(uid).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
                             if(task1.isSuccessful()){
                                 Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);

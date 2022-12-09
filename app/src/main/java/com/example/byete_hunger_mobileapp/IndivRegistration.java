@@ -122,9 +122,11 @@ public class IndivRegistration extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
+                        assert currentUser != null;
+                        String uid = currentUser.getUid();
 
                         dbRef = FirebaseDatabase.getInstance().getReference("Users");
-                        dbRef.child(currentUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
+                        dbRef.child(uid).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
                                 Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
