@@ -117,27 +117,26 @@ public class IndivRegistration extends AppCompatActivity {
             password.requestFocus();
         }
         else{
-            fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
-                        assert currentUser != null;
-                        String uid = currentUser.getUid();
-
-                        dbRef = FirebaseDatabase.getInstance().getReference("Users");
-                        dbRef.child(uid).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
-                            if (task1.isSuccessful()) {
-                                Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
-                                // Prevent user to return to Indiv Registration
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                Toast.makeText(IndivRegistration.this, "Registration Unsuccessful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(IndivRegistration.this, RegistrationMain.class);
-                                startActivity(intent);
+                        dbRef.child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(IndivRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(IndivRegistration.this, LoginScreen.class);
+                                    // Prevent user to return to Indiv Registration
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(IndivRegistration.this, "Registration Unsuccessful", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(IndivRegistration.this, RegistrationMain.class);
+                                    startActivity(intent);
+                                }
                             }
                         });
                     }else{

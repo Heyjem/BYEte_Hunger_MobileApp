@@ -124,27 +124,26 @@ public class OrgRegistration extends AppCompatActivity {
             password.requestFocus();
         }
         else{
-            mAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(emailAddresstxt, passwordtxt).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         ReadWriteOrgUserDetails writeUserDetails = new ReadWriteOrgUserDetails(organizationtxt,contactPersontxt,contactNotxt,locationtxt,emailAddresstxt,fullName,status);
-                        dbRef = FirebaseDatabase.getInstance().getReference("Users");
-                        assert currentUser != null;
-                        String uid = currentUser.getUid();
-
-                        dbRef.child(uid).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
-                            if(task1.isSuccessful()){
-                                Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
-                                // Prevent user to return to Org Registration
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                Toast.makeText(OrgRegistration.this, "Registration Unsuccessful",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(OrgRegistration.this, RegistrationMain.class);
-                                startActivity(intent);
+                        dbRef.child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(OrgRegistration.this, "Registration successful, client verification underway", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(OrgRegistration.this, LoginScreen.class);
+                                    //Prevent user to return to Org Registration
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(OrgRegistration.this, "Registration Unsuccessful",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(OrgRegistration.this, RegistrationMain.class);
+                                    startActivity(intent);
+                                }
                             }
                         });
                     }else{
@@ -156,4 +155,23 @@ public class OrgRegistration extends AppCompatActivity {
             });
         }
     }
+
+    private void login(){
+        String user = emailAddress.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+
+            mAuth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(OrgRegistration.this, "Registration successful, user logged in automatically", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(OrgRegistration.this, Homescreen.class));
+                    }else{
+                        Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+    }
+
 }
