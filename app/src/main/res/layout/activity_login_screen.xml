@@ -43,7 +43,8 @@
         android:textColor="#FFC91E"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:elevation="10dp"
+        android:elevation="20dp"
+        android:translationZ="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

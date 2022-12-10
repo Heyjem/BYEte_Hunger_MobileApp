@@ -43,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="16dp"
-        android:clickable="true"
         android:fontFamily="@font/montserrat_semibold"
         android:text=""
         android:textColor="#2eb674"
@@ -56,7 +55,8 @@
         android:id="@+id/tv_statustracker_donationconfirmed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation Accepted"
         android:textColor="#646464"
@@ -64,7 +64,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_uidvalue" />
 
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been picked up"
         android:textColor="#646464"
@@ -81,7 +81,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationconfirmed" />
 
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="46dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been dropped off"
         android:textColor="#646464"
@@ -98,7 +98,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationpicked" />
 
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Donation has been donated\nThank You!"
         android:textColor="#ffc91e"
@@ -115,7 +115,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/pB_statTracker"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_donationdropped" />
 
@@ -125,9 +125,10 @@
         android:layout_width="24dp"
         android:layout_height="360dp"
         android:layout_marginTop="28dp"
+        android:layout_marginStart="60dp"
         android:progressDrawable="@drawable/progressbartheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.150"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_statustracker_uidvalue" />
 

@@ -16,7 +16,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:translationZ="10dp"
-        android:elevation="10dp"
+        android:elevation="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

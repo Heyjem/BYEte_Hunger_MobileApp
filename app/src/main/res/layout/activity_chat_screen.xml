@@ -55,8 +55,8 @@
         android:id="@+id/sendButton"
         android:layout_width="33dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/send_icon"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,10 +65,9 @@
     <EditText
         android:id="@+id/inputMessage"
         android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="12dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="12dp"
+        android:layout_marginHorizontal="12dp"
         android:background="@drawable/chat_background_input"
         android:fontFamily="@font/montserrat_regular"
         android:hint="Type your message here"
@@ -79,10 +78,11 @@
         android:paddingEnd="16dp"
         android:textColor="@color/white"
         android:textColorHint="#C3C3C3"
-        android:textSize="10dp"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
-        app:layout_constraintHorizontal_bias="0.0"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
