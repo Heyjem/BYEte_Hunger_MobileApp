@@ -130,11 +130,11 @@
 
     <CheckBox
         android:id="@+id/checkBox_IndivReg"
-        android:layout_width="284dp"
+        android:layout_width="300dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
         android:buttonTint="#FFFFFF"
-        android:text="By ticking, you are confirming that you have read, understood and agree to our "
+        android:maxLines="2"
         android:textSize="12sp"
         android:translationZ="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,22 +179,6 @@
         android:translationZ="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3_IndivReg_Register" />
-
-    <TextView
-        android:id="@+id/textView6_IndivReg_PrivacyPolicy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="5dp"
-        android:text="Privacy Policy"
-        android:textColor="#2EB674"
-        android:textSize="12sp"
-        android:translationZ="10dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.868"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_IndivReg_Password" />
 
     <EditText
         android:id="@+id/editText_IndivReg_EmailAddress"

@@ -2,6 +2,12 @@ package com.example.byete_hunger_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,9 +34,9 @@ import java.util.Objects;
 
 public class OrgRegistration extends AppCompatActivity {
 
-    TextView PrivacyPolicy, LoginHere;
+    TextView LoginHere;
     EditText organization, contactPerson, contactNo, location, emailAddress, password;
-    CheckBox Checkbox;
+    CheckBox checkbox;
     Button Register;
 
     DatabaseReference dbRef;
@@ -42,7 +48,6 @@ public class OrgRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_registration);
 
-        PrivacyPolicy = findViewById(R.id.textView_OrgRegistration_PrivacyPolicy);
         LoginHere = findViewById(R.id.textView6_OrgRegistration_LoginHere);
         organization = findViewById(R.id.editText_OrgRegistration_Organization);
         contactPerson = findViewById(R.id.editText_OrgRegistration_ContactPerson);
@@ -50,31 +55,43 @@ public class OrgRegistration extends AppCompatActivity {
         location = findViewById(R.id.editText_OrgRegistration_Location);
         emailAddress = findViewById(R.id.editText_OrgRegistration_EmailAdd);
         password = findViewById(R.id.editText_OrgRegistration_Password);
-        Checkbox = findViewById(R.id.checkBox_OrgReg);
+        checkbox = findViewById(R.id.checkBox_OrgReg);
         Register = findViewById(R.id.button3_OrgRegistration_Register);
 
         dbRef = FirebaseDatabase.getInstance().getReference("Users");
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                // Prevent CheckBox state from being toggled when link is clicked
+                widget.cancelPendingInputEvents();
+                startActivity(new Intent(OrgRegistration.this, PrivacyPolicy.class));
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                // Show links with underlines (optional)
+                ds.setUnderlineText(true);
+            }
+        };
+
+        String privpol = "By ticking, you are confirming that you have read, understood and agree to our Privacy Policy.";
+        SpannableString linkText = new SpannableString(privpol);
+        linkText.setSpan(clickableSpan, 79,93, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        checkbox.setText(linkText);// Finally, make links clickable
+        checkbox.setMovementMethod(LinkMovementMethod.getInstance());
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!Checkbox.isChecked()){
+                if(!checkbox.isChecked()){
                     Toast.makeText(OrgRegistration.this, "Please agree to our privacy policy by ticking the checkbox.", Toast.LENGTH_SHORT).show();
-                }else if(Checkbox.isChecked()){
+                }else if(checkbox.isChecked()){
                     Register();
                 }
             }
-        });
-
-        // redirects to the privacy policy screen
-        PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(OrgRegistration.this, PrivacyPolicy.class));
-            }
-
         });
 
         // redirects to the login screen
@@ -156,22 +173,5 @@ public class OrgRegistration extends AppCompatActivity {
         }
     }
 
-    private void login(){
-        String user = emailAddress.getText().toString().trim();
-        String pass = password.getText().toString().trim();
-
-            mAuth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(OrgRegistration.this, "Registration successful, user logged in automatically", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(OrgRegistration.this, Homescreen.class));
-                    }else{
-                        Toast.makeText(OrgRegistration.this, "Registration Unsuccessful" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-    }
 
 }

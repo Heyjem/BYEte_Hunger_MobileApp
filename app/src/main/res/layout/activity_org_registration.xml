@@ -152,12 +152,12 @@
 
     <CheckBox
         android:id="@+id/checkBox_OrgReg"
-        android:layout_width="284dp"
+        android:layout_width="300dp"
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
+        android:maxLines="2"
         android:button="?android:attr/listChoiceIndicatorMultiple"
         android:buttonTint="#FDFDFD"
-        android:text="By ticking, you are confirming that you have read, understood and agree to our "
         android:textSize="12sp"
         android:translationZ="5dp"
         android:elevation="10dp"
@@ -165,22 +165,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Password" />
 
-    <TextView
-        android:id="@+id/textView_OrgRegistration_PrivacyPolicy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:text="Privacy Policy"
-        android:translationZ="10dp"
-        android:textAllCaps="false"
-        android:textColor="#2EB674"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_OrgRegistration_Password" />
 
     <Button
         android:id="@+id/button3_OrgRegistration_Register"

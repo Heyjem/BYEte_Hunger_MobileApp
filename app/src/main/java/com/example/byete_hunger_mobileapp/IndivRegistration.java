@@ -2,6 +2,11 @@ package com.example.byete_hunger_mobileapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,7 +42,6 @@ public class IndivRegistration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indiv_registration);
 
-        PrivacyPolicy = findViewById(R.id.textView6_IndivReg_PrivacyPolicy);
         LoginHere = findViewById(R.id.textView8_IndivReg_LoginHere);
         lastName = findViewById(R.id.editText_IndivOrg_LastName);
         firstName = findViewById(R.id.editText_IndivReg_FirstName);
@@ -52,6 +56,26 @@ public class IndivRegistration extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         currentUser = fAuth.getCurrentUser();
 
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                // Prevent CheckBox state from being toggled when link is clicked
+                widget.cancelPendingInputEvents();
+                startActivity(new Intent(IndivRegistration.this, PrivacyPolicy.class));
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);
+            }
+        };
+
+        String privpol = "By ticking, you are confirming that you have read, understood and agree to our Privacy Policy.";
+        SpannableString linkText = new SpannableString(privpol);
+        linkText.setSpan(clickableSpan, 79,93, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        checkbox.setText(linkText);// Finally, make links clickable
+        checkbox.setMovementMethod(LinkMovementMethod.getInstance());
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,14 +84,6 @@ public class IndivRegistration extends AppCompatActivity {
                 }else if(checkbox.isChecked()){
                     Register();
                 }
-            }
-        });
-
-        // redirects to the privacy policy screen
-        PrivacyPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(IndivRegistration.this, PrivacyPolicy.class));
             }
         });
 

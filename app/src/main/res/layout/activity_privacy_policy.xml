@@ -35,13 +35,14 @@
 
     <TextView
         android:id="@+id/textView2_PrivPol_Text"
-        android:layout_width="330dp"
+        android:layout_width="wrap_content"
         android:layout_height="450dp"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="40dp"
+        android:fontFamily="@font/montserrat_semibold"
         android:justificationMode="inter_word"
         android:scrollbars="vertical"
-        android:text="       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:text="@string/privpolicy"
         android:textColor="#000000"
         android:textSize="15sp"
         android:translationZ="10dp"

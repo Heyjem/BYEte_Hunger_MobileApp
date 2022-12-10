@@ -174,16 +174,6 @@
                     android:text="• How much can I donate?"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="• Do you accept monetary donations?"
-                    android:textColor="#FFFFFF"
-                    android:textSize="15sp" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -191,7 +181,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat_regular"
                     android:justificationMode="inter_word"
-                    android:text="We are currently not accepting monetary donations."
+                    android:text="It depends on the circumstance so feel free to message the team first before placing a donation"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
@@ -261,6 +251,17 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="• Can I directly drop off my donations?"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:justificationMode="inter_word"
+                    android:text="Yes, you can coordinate with the team in order to make arrangements."
                     android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
