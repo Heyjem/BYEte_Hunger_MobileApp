@@ -16,8 +16,8 @@
 
     //Donation type dropdown
     <string-array name="DonationType">
-        <item>Perishables</item>
-        <item>Non-Perishables</item>
+        <item>Perishable</item>
+        <item>Non-Perishable</item>
     </string-array>
 
 </resources>
