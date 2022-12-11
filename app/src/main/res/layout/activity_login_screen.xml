@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/welcomeBackDonor"
         android:layout_width="269dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/montserrat_semibold"
         android:text="WELCOME BACK DONOR!"
@@ -166,6 +166,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/greengradienteffect"
         android:translationZ="15dp"
+        android:elevation="5dp"
         app:layout_constraintBottom_toTopOf="@+id/loginToAccountText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
