@@ -167,7 +167,7 @@
         android:id="@+id/expired_image"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:src="@drawable/calendar"
@@ -177,9 +177,10 @@
 
     <EditText
         android:id="@+id/et_donate_donatePurchased"
-        android:layout_width="290dp"
+        android:layout_width="280dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
+        android:layout_marginStart="15dp"
         android:background="@drawable/edittext_rounded_corners"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -189,7 +190,7 @@
         android:textSize="12sp"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.325"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/datepurchased_image"
         app:layout_constraintTop_toBottomOf="@+id/et_donate_weight" />
 
@@ -197,7 +198,7 @@
         android:id="@+id/datepurchased_image"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
         android:src="@drawable/calendar"
@@ -207,9 +208,10 @@
 
     <EditText
         android:id="@+id/et_donate_donateExpired"
-        android:layout_width="290dp"
+        android:layout_width="280dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
+        android:layout_marginStart="15dp"
         android:background="@drawable/edittext_rounded_corners"
         android:backgroundTint="@color/white"
         android:ems="10"
@@ -219,7 +221,7 @@
         android:textSize="12sp"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/expired_image"
         app:layout_constraintTop_toBottomOf="@+id/et_donate_donatePurchased" />
 

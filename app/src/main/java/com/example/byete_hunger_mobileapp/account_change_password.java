@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class account_change_password extends AppCompatActivity {
 
 
@@ -74,6 +77,13 @@ public class account_change_password extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(account_change_password.this, "Check your email", Toast.LENGTH_SHORT).show();
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                   finish();
+                                }
+                            }, 1000);
                         }else {
                             Toast.makeText(account_change_password.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

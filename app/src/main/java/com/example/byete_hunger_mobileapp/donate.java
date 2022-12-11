@@ -143,7 +143,7 @@ public class donate extends AppCompatActivity {
                 DatePickerDialog dpg = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
-                        datePurchased.setText(DD + "-" + MM + "-" + YYYY);
+                        datePurchased.setText(DD + "-" + (MM+1) + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg.show();
@@ -161,7 +161,7 @@ public class donate extends AppCompatActivity {
                 DatePickerDialog dpg2 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
-                        dateExpired.setText(DD + "-" + MM + "-" + YYYY);
+                        dateExpired.setText(DD + "-" + (MM+1) + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg2.show();
@@ -179,7 +179,7 @@ public class donate extends AppCompatActivity {
                 DatePickerDialog dpg3 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
-                        datePurchased.setText(DD + "-" + MM + "-" + YYYY);
+                        datePurchased.setText(DD + "-" + (MM+1) + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg3.show();
@@ -197,7 +197,7 @@ public class donate extends AppCompatActivity {
                 DatePickerDialog dpg4 = new DatePickerDialog(donate.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int YYYY, int MM, int DD) {
-                        dateExpired.setText(DD + "-" + MM + "-" + YYYY);
+                        dateExpired.setText(DD + "-" + (MM+1) + "-" + YYYY);
                     }
                 },mYear,mMonth,mDate);
                 dpg4.show();
@@ -303,41 +303,41 @@ public class donate extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
+
+                                    HashMap<String,Object> hashMap = new HashMap<>();
+                                    hashMap.put("uid",uid);
+
+                                    dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                        }
+                                    });
+
+                                    //insert current users fullname, contactperson, and organization details to firebase realtime database
+                                    dbRef.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String cP = dataSnapshot.child("contactPerson").getValue(String.class);
+                                            String fN = dataSnapshot.child("fullName").getValue(String.class);
+                                            String org = dataSnapshot.child("organization").getValue(String.class);
+
+                                            HashMap<String,Object> Fn = new HashMap<>();
+                                            HashMap<String,Object> Cp = new HashMap<>();
+                                            HashMap<String,Object> Org = new HashMap<>();
+                                            Cp.put("contactPerson",cP);
+                                            Fn.put("fullName",fN);
+                                            Org.put("organization",org);
+
+                                            dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Fn);
+                                            dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Cp);
+                                            dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Org);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        }
+                                    });
+
                                 }
-                            }
-                        });
-
-                        HashMap<String,Object> hashMap = new HashMap<>();
-                        hashMap.put("uid",uid);
-
-                        dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                            }
-                        });
-
-
-                        //insert current users fullname, contactperson, and organization details to firebase realtime database
-                        dbRef.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                String cP = dataSnapshot.child("contactPerson").getValue(String.class);
-                                String fN = dataSnapshot.child("fullName").getValue(String.class);
-                                String org = dataSnapshot.child("organization").getValue(String.class);
-
-                                HashMap<String,Object> Fn = new HashMap<>();
-                                HashMap<String,Object> Cp = new HashMap<>();
-                                HashMap<String,Object> Org = new HashMap<>();
-                                Cp.put("contactPerson",cP);
-                                Fn.put("fullName",fN);
-                                Org.put("organization",org);
-
-                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Fn);
-                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Cp);
-                                dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(Org);
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
                             }
                         });
 
