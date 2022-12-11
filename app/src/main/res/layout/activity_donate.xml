@@ -314,15 +314,16 @@
 
     <TextView
         android:id="@+id/et_uploadImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:text="Upload Image: "
+        android:text="Upload Image (Required):"
         android:fontFamily="@font/montserrat_semibold"
         android:textColor="#ffc91e"
         android:translationZ="10dp"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
