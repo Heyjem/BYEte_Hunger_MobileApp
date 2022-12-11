@@ -143,7 +143,7 @@ public class statustracker extends AppCompatActivity {
                         donationAccepted.setText("Donation Accepted");
                         pB.setProgressTintList(ColorStateList.valueOf(Color.rgb(46,182,116))); //dark green color
                         pB.setProgress(100);
-                    }else if(Objects.equals(dS, "Cancelled")){
+                    }else if(Objects.equals(dS, "Declined")){
                         donationAccepted.setVisibility(View.VISIBLE);
                         donationPicked.setVisibility(View.INVISIBLE);
                         donationDropped.setVisibility(View.INVISIBLE);
@@ -153,7 +153,7 @@ public class statustracker extends AppCompatActivity {
                         pB.setProgress(100);
                     }
                 }
-                if(donationComplete.getVisibility() == View.VISIBLE && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)){
+                if(donationComplete.getVisibility() == View.VISIBLE && Objects.equals(dS, "Donated") && getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
