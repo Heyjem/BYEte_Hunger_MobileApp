@@ -97,17 +97,19 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginVertical="5dp"
                 android:layout_gravity="center"
                 android:gravity="center">
 
             <ImageView
                 android:id="@+id/announcementImage"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/ic_launcher_foreground" />
 
             </LinearLayout>
@@ -118,6 +120,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginVertical="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -133,7 +136,7 @@
                     android:id="@+id/newsFeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:letterSpacing="0.27"
                     android:text="NEWS FEED"
                     android:textColor="@color/white"
@@ -146,26 +149,28 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginVertical="5dp"
                 android:layout_marginEnd="25dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:justificationMode="inter_word"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/newsF_Image"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/ic_launcher_foreground" />
         </LinearLayout>
 
@@ -178,7 +183,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:letterSpacing="0.40"
                     android:text="- - - - TRIVIA! - - - -"
                     android:layout_gravity="center"
@@ -237,11 +242,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="ABOUT US"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="20sp" />
 
 
                 <View
@@ -266,7 +271,7 @@
                     android:text="Founder: Mr. Mac Florendo"
                     android:textAlignment="center"
                     android:textColor="#FFC91E"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -280,7 +285,7 @@
                     android:text="We rescue and redistribute perishable food 'waste' to charities that serve homeless and low income individuals. Our goal is to help solve the problems of hunger, malnutrition, and food wastage and promote cycling culture in our community. \n\nWe also are involving jeepneys and tricycles/tuktuks to create and promote an ASEAN identity to the project. \n\nThe project draws inspiration from Hana Dansky of Boulder Food Rescue , a successful food rescue organization since 2011. \n\nFood Rescue Philippines was recognized at the YSEALI Seeds for the Future 2015 and was awarded a grant by the U.S. Mission to ASEAN, and is one of the Ten Accomplished Youth Organizations (TAYO) of the 14th TAYO Awards in 2017, with 'Better World' Award from San Miguel Corporation. FRP is a Youth Champion for The 2030 Project: SDG2 Zero Hunger."
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -307,7 +312,7 @@
                     android:text="For Frequently Ask Questions"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_homescreen_faqsclickhere"
@@ -319,7 +324,7 @@
                     android:text="Click Here"
                     android:textAlignment="center"
                     android:textColor="#FFC91E"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
