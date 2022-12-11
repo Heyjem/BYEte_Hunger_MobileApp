@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:visibility="gone"
+
             >
 
             <LinearLayout
@@ -263,7 +263,7 @@
                     android:id="@+id/iV_donationcard"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_marginHorizontal="80dp"
+                    android:layout_marginHorizontal="100dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/client_logo"
                     android:elevation="15dp" />
