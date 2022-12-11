@@ -336,7 +336,6 @@ public class donate extends AppCompatActivity {
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                         }
                                     });
-
                                 }
                             }
                         });
@@ -359,12 +358,10 @@ public class donate extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Image Uploaded.", Toast.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(exception -> Toast.makeText(getApplicationContext(), "Failed to Upload Image.", Toast.LENGTH_LONG).show());
-
                     }
                 });
             }
         });
-
     }
 
     public String GetFileExtension(Uri uri){

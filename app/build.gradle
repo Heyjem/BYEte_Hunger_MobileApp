@@ -36,6 +36,7 @@ android {
         dataBinding true
     }
     buildToolsVersion '33.0.0'
+    namespace 'com.example.byete_hunger_mobileapp'
 
 }
 
