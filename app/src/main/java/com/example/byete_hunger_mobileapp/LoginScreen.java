@@ -90,8 +90,12 @@ public class LoginScreen extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(LoginScreen.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginScreen.this, Homescreen.class));
+                        Intent intent = new Intent(LoginScreen.this, Homescreen.class);
+                        //Prevent user to press back
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         finish();
+
                     }else{
                         Toast.makeText(LoginScreen.this, "Login Unsuccessful" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
 
