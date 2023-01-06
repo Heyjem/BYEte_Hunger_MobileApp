@@ -283,6 +283,9 @@ public class donate extends AppCompatActivity {
                         String id = dbRef.push().getKey();
                         String imageUrl = "";
                         String donationStatus = "Pending";
+                        String firstFour = id.substring(0, 4);
+                        String lastFour = id.substring(id.length() - 4);
+                        String customUID = "FRPH" + firstFour + lastFour;
 
                         //show when new card was added to donations
                         Date date = new Date();
@@ -295,7 +298,7 @@ public class donate extends AppCompatActivity {
                         Map map = new HashMap();
                         map.put("timestamp", ServerValue.TIMESTAMP);
 
-                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, donationStatus, ServerValue.TIMESTAMP);
+                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, donationStatus, customUID, ServerValue.TIMESTAMP);
 
                         //insert donation details to firebase realtime database
                         dbRef.child("Users").child(uid).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -324,6 +327,7 @@ public class donate extends AppCompatActivity {
                                             HashMap<String,Object> Fn = new HashMap<>();
                                             HashMap<String,Object> Cp = new HashMap<>();
                                             HashMap<String,Object> Org = new HashMap<>();
+
                                             Cp.put("contactPerson",cP);
                                             Fn.put("fullName",fN);
                                             Org.put("organization",org);

@@ -48,7 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.contactNo.setText(Donation.getContactNo());
         holder.location.setText(Donation.getLocation());
         holder.notes.setText(Donation.getNotes());
-        holder.id.setText(Donation.getId());
+        holder.customUID.setText(Donation.getCustomUID());
         holder.dateAdded.setText(Donation.getDateAdded());
         holder.dateAddedTime.setText(Donation.getDateAddedTime());
         Glide.with(context).load(Donation.getImageUrl()).into(holder.donationCardImage);
@@ -61,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView type, weight, datePurchased, dateExpired, contactNo, location, notes, id, dateAdded, dateAddedTime;
+        TextView type, weight, datePurchased, dateExpired, contactNo, location, notes, customUID, dateAdded, dateAddedTime;
         CardView cardView;
         ImageView donationCardImage;
 
@@ -77,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             contactNo = itemView.findViewById(R.id.tv_donationcard_contactNoDesc);
             location = itemView.findViewById(R.id.tv_donationcard_locationDesc);
             notes = itemView.findViewById(R.id.tv_donationcard_notesdesc);
-            id = itemView.findViewById(R.id.tv_donationcard_uidCode);
+            customUID = itemView.findViewById(R.id.tv_donationcard_uidCode);
             dateAdded = itemView.findViewById(R.id.tv_donationcard_dateadded);
             dateAddedTime = itemView.findViewById(R.id.tv_donationcard_dateaddedTime);
             donationCardImage = itemView.findViewById(R.id.iV_donationcard);

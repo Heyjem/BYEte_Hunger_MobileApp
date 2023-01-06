@@ -28,7 +28,7 @@
         android:id="@+id/tv_statustracker_uidtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_semibold"
         android:text="UID: "
