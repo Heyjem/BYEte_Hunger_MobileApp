@@ -1,14 +1,17 @@
 package com.example.byete_hunger_mobileapp;
 
+import java.util.Map;
+
 public class ReadWriteIndivUserDetails {
 
     public String lastName,firstName,fullName,contactNo,location,emailAddress, organization, contactPerson, status;
+    private Map timestamp;
 
     public ReadWriteIndivUserDetails() {
     }
 
     public ReadWriteIndivUserDetails(String lastNametxt, String firstNametxt, String fullName, String contactNotxt, String locationtxt,
-                                     String emailAddresstxt, String organization, String contactPerson, String status) {
+                                     String emailAddresstxt, String organization, String contactPerson, String status, Map timestamp) {
         this.lastName = lastNametxt;
         this.firstName = firstNametxt;
         this.fullName = fullName;
@@ -18,6 +21,7 @@ public class ReadWriteIndivUserDetails {
         this.organization = organization;
         this.contactPerson = contactPerson;
         this.status = status;
+        this.timestamp = timestamp;
     }
 
     public String getFullName() {
@@ -43,4 +47,6 @@ public class ReadWriteIndivUserDetails {
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
     }
+
+    public Map getTimestamp() {return timestamp;}
 }

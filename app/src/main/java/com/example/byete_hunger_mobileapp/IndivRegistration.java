@@ -24,7 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class IndivRegistration extends AppCompatActivity {
@@ -137,7 +140,10 @@ public class IndivRegistration extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status);
+                        Map map = new HashMap();
+                        map.put("timestamp", ServerValue.TIMESTAMP);
+
+                        ReadWriteIndivUserDetails writeUserDetails = new ReadWriteIndivUserDetails(lastNametxt, firstNametxt, fullName, contactNotxt, locationtxt, emailAddresstxt, organization, contactPerson, status, ServerValue.TIMESTAMP);
                         dbRef.child(Objects.requireNonNull(fAuth.getCurrentUser()).getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

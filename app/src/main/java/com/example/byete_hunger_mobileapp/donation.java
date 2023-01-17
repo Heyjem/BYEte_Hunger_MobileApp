@@ -73,7 +73,7 @@ public class donation {
 
     public String getDonationStatus(){return donationStatus; }
 
-    public Map getTime() {return timestamp;}
+    public Map getTimestamp() {return timestamp;}
 
     public String getImageUrl() {
         return imageUrl;
