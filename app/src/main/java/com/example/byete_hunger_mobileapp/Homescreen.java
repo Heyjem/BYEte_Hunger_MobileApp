@@ -201,11 +201,25 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
+        String firstFour = uid.substring(0, 4);
+        String lastFour = uid.substring(uid.length() - 4);
+        String customUID = "FRPH-U-" + firstFour + lastFour;
+
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",currentUser.getUid());
 
+        HashMap<String,Object> hashMap2 = new HashMap<>();
+        hashMap2.put("customUID",customUID);
+
         //store uid inside current user
         dbRef2.child(currentUser.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+            }
+        });
+
+        //store custom uid inside current user
+        dbRef2.child(currentUser.getUid()).updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
             }
