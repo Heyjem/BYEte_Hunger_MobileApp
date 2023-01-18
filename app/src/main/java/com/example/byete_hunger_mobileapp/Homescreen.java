@@ -45,7 +45,7 @@ public class Homescreen extends AppCompatActivity {
     String uid;
     Button Chat, Track, Donate;
     ImageView account, newsImage, announcementImage;
-    TextView faqs, newsFeed, triviaFeed;
+    TextView faqs, newsFeed, triviaFeed, announceFeed;
     FirebaseDatabase fDB;
     DatabaseReference dbRef, dbRef2;
     FirebaseAuth fAuth;
@@ -67,6 +67,7 @@ public class Homescreen extends AppCompatActivity {
         Track = findViewById(R.id.button_homescreen_track);
         Donate = findViewById(R.id.button_homescreen_donate);
         faqs = findViewById(R.id.tv_homescreen_faqsclickhere);
+        announceFeed = findViewById(R.id.announcements_Content);
         newsFeed = findViewById(R.id.newsF_Content);
         newsImage = findViewById(R.id.newsF_Image);
         triviaFeed = findViewById(R.id.Trivia_Content);
@@ -99,6 +100,18 @@ public class Homescreen extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String img = (String)snapshot.getValue();
                 Glide.with(Homescreen.this).load(img).override(Target.SIZE_ORIGINAL).into(announcementImage);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        // insert text in announcements
+        dbRef.child("announcement").child("announcementText").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String announce = (String)snapshot.getValue();
+                announceFeed.setText(announce);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
