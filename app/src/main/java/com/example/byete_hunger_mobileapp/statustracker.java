@@ -98,7 +98,7 @@ public class statustracker extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     // get uid of recent donation
-                    String id = dataSnapshot.child("customUID").getValue(String.class);
+                    String id = dataSnapshot.child("customDonationUID").getValue(String.class);
                     donationUID.setText(id);
                 }
                 for (DataSnapshot dataSnapshot2: snapshot.getChildren()){
@@ -160,7 +160,7 @@ public class statustracker extends AppCompatActivity {
                             Intent intent=new Intent(statustracker.this,acknowledgement_screen.class);
                             startActivity(intent);
                         }
-                    }, 1000); // wait for 1 seconds
+                    }, 1000); // wait for 1 second
                 }
             }
             @Override

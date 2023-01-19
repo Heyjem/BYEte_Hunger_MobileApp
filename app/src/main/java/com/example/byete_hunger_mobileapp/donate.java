@@ -285,7 +285,7 @@ public class donate extends AppCompatActivity {
                         String donationStatus = "Pending";
                         String firstFour = id.substring(0, 4);
                         String lastFour = id.substring(id.length() - 4);
-                        String customUID = "FRPH" + firstFour + lastFour;
+                        String customDonationUID = "FRPH" + firstFour + lastFour;
 
                         //show when new card was added to donations
                         Date date = new Date();
@@ -295,10 +295,7 @@ public class donate extends AppCompatActivity {
                         String dateAdded = formatter.format(date);
                         String dateAddedTime = formatter2.format(time);
 
-                        Map map = new HashMap();
-                        map.put("timestamp", ServerValue.TIMESTAMP);
-
-                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, donationStatus, customUID, ServerValue.TIMESTAMP);
+                        donation Donation = new donation(type, wt, dP, dE, cN, loc, nts, id, dateAdded, dateAddedTime, imageUrl, donationStatus, customDonationUID);
 
                         //insert donation details to firebase realtime database
                         dbRef.child("Users").child(uid).child("donation").child(id).setValue(Donation).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -307,10 +304,32 @@ public class donate extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Toast.makeText(donate.this,"Donation details inserted", Toast.LENGTH_LONG).show();
 
+                                    //insert time in database
+                                    HashMap <String, Object> map = new HashMap<>();
+                                    map.put("timestamp", ServerValue.TIMESTAMP);
+                                    dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                        }
+                                    });
+
+                                    //insert UID in database
                                     HashMap<String,Object> hashMap = new HashMap<>();
                                     hashMap.put("uid",uid);
-
                                     dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                        }
+                                    });
+
+                                    String firstFourUID = uid.substring(0, 4);
+                                    String lastFourUID = uid.substring(uid.length() - 4);
+                                    String customUID = "FRPH-U-" + firstFourUID + lastFourUID;
+
+                                    //insert customUID in database
+                                    HashMap<String,Object> hashMap2 = new HashMap<>();
+                                    hashMap2.put("customUID",customUID);
+                                    dbRef.child("Users").child(uid).child("donation").child(id).updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
                                         }

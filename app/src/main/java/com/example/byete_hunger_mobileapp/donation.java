@@ -1,17 +1,20 @@
 package com.example.byete_hunger_mobileapp;
 
+import com.google.firebase.database.GenericTypeIndicator;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class donation {
-    private String type, weight, datePurchased, dateExpired, contactNo,location, notes, id, dateAdded, dateAddedTime , imageUrl, donationStatus, customUID;
-    private Map timestamp;
+    private String type, weight, datePurchased, dateExpired, contactNo,location, notes, id, dateAdded, dateAddedTime , imageUrl, donationStatus, customDonationUID;
+    //private Map timestamp;
 
     public donation() {
     }
 
 
-    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo,String location, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl, String donationStatus, String customUID, Map timestamp) {
+    public donation(String type, String weight, String datePurchased, String dateExpired, String contactNo,String location, String notes, String id, String dateAdded, String dateAddedTime, String imageUrl, String donationStatus, String customDonationUID /*Map timestamp*/) {
         this.type = type;
         this.weight = weight;
         this.datePurchased = datePurchased;
@@ -24,8 +27,8 @@ public class donation {
         this.dateAddedTime = dateAddedTime;
         this.imageUrl = imageUrl;
         this.donationStatus = donationStatus;
-        this.customUID = customUID;
-        this.timestamp = timestamp;
+        this.customDonationUID = customDonationUID;
+        //this.timestamp = timestamp;
     }
 
     public donation(String imageUrl, String url) {
@@ -67,13 +70,18 @@ public class donation {
         return dateAddedTime;
     }
 
-    public String getCustomUID() {
-        return customUID;
+    public String getCustomDonationUID() {
+        return customDonationUID;
     }
 
     public String getDonationStatus(){return donationStatus; }
 
-    public Map getTimestamp() {return timestamp;}
+    /*public Map getTimestamp() {return timestamp;}
+
+    public void setTimestamp(Map timestamp) {
+        this.timestamp = timestamp;
+    }
+     */
 
     public String getImageUrl() {
         return imageUrl;
@@ -84,3 +92,5 @@ public class donation {
     }
 
 }
+
+
