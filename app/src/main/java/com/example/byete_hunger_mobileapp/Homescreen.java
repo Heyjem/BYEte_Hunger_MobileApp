@@ -165,7 +165,7 @@ public class Homescreen extends AppCompatActivity {
             }
         });
 
-        //donate if only user is already verified and when recent donation is donated or cancelled
+        //donate, only if user is already verified and when recent donation is donated or cancelled
         dbRef2.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -193,6 +193,29 @@ public class Homescreen extends AppCompatActivity {
                             Donate.getBackground().setColorFilter(Color.rgb(0,125,70), PorterDuff.Mode.SRC_ATOP);
                         }
                     }
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        //chat, only if user is already verified
+        dbRef2.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String stat = snapshot.child("status").getValue(String.class);
+                String unveri = "CHAT INACCESSIBLE";
+                String veri = "CHAT WITH US!";
+                if(Objects.equals(stat, "Pending") || Objects.equals(stat, "Declined")){
+                    Chat.setEnabled(false);
+                    Chat.setText(unveri);
+                    Chat.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+                }else if(Objects.equals(stat, "Verified")){
+                    Chat.setEnabled(true);
+                    Chat.setText(veri);
+                    Chat.getBackground().setColorFilter(Color.rgb(53,201,60), PorterDuff.Mode.SRC_ATOP);
                 }
 
             }
